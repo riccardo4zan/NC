@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class NonConformita implements Serializable {
     @Id @GeneratedValue
     @Column(name="Codice")
     private int codice;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name="Stato")
     private Stato stato;
     @Column(name="Descrizione")

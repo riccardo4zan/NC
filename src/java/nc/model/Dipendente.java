@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Dipendente implements Serializable {
     private String cognome;
     @Column(name="Password")
     private String password;
-    @Enumerated 
+    @Enumerated(EnumType.STRING) 
     @Column(name="Ruolo")
     private Ruolo ruolo;
     @ManyToOne
@@ -53,7 +54,7 @@ public class Dipendente implements Serializable {
 
     public Dipendente() {
     }
-
+    
     public int getMatricola() {
         return matricola;
     }
@@ -73,7 +74,7 @@ public class Dipendente implements Serializable {
     public Ruolo getRuolo() {
         return ruolo;
     }
-
+    
     public Reparto getReparto() {
         return reparto;
     }
@@ -138,5 +139,4 @@ public class Dipendente implements Serializable {
     public String toString() {
         return "Dipendente{" + "matricola=" + matricola + ", nome=" + nome + ", cognome=" + cognome + ", password=" + password + ", ruolo=" + ruolo + ", reparto=" + reparto + ", segnalazioni=" + segnalazioni + ", aperte=" + aperte + ", elaborazioniEffettuate=" + elaborazioniEffettuate + ", parteTeam=" + parteTeam + '}';
     }
-    
 }

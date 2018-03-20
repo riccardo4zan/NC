@@ -1,10 +1,9 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -38,18 +37,18 @@ public class Dipendente implements Serializable {
     @JoinColumn(name="Reparto")
     private Reparto reparto;
     @OneToMany(mappedBy = "dipendente")
-    private List<Segnalazione> segnalazioni;
+    private Set<Segnalazione> segnalazioni;
     @OneToMany(mappedBy="dipendente")
-    private List<NonConformita> aperte;
+    private Set<NonConformita> aperte;
     @OneToMany(mappedBy="dipendente")
-    private List<Elaborazione> elaborazioniEffettuate;
+    private Set<Elaborazione> elaborazioniEffettuate;
     @ManyToMany
     @JoinTable(
             name = "CTeam",
             joinColumns = {@JoinColumn(name = "MatricolaDipendente")},
             inverseJoinColumns = {@JoinColumn(name = "CodiceNC")}
     )
-    private List<NonConformita> parteTeam;
+    private Set<NonConformita> parteTeam;
 
     public Dipendente() {
     }
@@ -78,19 +77,19 @@ public class Dipendente implements Serializable {
         return reparto;
     }
 
-    public List<Segnalazione> getSegnalazioni() {
+    public Set<Segnalazione> getSegnalazioni() {
         return segnalazioni;
     }
 
-    public List<NonConformita> getAperte() {
+    public Set<NonConformita> getAperte() {
         return aperte;
     }
 
-    public List<Elaborazione> getElaborazioniEffettuate() {
+    public Set<Elaborazione> getElaborazioniEffettuate() {
         return elaborazioniEffettuate;
     }
 
-    public List<NonConformita> getParteTeam() {
+    public Set<NonConformita> getParteTeam() {
         return parteTeam;
     }
 
@@ -118,19 +117,19 @@ public class Dipendente implements Serializable {
         this.reparto = reparto;
     }
 
-    public void setSegnalazioni(List<Segnalazione> segnalazioni) {
+    public void setSegnalazioni(Set<Segnalazione> segnalazioni) {
         this.segnalazioni = segnalazioni;
     }
 
-    public void setAperte(List<NonConformita> aperte) {
+    public void setAperte(Set<NonConformita> aperte) {
         this.aperte = aperte;
     }
 
-    public void setElaborazioniEffettuate(List<Elaborazione> elaborazioniEffettuate) {
+    public void setElaborazioniEffettuate(Set<Elaborazione> elaborazioniEffettuate) {
         this.elaborazioniEffettuate = elaborazioniEffettuate;
     }
 
-    public void setParteTeam(List<NonConformita> parteTeam) {
+    public void setParteTeam(Set<NonConformita> parteTeam) {
         this.parteTeam = parteTeam;
     }
 

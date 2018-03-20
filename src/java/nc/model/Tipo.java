@@ -1,7 +1,7 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,7 +21,7 @@ public class Tipo implements Serializable {
     @Column(name="Descrizione")
     private String descrizione;
     @OneToMany(mappedBy="tipo")
-    private List<NonConformita> listaNC;
+    private Set<NonConformita> listaNC;
 
     public Tipo() {
     }
@@ -34,7 +34,7 @@ public class Tipo implements Serializable {
         return descrizione;
     }
 
-    public List<NonConformita> getListaNC() {
+    public Set<NonConformita> getListaNC() {
         return listaNC;
     }
 
@@ -46,7 +46,7 @@ public class Tipo implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public void setListaNC(List<NonConformita> listaNC) {
+    public void setListaNC(Set<NonConformita> listaNC) {
         this.listaNC = listaNC;
     }
 

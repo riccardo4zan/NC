@@ -1,7 +1,7 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +22,9 @@ public class Reparto implements Serializable {
     @Column(name="Nome")
     private String nome;
     @OneToMany(mappedBy="reparto")
-    private List<Dipendente> dipendentiReparto;
+    private Set<Dipendente> dipendentiReparto;
     @OneToMany(mappedBy="reparto")
-    private List<NonConformita> nonConformitaCorrelate;
+    private Set<NonConformita> nonConformitaCorrelate;
 
     public Reparto() {
     }
@@ -37,11 +37,11 @@ public class Reparto implements Serializable {
         return nome;
     }
 
-    public List<Dipendente> getDipendentiReparto() {
+    public Set<Dipendente> getDipendentiReparto() {
         return dipendentiReparto;
     }
 
-    public List<NonConformita> getNonConformitaCorrelate() {
+    public Set<NonConformita> getNonConformitaCorrelate() {
         return nonConformitaCorrelate;
     }
 
@@ -53,11 +53,11 @@ public class Reparto implements Serializable {
         this.nome = nome;
     }
 
-    public void setDipendentiReparto(List<Dipendente> dipendentiReparto) {
+    public void setDipendentiReparto(Set<Dipendente> dipendentiReparto) {
         this.dipendentiReparto = dipendentiReparto;
     }
 
-    public void setNonConformitaCorrelate(List<NonConformita> nonConformitaCorrelate) {
+    public void setNonConformitaCorrelate(Set<NonConformita> nonConformitaCorrelate) {
         this.nonConformitaCorrelate = nonConformitaCorrelate;
     }
 

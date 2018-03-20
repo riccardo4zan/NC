@@ -1,7 +1,7 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Categoria implements Serializable {
     @Column(name="Descrizione")
     private String descrizione;
     @OneToMany(mappedBy="categoria")
-    private List<Pezzo> pezzi;
+    private Set<Pezzo> pezzi;
 
     public Categoria() {
     }
@@ -36,7 +36,7 @@ public class Categoria implements Serializable {
         return descrizione;
     }
 
-    public List<Pezzo> getPezzi() {
+    public Set<Pezzo> getPezzi() {
         return pezzi;
     }
 
@@ -48,7 +48,7 @@ public class Categoria implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public void setPezzi(List<Pezzo> pezzi) {
+    public void setPezzi(Set<Pezzo> pezzi) {
         this.pezzi = pezzi;
     }
 

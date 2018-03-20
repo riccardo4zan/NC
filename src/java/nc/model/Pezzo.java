@@ -1,7 +1,7 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +31,7 @@ public class Pezzo implements Serializable {
             joinColumns = {@JoinColumn(name = "CodicePezzo")},
             inverseJoinColumns = {@JoinColumn(name = "CodiceNC")}
     )
-    private List<NonConformita> pezziNC;
+    private Set<NonConformita> pezziNC;
 
     public Pezzo() {
     }
@@ -44,7 +44,7 @@ public class Pezzo implements Serializable {
         return categoria;
     }
 
-    public List<NonConformita> getPezziNC() {
+    public Set<NonConformita> getPezziNC() {
         return pezziNC;
     }
 
@@ -56,7 +56,7 @@ public class Pezzo implements Serializable {
         this.categoria = categoria;
     }
 
-    public void setPezziNC(List<NonConformita> pezziNC) {
+    public void setPezziNC(Set<NonConformita> pezziNC) {
         this.pezziNC = pezziNC;
     }
 

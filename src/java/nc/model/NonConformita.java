@@ -2,7 +2,7 @@ package nc.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -59,11 +59,11 @@ public class NonConformita implements Serializable {
     @JoinColumn(name="MatricolaDipendente")
     private Dipendente dipendente;
     @OneToMany(mappedBy="nonConformita")
-    private List<Elaborazione> elaborazioni; 
+    private Set<Elaborazione> elaborazioni; 
     @ManyToMany(mappedBy="pezziNC")
-    private List<Pezzo> pezziCorrelati;
+    private Set<Pezzo> pezziCorrelati;
     @ManyToMany(mappedBy="parteTeam")
-    private List<Dipendente> team;
+    private Set<Dipendente> team;
 
     public NonConformita() {
     }
@@ -132,15 +132,15 @@ public class NonConformita implements Serializable {
         return dipendente;
     }
 
-    public List<Elaborazione> getElaborazioni() {
+    public Set<Elaborazione> getElaborazioni() {
         return elaborazioni;
     }
 
-    public List<Pezzo> getPezziCorrelati() {
+    public Set<Pezzo> getPezziCorrelati() {
         return pezziCorrelati;
     }
 
-    public List<Dipendente> getTeam() {
+    public Set<Dipendente> getTeam() {
         return team;
     }
 
@@ -208,15 +208,15 @@ public class NonConformita implements Serializable {
         this.dipendente = dipendente;
     }
 
-    public void setElaborazioni(List<Elaborazione> elaborazioni) {
+    public void setElaborazioni(Set<Elaborazione> elaborazioni) {
         this.elaborazioni = elaborazioni;
     }
 
-    public void setPezziCorrelati(List<Pezzo> pezziCorrelati) {
+    public void setPezziCorrelati(Set<Pezzo> pezziCorrelati) {
         this.pezziCorrelati = pezziCorrelati;
     }
 
-    public void setTeam(List<Dipendente> team) {
+    public void setTeam(Set<Dipendente> team) {
         this.team = team;
     }
 

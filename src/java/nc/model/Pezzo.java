@@ -2,6 +2,7 @@ package nc.model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,43 +20,49 @@ import javax.persistence.Table;
 @Table(name="Pezzi")
 public class Pezzo implements Serializable {
     @Id @GeneratedValue
-    private int Codice;
+    @Column(name="Codice")
+    private int codice;
     @ManyToOne
     @JoinColumn(name="Categoria")
-    private Categoria Categoria;
+    private Categoria categoria;
     @ManyToMany
     @JoinTable(
             name="PezzoNC",
             joinColumns = {@JoinColumn(name = "CodicePezzo")},
             inverseJoinColumns = {@JoinColumn(name = "CodiceNC")}
     )
-    private List<NonConformita> PezziNC;
+    private List<NonConformita> pezziNC;
 
     public Pezzo() {
     }
 
     public int getCodice() {
-        return Codice;
+        return codice;
     }
 
     public Categoria getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     public List<NonConformita> getPezziNC() {
-        return PezziNC;
+        return pezziNC;
     }
 
-    public void setCodice(int Codice) {
-        this.Codice = Codice;
+    public void setCodice(int codice) {
+        this.codice = codice;
     }
 
-    public void setCategoria(Categoria Categoria) {
-        this.Categoria = Categoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public void setPezziNC(List<NonConformita> PezziNC) {
-        this.PezziNC = PezziNC;
+    public void setPezziNC(List<NonConformita> pezziNC) {
+        this.pezziNC = pezziNC;
+    }
+
+    @Override
+    public String toString() {
+        return "Pezzo{" + "codice=" + codice + ", categoria=" + categoria + ", pezziNC=" + pezziNC + '}';
     }
     
 }

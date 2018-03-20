@@ -17,52 +17,53 @@ import javax.persistence.Table;
 @Table(name="Reparti")
 public class Reparto implements Serializable {
     @Id @GeneratedValue
-    private int ID;
-    @Column(nullable = false)
-    private String Nome;
-    @OneToMany(mappedBy="Reparto")
-    private List<Dipendente> DipendentiReparto;
-    @OneToMany(mappedBy="Reparto")
-    private List<NonConformita> NonConformitaCorrelate;
+    @Column(name="ID")
+    private int id;
+    @Column(name="Nome")
+    private String nome;
+    @OneToMany(mappedBy="reparto")
+    private List<Dipendente> dipendentiReparto;
+    @OneToMany(mappedBy="reparto")
+    private List<NonConformita> nonConformitaCorrelate;
 
     public Reparto() {
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public List<Dipendente> getDipendentiReparto() {
-        return DipendentiReparto;
+        return dipendentiReparto;
     }
 
     public List<NonConformita> getNonConformitaCorrelate() {
-        return NonConformitaCorrelate;
+        return nonConformitaCorrelate;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setDipendentiReparto(List<Dipendente> DipendentiReparto) {
-        this.DipendentiReparto = DipendentiReparto;
+    public void setDipendentiReparto(List<Dipendente> dipendentiReparto) {
+        this.dipendentiReparto = dipendentiReparto;
     }
 
-    public void setNonConformitaCorrelate(List<NonConformita> NonConformitaCorrelate) {
-        this.NonConformitaCorrelate = NonConformitaCorrelate;
+    public void setNonConformitaCorrelate(List<NonConformita> nonConformitaCorrelate) {
+        this.nonConformitaCorrelate = nonConformitaCorrelate;
     }
 
     @Override
     public String toString() {
-        return "Reparto{" + "ID=" + ID + ", Nome=" + Nome + ", DipendentiReparto=" + DipendentiReparto + ", NonConformitaCorrelate=" + NonConformitaCorrelate + '}';
+        return "Reparto{" + "id=" + id + ", nome=" + nome + ", dipendentiReparto=" + dipendentiReparto + ", nonConformitaCorrelate=" + nonConformitaCorrelate + '}';
     }
     
 }

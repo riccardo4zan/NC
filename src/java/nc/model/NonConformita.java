@@ -20,204 +20,209 @@ import javax.persistence.OneToMany;
 @Entity
 public class NonConformita implements Serializable {
     @Id @GeneratedValue
-    private int Codice;
-    @Column(nullable = false)
+    @Column(name="Codice")
+    private int codice;
     @Enumerated
-    private Stato Stato;
-    @Column(nullable = false)
-    private String Descrizione;
-    @Column(nullable = false)
-    private String AzioniContenimento;
-    private String AzioniCorrettive;
-    private String AzioniPreventive;
-    @Column(nullable = false)
-    private Date DataApertura;
-    private Date DataChiusura;
-    @Column(nullable = false)
-    private String Cause;
-    private int Gravita;
-    private double Costo;
+    @Column(name="Stato")
+    private Stato stato;
+    @Column(name="Descrizione")
+    private String descrizione;
+    @Column(name="AzioniContenimento")
+    private String azioniContenimento;
+    @Column(name="AzioniCorrettive")
+    private String azioniCorrettive;
+    @Column(name="AzioniPreventive")
+    private String azioniPreventive;
+    @Column(name="DataApertura")
+    private Date dataApertura;
+    @Column(name="DataChiusura")
+    private Date dataChiusura;
+    @Column(name="Cause")
+    private String cause;
+    @Column(name="Gravita")
+    private int gravita;
+    @Column(name="Costo")
+    private double costo;
     @ManyToOne
     @JoinColumn(name="Tipo")
-    private Tipo Tipo;
+    private Tipo tipo;
     @ManyToOne
     @JoinColumn(name="PivaFornitore")
-    private Fornitore Fornitore;
+    private Fornitore fornitore;
     @ManyToOne
     @JoinColumn(name="PivaCliente")
-    private Cliente Cliente;
+    private Cliente cliente;
     @ManyToOne
     @JoinColumn(name="IDReparto")
-    private Reparto Reparto;
+    private Reparto reparto;
     @ManyToOne
     @JoinColumn(name="MatricolaDipendente")
-    private Dipendente Dipendente;
-    @OneToMany(mappedBy="NonConformita")
-    private List<Elaborazione> Elaborazioni; 
-    @ManyToMany(mappedBy="PezziNC")
-    private List<Pezzo> PezziCorrelati;
-    @ManyToMany(mappedBy="ParteTeam")
-    private List<Dipendente> Team;
+    private Dipendente dipendente;
+    @OneToMany(mappedBy="nonConformita")
+    private List<Elaborazione> elaborazioni; 
+    @ManyToMany(mappedBy="pezziNC")
+    private List<Pezzo> pezziCorrelati;
+    @ManyToMany(mappedBy="parteTeam")
+    private List<Dipendente> team;
 
     public NonConformita() {
     }
 
     public int getCodice() {
-        return Codice;
+        return codice;
     }
 
     public Stato getStato() {
-        return Stato;
+        return stato;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public String getAzioniContenimento() {
-        return AzioniContenimento;
+        return azioniContenimento;
     }
 
     public String getAzioniCorrettive() {
-        return AzioniCorrettive;
+        return azioniCorrettive;
     }
 
     public String getAzioniPreventive() {
-        return AzioniPreventive;
+        return azioniPreventive;
     }
 
     public Date getDataApertura() {
-        return DataApertura;
+        return dataApertura;
     }
 
     public Date getDataChiusura() {
-        return DataChiusura;
+        return dataChiusura;
     }
 
     public String getCause() {
-        return Cause;
+        return cause;
     }
 
     public int getGravita() {
-        return Gravita;
+        return gravita;
     }
 
     public double getCosto() {
-        return Costo;
+        return costo;
     }
 
     public Tipo getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public Fornitore getFornitore() {
-        return Fornitore;
+        return fornitore;
     }
 
     public Cliente getCliente() {
-        return Cliente;
+        return cliente;
     }
 
     public Reparto getReparto() {
-        return Reparto;
+        return reparto;
     }
 
     public Dipendente getDipendente() {
-        return Dipendente;
+        return dipendente;
     }
 
     public List<Elaborazione> getElaborazioni() {
-        return Elaborazioni;
+        return elaborazioni;
     }
 
     public List<Pezzo> getPezziCorrelati() {
-        return PezziCorrelati;
+        return pezziCorrelati;
     }
 
     public List<Dipendente> getTeam() {
-        return Team;
+        return team;
     }
 
-    public void setCodice(int Codice) {
-        this.Codice = Codice;
+    public void setCodice(int codice) {
+        this.codice = codice;
     }
 
-    public void setStato(Stato Stato) {
-        this.Stato = Stato;
+    public void setStato(Stato stato) {
+        this.stato = stato;
     }
 
-    public void setDescrizione(String Descrizione) {
-        this.Descrizione = Descrizione;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
-    public void setAzioniContenimento(String AzioniContenimento) {
-        this.AzioniContenimento = AzioniContenimento;
+    public void setAzioniContenimento(String azioniContenimento) {
+        this.azioniContenimento = azioniContenimento;
     }
 
-    public void setAzioniCorrettive(String AzioniCorrettive) {
-        this.AzioniCorrettive = AzioniCorrettive;
+    public void setAzioniCorrettive(String azioniCorrettive) {
+        this.azioniCorrettive = azioniCorrettive;
     }
 
-    public void setAzioniPreventive(String AzioniPreventive) {
-        this.AzioniPreventive = AzioniPreventive;
+    public void setAzioniPreventive(String azioniPreventive) {
+        this.azioniPreventive = azioniPreventive;
     }
 
-    public void setDataApertura(Date DataApertura) {
-        this.DataApertura = DataApertura;
+    public void setDataApertura(Date dataApertura) {
+        this.dataApertura = dataApertura;
     }
 
-    public void setDataChiusura(Date DataChiusura) {
-        this.DataChiusura = DataChiusura;
+    public void setDataChiusura(Date dataChiusura) {
+        this.dataChiusura = dataChiusura;
     }
 
-    public void setCause(String Cause) {
-        this.Cause = Cause;
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 
-    public void setGravita(int Gravita) {
-        this.Gravita = Gravita;
+    public void setGravita(int gravita) {
+        this.gravita = gravita;
     }
 
-    public void setCosto(double Costo) {
-        this.Costo = Costo;
+    public void setCosto(double costo) {
+        this.costo = costo;
     }
 
-    public void setTipo(Tipo Tipo) {
-        this.Tipo = Tipo;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
-    public void setFornitore(Fornitore Fornitore) {
-        this.Fornitore = Fornitore;
+    public void setFornitore(Fornitore fornitore) {
+        this.fornitore = fornitore;
     }
 
-    public void setCliente(Cliente Cliente) {
-        this.Cliente = Cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public void setReparto(Reparto Reparto) {
-        this.Reparto = Reparto;
+    public void setReparto(Reparto reparto) {
+        this.reparto = reparto;
     }
 
-    public void setDipendente(Dipendente Dipendente) {
-        this.Dipendente = Dipendente;
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
     }
 
-    public void setElaborazioni(List<Elaborazione> Elaborazioni) {
-        this.Elaborazioni = Elaborazioni;
+    public void setElaborazioni(List<Elaborazione> elaborazioni) {
+        this.elaborazioni = elaborazioni;
     }
 
-    public void setPezziCorrelati(List<Pezzo> PezziCorrelati) {
-        this.PezziCorrelati = PezziCorrelati;
+    public void setPezziCorrelati(List<Pezzo> pezziCorrelati) {
+        this.pezziCorrelati = pezziCorrelati;
     }
 
-    public void setTeam(List<Dipendente> Team) {
-        this.Team = Team;
+    public void setTeam(List<Dipendente> team) {
+        this.team = team;
     }
 
     @Override
     public String toString() {
-        return "NonConformita{" + "Codice=" + Codice + ", Stato=" + Stato + ", Descrizione=" + Descrizione + ", AzioniContenimento=" + AzioniContenimento + ", AzioniCorrettive=" + AzioniCorrettive + ", AzioniPreventive=" + AzioniPreventive + ", DataApertura=" + DataApertura + ", DataChiusura=" + DataChiusura + ", Cause=" + Cause + ", Gravita=" + Gravita + ", Costo=" + Costo + ", Tipo=" + Tipo + ", Fornitore=" + Fornitore + ", Cliente=" + Cliente + ", Reparto=" + Reparto + ", Dipendente=" + Dipendente + ", Elaborazioni=" + Elaborazioni + ", PezziCorrelati=" + PezziCorrelati + ", Team=" + Team + '}';
+        return "NonConformita{" + "codice=" + codice + ", stato=" + stato + ", descrizione=" + descrizione + ", azioniContenimento=" + azioniContenimento + ", azioniCorrettive=" + azioniCorrettive + ", azioniPreventive=" + azioniPreventive + ", dataApertura=" + dataApertura + ", dataChiusura=" + dataChiusura + ", cause=" + cause + ", gravita=" + gravita + ", costo=" + costo + ", tipo=" + tipo + ", fornitore=" + fornitore + ", cliente=" + cliente + ", reparto=" + reparto + ", dipendente=" + dipendente + ", elaborazioni=" + elaborazioni + ", pezziCorrelati=" + pezziCorrelati + ", team=" + team + '}';
     }
-    
-    
+
 }

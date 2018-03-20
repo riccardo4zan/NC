@@ -16,42 +16,43 @@ import javax.persistence.Table;
 @Table(name="Tipi")
 public class Tipo implements Serializable {
     @Id
-    private String Nome;
-    @Column(nullable = false)
-    private String Descrizione;
-    @OneToMany(mappedBy="Tipo")
-    private List<NonConformita> ListaNC;
+    @Column(name="Nome")
+    private String nome;
+    @Column(name="Descrizione")
+    private String descrizione;
+    @OneToMany(mappedBy="tipo")
+    private List<NonConformita> listaNC;
 
     public Tipo() {
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public List<NonConformita> getListaNC() {
-        return ListaNC;
+        return listaNC;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setDescrizione(String Descrizione) {
-        this.Descrizione = Descrizione;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
-    public void setListaNC(List<NonConformita> ListaNC) {
-        this.ListaNC = ListaNC;
+    public void setListaNC(List<NonConformita> listaNC) {
+        this.listaNC = listaNC;
     }
 
     @Override
     public String toString() {
-        return "Tipo{" + "Nome=" + Nome + ", Descrizione=" + Descrizione + ", ListaNC=" + ListaNC + '}';
+        return "Tipo{" + "nome=" + nome + ", descrizione=" + descrizione + ", listaNC=" + listaNC + '}';
     }
     
 }

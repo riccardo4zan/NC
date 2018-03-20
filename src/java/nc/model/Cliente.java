@@ -16,42 +16,43 @@ import javax.persistence.Table;
 @Table(name = "Clienti")
 public class Cliente implements Serializable {
     @Id
-    private int Piva;
-    @Column(nullable = false)
-    private int Nome;
-    @OneToMany(mappedBy="Cliente")
-    private List<NonConformita> NonConformitaCorrelate;
+    @Column(name="Piva")
+    private int piva;
+    @Column(name="Nome")
+    private int nome;
+    @OneToMany(mappedBy="cliente")
+    private List<NonConformita> nonConformitaCorrelate;
 
     public Cliente() {
     }
 
     public int getPiva() {
-        return Piva;
+        return piva;
     }
 
     public int getNome() {
-        return Nome;
+        return nome;
     }
 
     public List<NonConformita> getNonConformitaCorrelate() {
-        return NonConformitaCorrelate;
+        return nonConformitaCorrelate;
     }
 
-    public void setPiva(int Piva) {
-        this.Piva = Piva;
+    public void setPiva(int piva) {
+        this.piva = piva;
     }
 
-    public void setNome(int Nome) {
-        this.Nome = Nome;
+    public void setNome(int nome) {
+        this.nome = nome;
     }
 
-    public void setNonConformitaCorrelate(List<NonConformita> NonConformitaCorrelate) {
-        this.NonConformitaCorrelate = NonConformitaCorrelate;
+    public void setNonConformitaCorrelate(List<NonConformita> nonConformitaCorrelate) {
+        this.nonConformitaCorrelate = nonConformitaCorrelate;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "Piva=" + Piva + ", Nome=" + Nome + ", NonConformitaCorrelate=" + NonConformitaCorrelate + '}';
+        return "Cliente{" + "piva=" + piva + ", nome=" + nome + ", nonConformitaCorrelate=" + nonConformitaCorrelate + '}';
     }
     
 }

@@ -18,42 +18,43 @@ import javax.persistence.Table;
 @Table(name="Categorie")
 public class Categoria implements Serializable {    
     @Id @GeneratedValue
-    private int Codice;
-    @Column(nullable = false)
-    private String Descrizione;
-    @OneToMany(mappedBy="Categoria")
-    private List<Pezzo> Pezzi;
+    @Column(name="Codice")
+    private int codice;
+    @Column(name="Descrizione")
+    private String descrizione;
+    @OneToMany(mappedBy="categoria")
+    private List<Pezzo> pezzi;
 
     public Categoria() {
     }
 
     public int getCodice() {
-        return Codice;
+        return codice;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public List<Pezzo> getPezzi() {
-        return Pezzi;
+        return pezzi;
     }
 
-    public void setCodice(int Codice) {
-        this.Codice = Codice;
+    public void setCodice(int codice) {
+        this.codice = codice;
     }
 
-    public void setDescrizione(String Descrizione) {
-        this.Descrizione = Descrizione;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
-    public void setPezzi(List<Pezzo> Pezzi) {
-        this.Pezzi = Pezzi;
+    public void setPezzi(List<Pezzo> pezzi) {
+        this.pezzi = pezzi;
     }
 
     @Override
     public String toString() {
-        return "Categoria{" + "Codice=" + Codice + ", Descrizione=" + Descrizione + ", Pezzi=" + Pezzi + '}';
+        return "Categoria{" + "codice=" + codice + ", descrizione=" + descrizione + ", pezzi=" + pezzi + '}';
     }
-        
+    
 }

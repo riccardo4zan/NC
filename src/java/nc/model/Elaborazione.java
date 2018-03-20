@@ -18,73 +18,75 @@ import javax.persistence.Table;
 @Table(name="Elaborazioni")
 public class Elaborazione implements Serializable {
     @Id @GeneratedValue
-    private int Codice;
-    @Column(nullable = false)
-    private String Descrizione;
-    @Column(nullable = false)
-    private Date DataInizio;
-    private Date DataFine;
+    @Column(name="Codice")
+    private int codice;
+    @Column(name="Descrizione")
+    private String descrizione;
+    @Column(name="DataInizio")
+    private Date dataInizio;
+    @Column(name="DataFine")
+    private Date dataFine;
     @ManyToOne
     @JoinColumn(name="MatricolaDipendente")
-    private Dipendente Dipendente;
+    private Dipendente dipendente;
     @ManyToOne
     @JoinColumn(name="CodiceNC")
-    private NonConformita NonConformita;
+    private NonConformita nonConformita;
 
     public Elaborazione() {
     }
 
     public int getCodice() {
-        return Codice;
+        return codice;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public Date getDataInizio() {
-        return DataInizio;
+        return dataInizio;
     }
 
     public Date getDataFine() {
-        return DataFine;
+        return dataFine;
     }
 
     public Dipendente getDipendente() {
-        return Dipendente;
+        return dipendente;
     }
 
     public NonConformita getNonConformita() {
-        return NonConformita;
+        return nonConformita;
     }
 
-    public void setCodice(int Codice) {
-        this.Codice = Codice;
+    public void setCodice(int codice) {
+        this.codice = codice;
     }
 
-    public void setDescrizione(String Descrizione) {
-        this.Descrizione = Descrizione;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
-    public void setDataInizio(Date DataInizio) {
-        this.DataInizio = DataInizio;
+    public void setDataInizio(Date dataInizio) {
+        this.dataInizio = dataInizio;
     }
 
-    public void setDataFine(Date DataFine) {
-        this.DataFine = DataFine;
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
     }
 
-    public void setDipendente(Dipendente Dipendente) {
-        this.Dipendente = Dipendente;
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
     }
 
-    public void setNonConformita(NonConformita NonConformita) {
-        this.NonConformita = NonConformita;
+    public void setNonConformita(NonConformita nonConformita) {
+        this.nonConformita = nonConformita;
     }
 
     @Override
     public String toString() {
-        return "Elaborazione{" + "Codice=" + Codice + ", Descrizione=" + Descrizione + ", DataInizio=" + DataInizio + ", DataFine=" + DataFine + ", Dipendente=" + Dipendente + ", NonConformita=" + NonConformita + '}';
+        return "Elaborazione{" + "codice=" + codice + ", descrizione=" + descrizione + ", dataInizio=" + dataInizio + ", dataFine=" + dataFine + ", dipendente=" + dipendente + ", nonConformita=" + nonConformita + '}';
     }
-    
+
 }

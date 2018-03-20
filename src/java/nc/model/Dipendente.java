@@ -22,120 +22,121 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Dipendenti")
 public class Dipendente implements Serializable {
-    @Id @GeneratedValue
-    private int Matricola;
-    @Column(nullable = false)
-    private String Nome;
-    @Column(nullable = false)
-    private String Cognome;
-    @Column(nullable = false)
-    private String Password;
-    @Column(nullable = false)
-    @Enumerated
-    private Ruolo Ruolo;
+    @Id @GeneratedValue 
+    @Column(name="Matricola")
+    private int matricola;
+    @Column(name="Nome")
+    private String nome;
+    @Column(name="Cognome")
+    private String cognome;
+    @Column(name="Password")
+    private String password;
+    @Enumerated 
+    @Column(name="Ruolo")
+    private Ruolo ruolo;
     @ManyToOne
     @JoinColumn(name="Reparto")
-    private Reparto Reparto;
-    @OneToMany(mappedBy = "Dipendente")
-    private List<Segnalazione> Segnalazioni;
-    @OneToMany(mappedBy="Dipendente")
-    private List<NonConformita> Aperte;
-    @OneToMany(mappedBy="Dipendente")
-    private List<Elaborazione> ElaborazioniEffettuate;
+    private Reparto reparto;
+    @OneToMany(mappedBy = "dipendente")
+    private List<Segnalazione> segnalazioni;
+    @OneToMany(mappedBy="dipendente")
+    private List<NonConformita> aperte;
+    @OneToMany(mappedBy="dipendente")
+    private List<Elaborazione> elaborazioniEffettuate;
     @ManyToMany
     @JoinTable(
             name = "CTeam",
             joinColumns = {@JoinColumn(name = "MatricolaDipendente")},
             inverseJoinColumns = {@JoinColumn(name = "CodiceNC")}
     )
-    private List<NonConformita> ParteTeam;
+    private List<NonConformita> parteTeam;
 
     public Dipendente() {
     }
 
     public int getMatricola() {
-        return Matricola;
+        return matricola;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public String getCognome() {
-        return Cognome;
+        return cognome;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public Ruolo getRuolo() {
-        return Ruolo;
+        return ruolo;
     }
 
     public Reparto getReparto() {
-        return Reparto;
+        return reparto;
     }
 
     public List<Segnalazione> getSegnalazioni() {
-        return Segnalazioni;
+        return segnalazioni;
     }
 
     public List<NonConformita> getAperte() {
-        return Aperte;
+        return aperte;
     }
 
     public List<Elaborazione> getElaborazioniEffettuate() {
-        return ElaborazioniEffettuate;
+        return elaborazioniEffettuate;
     }
 
     public List<NonConformita> getParteTeam() {
-        return ParteTeam;
+        return parteTeam;
     }
 
-    public void setMatricola(int Matricola) {
-        this.Matricola = Matricola;
+    public void setMatricola(int matricola) {
+        this.matricola = matricola;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setCognome(String Cognome) {
-        this.Cognome = Cognome;
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setRuolo(Ruolo Ruolo) {
-        this.Ruolo = Ruolo;
+    public void setRuolo(Ruolo ruolo) {
+        this.ruolo = ruolo;
     }
 
-    public void setReparto(Reparto Reparto) {
-        this.Reparto = Reparto;
+    public void setReparto(Reparto reparto) {
+        this.reparto = reparto;
     }
 
-    public void setSegnalazioni(List<Segnalazione> Segnalazioni) {
-        this.Segnalazioni = Segnalazioni;
+    public void setSegnalazioni(List<Segnalazione> segnalazioni) {
+        this.segnalazioni = segnalazioni;
     }
 
-    public void setAperte(List<NonConformita> Aperte) {
-        this.Aperte = Aperte;
+    public void setAperte(List<NonConformita> aperte) {
+        this.aperte = aperte;
     }
 
-    public void setElaborazioniEffettuate(List<Elaborazione> ElaborazioniEffettuate) {
-        this.ElaborazioniEffettuate = ElaborazioniEffettuate;
+    public void setElaborazioniEffettuate(List<Elaborazione> elaborazioniEffettuate) {
+        this.elaborazioniEffettuate = elaborazioniEffettuate;
     }
 
-    public void setParteTeam(List<NonConformita> ParteTeam) {
-        this.ParteTeam = ParteTeam;
+    public void setParteTeam(List<NonConformita> parteTeam) {
+        this.parteTeam = parteTeam;
     }
 
     @Override
     public String toString() {
-        return "Dipendente{" + "Matricola=" + Matricola + ", Nome=" + Nome + ", Cognome=" + Cognome + ", Password=" + Password + ", Ruolo=" + Ruolo + ", Reparto=" + Reparto + ", Segnalazioni=" + Segnalazioni + ", Aperte=" + Aperte + ", ElaborazioniEffettuate=" + ElaborazioniEffettuate + ", ParteTeam=" + ParteTeam + '}';
+        return "Dipendente{" + "matricola=" + matricola + ", nome=" + nome + ", cognome=" + cognome + ", password=" + password + ", ruolo=" + ruolo + ", reparto=" + reparto + ", segnalazioni=" + segnalazioni + ", aperte=" + aperte + ", elaborazioniEffettuate=" + elaborazioniEffettuate + ", parteTeam=" + parteTeam + '}';
     }
     
 }

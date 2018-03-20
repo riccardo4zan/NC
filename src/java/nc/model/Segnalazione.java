@@ -18,54 +18,54 @@ import javax.persistence.Table;
 @Table(name="Segnalazioni")
 public class Segnalazione implements Serializable {
     @Id @GeneratedValue
-    private int Codice;
-    @Column(nullable = false)
-    private String Descrizione;
-    @Column(nullable = false)
-    private Date Data;
+    @Column(name="Codice")
+    private int codice;
+    @Column(name="Descrizione")
+    private String descrizione;
+    @Column(name="Data")
+    private Date data;
     @ManyToOne
     @JoinColumn(name = "MatricolaDipendente")
-    private Dipendente Dipendente;
+    private Dipendente dipendente;
 
     public Segnalazione() {
     }
 
     public int getCodice() {
-        return Codice;
+        return codice;
     }
 
     public String getDescrizione() {
-        return Descrizione;
+        return descrizione;
     }
 
     public Date getData() {
-        return Data;
+        return data;
     }
 
     public Dipendente getDipendente() {
-        return Dipendente;
+        return dipendente;
     }
 
-    public void setCodice(int Codice) {
-        this.Codice = Codice;
+    public void setCodice(int codice) {
+        this.codice = codice;
     }
 
-    public void setDescrizione(String Descrizione) {
-        this.Descrizione = Descrizione;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 
-    public void setData(Date Data) {
-        this.Data = Data;
+    public void setData(Date data) {
+        this.data = data;
     }
 
-    public void setDipendente(Dipendente Dipendente) {
-        this.Dipendente = Dipendente;
+    public void setDipendente(Dipendente dipendente) {
+        this.dipendente = dipendente;
     }
 
     @Override
     public String toString() {
-        return "Segnalazione{" + "Codice=" + Codice + ", Descrizione=" + Descrizione + ", Data=" + Data + ", Dipendente=" + Dipendente + '}';
+        return "Segnalazione{" + "codice=" + codice + ", descrizione=" + descrizione + ", data=" + data + ", dipendente=" + dipendente + '}';
     }
-    
     
 }

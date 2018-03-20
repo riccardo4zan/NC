@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,10 +27,10 @@ public class Elaborazione implements Serializable {
     private Date dataInizio;
     @Column(name="DataFine")
     private Date dataFine;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MatricolaDipendente")
     private Dipendente dipendente;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="CodiceNC")
     private NonConformita nonConformita;
 

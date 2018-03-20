@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,26 +44,26 @@ public class NonConformita implements Serializable {
     private int gravita;
     @Column(name="Costo")
     private double costo;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="Tipo")
     private Tipo tipo;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="PivaFornitore")
     private Fornitore fornitore;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="PivaCliente")
     private Cliente cliente;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="IDReparto")
     private Reparto reparto;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MatricolaDipendente")
     private Dipendente dipendente;
-    @OneToMany(mappedBy="nonConformita")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="nonConformita")
     private Set<Elaborazione> elaborazioni; 
-    @ManyToMany(mappedBy="pezziNC")
+    @ManyToMany(fetch=FetchType.EAGER,mappedBy="pezziNC")
     private Set<Pezzo> pezziCorrelati;
-    @ManyToMany(mappedBy="parteTeam")
+    @ManyToMany(fetch=FetchType.EAGER,mappedBy="parteTeam")
     private Set<Dipendente> team;
 
     public NonConformita() {

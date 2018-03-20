@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,10 +23,10 @@ public class Pezzo implements Serializable {
     @Id @GeneratedValue
     @Column(name="Codice")
     private int codice;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="Categoria")
     private Categoria categoria;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="PezzoNC",
             joinColumns = {@JoinColumn(name = "CodicePezzo")},

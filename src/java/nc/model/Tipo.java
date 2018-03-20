@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class Tipo implements Serializable {
     private String nome;
     @Column(name="Descrizione")
     private String descrizione;
-    @OneToMany(mappedBy="tipo")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="tipo")
     private Set<NonConformita> listaNC;
 
     public Tipo() {

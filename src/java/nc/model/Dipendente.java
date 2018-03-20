@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,13 +37,13 @@ public class Dipendente implements Serializable {
     @ManyToOne
     @JoinColumn(name="Reparto")
     private Reparto reparto;
-    @OneToMany(mappedBy = "dipendente")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy = "dipendente")
     private Set<Segnalazione> segnalazioni;
-    @OneToMany(mappedBy="dipendente")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="dipendente")
     private Set<NonConformita> aperte;
-    @OneToMany(mappedBy="dipendente")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="dipendente")
     private Set<Elaborazione> elaborazioniEffettuate;
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name = "CTeam",
             joinColumns = {@JoinColumn(name = "MatricolaDipendente")},

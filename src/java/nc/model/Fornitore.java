@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class Fornitore implements Serializable {
     private int piva;
     @Column(name="Nome")
     private int nome;
-    @OneToMany(mappedBy="fornitore")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="fornitore")
     private Set<NonConformita> nonConformitaCorrelate;
 
     public Fornitore() {

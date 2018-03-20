@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,9 +22,9 @@ public class Reparto implements Serializable {
     private int id;
     @Column(name="Nome")
     private String nome;
-    @OneToMany(mappedBy="reparto")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="reparto")
     private Set<Dipendente> dipendentiReparto;
-    @OneToMany(mappedBy="reparto")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="reparto")
     private Set<NonConformita> nonConformitaCorrelate;
 
     public Reparto() {

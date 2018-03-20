@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Categoria implements Serializable {
     private int codice;
     @Column(name="Descrizione")
     private String descrizione;
-    @OneToMany(mappedBy="categoria")
+    @OneToMany(fetch=FetchType.EAGER,mappedBy="categoria")
     private Set<Pezzo> pezzi;
 
     public Categoria() {

@@ -25,7 +25,7 @@ public class DipendenteDaoImpl implements DipendenteDao{
     }
 
     @Override
-    public Dipendente findByMatricola(String matricola) {
+    public Dipendente findByMatricola(int matricola) {
         return (Dipendente) getSession().get(Dipendente.class, matricola);
     }
 

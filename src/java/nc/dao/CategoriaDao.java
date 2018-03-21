@@ -8,7 +8,7 @@ import nc.model.Categoria;
  * @author riccardo
  */
 public interface CategoriaDao {
-    Categoria findByCodice(String codice);
+    Categoria findByCodice(int codice);
     void saveCategoria(Categoria toSave);
     List<Categoria> findAllCategorie();
 }

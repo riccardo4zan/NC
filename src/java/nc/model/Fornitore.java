@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Fornitore implements Serializable { 
     @Id
     @Column(name="Piva")
-    private int piva;
+    private String piva;
     @Column(name="Nome")
     private int nome;
     @OneToMany(fetch=FetchType.EAGER,mappedBy="fornitore")
@@ -27,7 +27,7 @@ public class Fornitore implements Serializable {
     public Fornitore() {
     }
 
-    public int getPiva() {
+    public String getPiva() {
         return piva;
     }
 
@@ -39,7 +39,7 @@ public class Fornitore implements Serializable {
         return nonConformitaCorrelate;
     }
 
-    public void setPiva(int piva) {
+    public void setPiva(String piva) {
         this.piva = piva;
     }
 

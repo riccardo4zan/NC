@@ -8,7 +8,7 @@ import nc.model.Elaborazione;
  * @author riccardo
  */
 public interface ElaborazioneDao {
-    Elaborazione findByCodice(String codice);
+    Elaborazione findByCodice(int codice);
     void saveElaborazione (Elaborazione toSave);
     List<Elaborazione> findAll();
 }

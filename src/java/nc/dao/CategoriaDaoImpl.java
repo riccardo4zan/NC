@@ -25,7 +25,7 @@ public class CategoriaDaoImpl implements CategoriaDao {
     }
 
     @Override
-    public Categoria findByCodice(String codice) {
+    public Categoria findByCodice(int codice) {
         return (Categoria) getSession().get(Categoria.class, codice);
     }
 

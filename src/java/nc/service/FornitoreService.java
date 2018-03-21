@@ -1,6 +1,5 @@
 package nc.service;
 
-import nc.dao.*;
 import java.util.List;
 import nc.model.Fornitore;
 

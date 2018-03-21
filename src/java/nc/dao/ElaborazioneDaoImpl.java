@@ -25,7 +25,7 @@ public class ElaborazioneDaoImpl implements ElaborazioneDao{
     }
 
     @Override
-    public Elaborazione findByCodice(String codice) {
+    public Elaborazione findByCodice(int codice) {
         return (Elaborazione) getSession().get(Elaborazione.class, codice);
     }
 

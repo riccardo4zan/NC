@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,9 +22,6 @@ public class NonConformita implements Serializable {
     @Id @GeneratedValue
     @Column(name="Codice")
     private int codice;
-    @Enumerated(EnumType.STRING)
-    @Column(name="Stato")
-    private Stato stato;
     @Column(name="Descrizione")
     private String descrizione;
     @Column(name="AzioniContenimento")
@@ -72,10 +67,6 @@ public class NonConformita implements Serializable {
 
     public int getCodice() {
         return codice;
-    }
-
-    public Stato getStato() {
-        return stato;
     }
 
     public String getDescrizione() {
@@ -150,10 +141,6 @@ public class NonConformita implements Serializable {
         this.codice = codice;
     }
 
-    public void setStato(Stato stato) {
-        this.stato = stato;
-    }
-
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
@@ -224,7 +211,7 @@ public class NonConformita implements Serializable {
 
     @Override
     public String toString() {
-        return "NonConformita{" + "codice=" + codice + ", stato=" + stato + ", descrizione=" + descrizione + ", azioniContenimento=" + azioniContenimento + ", azioniCorrettive=" + azioniCorrettive + ", azioniPreventive=" + azioniPreventive + ", dataApertura=" + dataApertura + ", dataChiusura=" + dataChiusura + ", cause=" + cause + ", gravita=" + gravita + ", costo=" + costo + ", tipo=" + tipo + ", fornitore=" + fornitore + ", cliente=" + cliente + ", reparto=" + reparto + ", dipendente=" + dipendente + ", elaborazioni=" + elaborazioni + ", pezziCorrelati=" + pezziCorrelati + ", team=" + team + '}';
+        return "NonConformita{" + "codice=" + codice + ", descrizione=" + descrizione + ", azioniContenimento=" + azioniContenimento + ", azioniCorrettive=" + azioniCorrettive + ", azioniPreventive=" + azioniPreventive + ", dataApertura=" + dataApertura + ", dataChiusura=" + dataChiusura + ", cause=" + cause + ", gravita=" + gravita + ", costo=" + costo + ", tipo=" + tipo + ", fornitore=" + fornitore + ", cliente=" + cliente + ", reparto=" + reparto + ", dipendente=" + dipendente + ", elaborazioni=" + elaborazioni + ", pezziCorrelati=" + pezziCorrelati + ", team=" + team + '}';
     }
 
 }

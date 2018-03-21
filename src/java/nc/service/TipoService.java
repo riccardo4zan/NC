@@ -10,5 +10,6 @@ import nc.model.Tipo;
 public interface TipoService {
     Tipo findByNome(String nome);
     void saveTipo (Tipo toSave);
+    void updateTipo(Tipo toUpdate);
     List<Tipo> findAll();
 }

@@ -10,5 +10,6 @@ import nc.model.NonConformita;
 public interface NonConformitaService {
     NonConformita findByCodice(int codice);
     void saveNonConformita (NonConformita toSave);
+    void updateNonConformita(NonConformita toUpdate);
     List<NonConformita> findAll();
 }

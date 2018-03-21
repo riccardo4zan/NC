@@ -10,5 +10,6 @@ import nc.model.Elaborazione;
 public interface ElaborazioneService {
     Elaborazione findByCodice(int codice);
     void saveElaborazione (Elaborazione toSave);
+    void updateElaborazione(Elaborazione toUpdate);
     List<Elaborazione> findAll();
 }

@@ -10,5 +10,6 @@ import nc.model.Pezzo;
 public interface PezzoService {
     Pezzo findByCodice(int codice);
     void savePezzo (Pezzo toSave);
+    void updatePezzo(Pezzo toUpdate);
     List<Pezzo> findAll();
 }

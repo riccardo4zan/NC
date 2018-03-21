@@ -10,5 +10,6 @@ import nc.model.Dipendente;
 public interface DipendenteService {
     Dipendente findByMatricola(int matricola);
     void saveDipendente (Dipendente toSave);
+    void updateDipendente(Dipendente toUpdate);
     List<Dipendente> findAll();
 }

@@ -6,21 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import nc.dao.DipendenteDao;
+import nc.service.DipendenteService;
  
 @Controller
 @RequestMapping("/")
 @ComponentScan("nc.dao")
 public class MainController {
     
-    /**
-     * TODO:
-     * - Cambiare la dipendenza da DipendenteDao e impostarla sul service
-     * - Togliere transactional dai DaoImpl
-     */
-    
     @Autowired
-    DipendenteDao dip;
+    DipendenteService dip;
     
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String index(ModelMap model) {

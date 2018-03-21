@@ -10,5 +10,6 @@ import nc.model.Categoria;
 public interface CategoriaService {
     Categoria findByCodice(int codice);
     void saveCategoria(Categoria toSave);
+    void updateCategoria(Categoria toUpdate);
     List<Categoria> findAllCategorie();
 }

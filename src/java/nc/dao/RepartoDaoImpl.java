@@ -14,7 +14,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("RepartoDao")
 public class RepartoDaoImpl implements RepartoDao{
-        @Autowired
+    
+    @Autowired
     private SessionFactory sessionFactory;
 
     protected Session getSession() {

@@ -9,6 +9,10 @@
 <body>
     <c:forEach var="dipendente" items="${Dipendenti}">
         ${dipendente.nome}
+        ${dipendente.cognome}
+        ${dipendente.password}
+        ${dipendente.ruolo}
+        ${dipendente.reparto.nome}
     </c:forEach>
 </body>
 </html>

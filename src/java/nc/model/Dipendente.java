@@ -31,11 +31,7 @@ public class Dipendente implements Serializable {
     private String nome;
     @Column(name="Cognome")
     private String cognome;
-    @Column(name="Password")
-    private String password;
     @Enumerated(EnumType.STRING) 
-    @Column(name="Ruolo")
-    private Ruolo ruolo;
     @ManyToOne
     @JoinColumn(name="Reparto")
     private Reparto reparto;
@@ -70,14 +66,6 @@ public class Dipendente implements Serializable {
     public String getCognome() {
         return cognome;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Ruolo getRuolo() {
-        return ruolo;
-    }
     
     public Reparto getReparto() {
         return reparto;
@@ -111,14 +99,6 @@ public class Dipendente implements Serializable {
         this.cognome = cognome;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRuolo(Ruolo ruolo) {
-        this.ruolo = ruolo;
-    }
-
     public void setReparto(Reparto reparto) {
         this.reparto = reparto;
     }
@@ -141,6 +121,7 @@ public class Dipendente implements Serializable {
 
     @Override
     public String toString() {
-        return "Dipendente{" + "matricola=" + matricola + ", nome=" + nome + ", cognome=" + cognome + ", password=" + password + ", ruolo=" + ruolo + ", reparto=" + reparto + ", segnalazioni=" + segnalazioni + ", aperte=" + aperte + ", elaborazioniEffettuate=" + elaborazioniEffettuate + ", parteTeam=" + parteTeam + '}';
+        return "Dipendente{" + "matricola=" + matricola + ", nome=" + nome + ", cognome=" + cognome + ", reparto=" + reparto + ", segnalazioni=" + segnalazioni + ", aperte=" + aperte + ", elaborazioniEffettuate=" + elaborazioniEffettuate + ", parteTeam=" + parteTeam + ", user=" + user + '}';
     }
+
 }

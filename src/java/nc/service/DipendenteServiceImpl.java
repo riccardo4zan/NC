@@ -37,9 +37,7 @@ public class DipendenteServiceImpl implements DipendenteService{
             entity.setElaborazioniEffettuate(entity.getElaborazioniEffettuate());
             entity.setNome(entity.getNome());
             entity.setParteTeam(entity.getParteTeam());
-            entity.setPassword(entity.getPassword());
             entity.setReparto(entity.getReparto());
-            entity.setRuolo(entity.getRuolo());
             entity.setSegnalazioni(entity.getSegnalazioni());
         }
     }

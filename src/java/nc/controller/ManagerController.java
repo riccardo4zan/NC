@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author riccardo
  */
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/manager**")
 @ComponentScan("nc.dao")
 public class ManagerController {
     
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String index(ModelMap model) {
         return "indexManager";
-    }
+    } 
+    
 }

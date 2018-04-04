@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author riccardo
  */
 @Controller
-@RequestMapping("/cq")
+@RequestMapping("/cq**")
 @ComponentScan("nc.dao")
 public class CQualitaController {
 
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
     public String index(ModelMap model) {
         return "indexCQualita";
     }

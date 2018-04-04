@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -43,7 +42,7 @@ public class AppConfig {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         //Nome del Db a cui deve connettersi
-        ds.setUrl("jdbc:mysql://localhost:3306/Prova");
+        ds.setUrl("jdbc:mysql://localhost:3306/WebApp");
         //Username dell'utente
         ds.setUsername("root");
         //Password dell'utente

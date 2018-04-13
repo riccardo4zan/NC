@@ -1,7 +1,10 @@
 package nc.controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
+import nc.model.Dipendente;
+import nc.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -17,12 +20,29 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
+    @Autowired
+    private UserService us;
+    /**
+     * Oggetto relativo al dipendente che ha effettuato il login
+     */
+    public Dipendente loggedDip;
+
     @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security + Hibernate Example");
-        model.addObject("message", "This is default page!");
         model.setViewName("hello");
+        /**
+         * Cerco di recuperare il riferimento all'utente loggato nella richiesta
+         * HTTP e di ricavarne il dipendente associato
+         */
+        try {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
+            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
+        } catch (Exception ex) {
+            model.addObject("message", "Problema nel trovare il numero del dipendente");
+        }
         return model;
 
     }
@@ -39,7 +59,15 @@ public class MainController {
         }
         model.setViewName("login");
         return model;
+    }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public void logout(HttpServletRequest request) {
+        try {
+            request.logout();
+        } catch (ServletException ex) {
+
+        }
     }
 
     // customize the error message
@@ -53,7 +81,6 @@ public class MainController {
         } else {
             error = "Invalid username and password!";
         }
-
         return error;
     }
 
@@ -66,9 +93,7 @@ public class MainController {
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             System.out.println(userDetail);
-
             model.addObject("username", userDetail.getUsername());
-
         }
         model.setViewName("403");
         return model;

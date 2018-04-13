@@ -44,7 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("password")
                 .and()
                     .logout().logoutSuccessUrl("/login?logout")
-                
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/403");
     }

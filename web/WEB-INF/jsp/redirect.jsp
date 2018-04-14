@@ -1,20 +1,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-    switch () {
-        case "Manager":
+    String ruolo = request.getParameter("ruolo");
+    switch (ruolo) {
+        case "ROLE_MANAGER":
             response.sendRedirect("/manager");
             break;
-        case "Operaio":
+        case "ROLE_OPERAIO":
             response.sendRedirect("/operaio");
             break;
-        case "ResponsabileQualita":
+        case "ROLE_RESPOQUA":
             response.sendRedirect("/rq");
             break;
-        case "ControlloreQualita":
+        case "ROLE_CONTROLQUA":
             response.sendRedirect("/cq");
             break;
         default:
-            response.sendRedirect("/login");
+            response.sendRedirect("/");
             break;
     }
 %>

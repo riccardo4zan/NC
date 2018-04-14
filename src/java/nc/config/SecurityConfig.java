@@ -37,15 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/operaio/**").access("hasRole('ROLE_OPERAIO')")
                 .and()
                     .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/")
                     .permitAll()
-                    .failureUrl("/login?error")
+                    .failureUrl("/")
+                    .defaultSuccessUrl("/redirect")
                     .usernameParameter("username")
                     .passwordParameter("password")
                 .and()
-                    .logout().logoutSuccessUrl("/login?logout")
+                    .logout().logoutSuccessUrl("/logout")
                 .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().exceptionHandling().accessDeniedPage("/redirect");
     }
 
     @Bean

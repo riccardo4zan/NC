@@ -20,7 +20,7 @@ public class OperaioController {
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         //inserire qui elaborazioni aperte
-        model.addObject("elaborazioniAperte", es.findOpen(MainController.loggedDip));
+        model.addObject("aperte", es.findOpen(MainController.loggedDip));
         model.setViewName("indexOperaio");
         return model;
     }
@@ -29,13 +29,13 @@ public class OperaioController {
     public ModelAndView old() {
         ModelAndView model = new ModelAndView();
         //inserire qui elaborazioni chiuse
-        model.addObject("elaborazioniChiuse", es.findClose(MainController.loggedDip));
+        model.addObject("chiuse", es.findClose(MainController.loggedDip));
         model.setViewName("indexOperaio");
         return model;
     }
     
     //manca request param
-    @RequestMapping(value = {"/modifica"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/mod"}, method = RequestMethod.GET)
     public ModelAndView modifica() {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
@@ -45,7 +45,7 @@ public class OperaioController {
     }
     
     //manca request param
-    @RequestMapping(value = {"/segnalazione"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/news"}, method = RequestMethod.GET)
     public ModelAndView segnalazione() {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro

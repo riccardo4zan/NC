@@ -8,18 +8,12 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Gestione NC</title>
-
         <!-- Bootstrap core CSS -->
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-
         <!-- Custom styles for this template -->
         <link href="/resources/css/navbar.css" rel="stylesheet">
-
     <body>
-
         <div class="container">
 
             <!-- Static navbar -->
@@ -43,32 +37,49 @@
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-
-            <c:if test="${not empty elaborazioniAperte}">
-                <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp">
-                    <jsp:param name="elaborazioniAperte" value="${elaborazioniAperte}"/>
-                </jsp:include>
+            <!-- operazioni da svolgere-->
+            <c:if test="${not empty aperte}">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Codice elaborazione</th>
+                            <th>Data</th>
+                            <th>Modifica</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${aperte}" var="item">
+                            <tr>
+                                <td> <c:out value ="${item.codice}"/> </td>
+                                <td> <c:out value ="${item.dataInizio}"/> </td>
+                                <td><a href="editElaborazione.jsp?codice=${item.codice}">Modifica</a></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </c:if>
-
-            <c:if test="${not empty elaborazioniChiuse}">
-                <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp">
-                    <jsp:param name="elaborazioniChiuse" value="${elaborazioniChiuse}"/>
-                </jsp:include>
-            </c:if>
-
-            <c:if test="${not empty segnalazione}">
-                <jsp:include page="/WEB-INF/jsp/segnalazione.jsp" />
-            </c:if>
-
-            <c:if test="${not empty idElaborazione}">
-                <jsp:include page="/WEB-INF/jsp/operaio/editElaborazione.jsp">
-                    <jsp:param name="ideElaborazione" value="${idElaborazione}"/>
-                </jsp:include>
-            </c:if>
+            <!-- operazioni concluse -->
+            <c:if test="${not empty chiuse}">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Codice elaborazione</th>
+                            <th>Data</th>
+                            <th>Modifica</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${aperte}" var="item">
+                            <tr>
+                                <td> <c:out value ="${item.codice}"/> </td>
+                                <td> <c:out value ="${item.dataFine}"/> </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>            
 
         </div> <!-- /container -->
-
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

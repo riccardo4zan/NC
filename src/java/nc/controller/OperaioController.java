@@ -34,7 +34,17 @@ public class OperaioController {
     public ModelAndView modifica() {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
-        model.addObject("elaborazione", "codiceElaborazione");
+        model.addObject("idElaborazione", "codiceElaborazione");
+        model.setViewName("indexOperaio");
+        return model;
+    }
+    
+    //manca request param
+    @RequestMapping(value = {"/segnalazione"}, method = RequestMethod.GET)
+    public ModelAndView segnalazione() {
+        ModelAndView model = new ModelAndView();
+        //inserire qui codice elaborazione da parametro
+        model.addObject("segnalazione", "si");
         model.setViewName("indexOperaio");
         return model;
     }

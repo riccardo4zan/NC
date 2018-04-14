@@ -29,7 +29,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/operaio/">Home</a></li>
                             <li><a href="/operaio/old">Segnalazioni chiuse</a></li>
-                            <li><a href="/segnalazione">Invia una segnalazione</a>
+                            <li><a href="/operaio/segnalazione">Invia una segnalazione</a>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -45,21 +45,27 @@
             </nav>
 
             <c:if test="${not empty elaborazioniAperte}">
-                <jsp:include page="operaio/elaborazioniAperte" />
+                <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp">
+                    <jsp:param name="elaborazioni" value="${instanceVar}"/>
+                </jsp:include>
             </c:if>
-                
+
             <c:if test="${not empty elaborazioniChiuse}">
-                <jsp:include page="operaio/elaborazioniChiuse" />
+                <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp">
+                    <jsp:param name="elaborazioni" value="${instanceVar}"/>
+                </jsp:include>
             </c:if>
-            
+
             <c:if test="${not empty segnalazione}">
-                <jsp:include page="segnalazione" />
+                <jsp:include page="/WEB-INF/jsp/segnalazione.jsp" />
             </c:if>
-            
-            <c:if test="${not empty elaborazione}">
-                <jsp:include page="operaio/editElaborazione" />
+
+            <c:if test="${not empty idElaborazione}">
+                <jsp:include page="/WEB-INF/jsp/operaio/editElaborazione.jsp">
+                    <jsp:param name="ideElaborazione" value="${idElaborazione}"/>
+                </jsp:include>
             </c:if>
-            
+
         </div> <!-- /container -->
 
 

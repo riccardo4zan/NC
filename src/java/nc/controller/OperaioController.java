@@ -20,15 +20,8 @@ public class OperaioController {
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         //inserire qui elaborazioni aperte
+        model.addObject("matricola",MainController.loggedDip.getMatricola());
         model.addObject("aperte", es.findOpen(MainController.loggedDip));
-        model.setViewName("indexOperaio");
-        return model;
-    }
-    
-    @RequestMapping(value = {"/old"}, method = RequestMethod.GET)
-    public ModelAndView old() {
-        ModelAndView model = new ModelAndView();
-        //inserire qui elaborazioni chiuse
         model.addObject("chiuse", es.findClose(MainController.loggedDip));
         model.setViewName("indexOperaio");
         return model;

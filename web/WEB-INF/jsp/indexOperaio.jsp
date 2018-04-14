@@ -23,11 +23,11 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/operaio/">Home</a></li>
                             <li><a href="/operaio/old">Segnalazioni chiuse</a></li>
-                            <li><a href="/operaio/segnalazione">Invia una segnalazione</a>
+                            <li><a href="/operaio/news">Invia una segnalazione</a>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matricola qui <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${matricola}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">I miei dati</a></li>
                                     <li><a href="/logout">Logout</a></li>
@@ -37,6 +37,7 @@
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
+            
             <!-- operazioni da svolgere-->
             <c:if test="${not empty aperte}">
                 <table class="table">
@@ -77,8 +78,8 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </c:if>            
-
+            </c:if>
+            
         </div> <!-- /container -->
         <!-- Bootstrap core JavaScript
         ================================================== -->

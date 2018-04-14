@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -27,36 +26,9 @@ public class MainController {
      */
     public Dipendente loggedDip;
 
-    @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security + Hibernate Example");
-        model.setViewName("hello");
-        /**
-         * Cerco di recuperare il riferimento all'utente loggato nella richiesta
-         * HTTP e di ricavarne il dipendente associato
-         */
-        try {
-            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
-            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
-        } catch (Exception ex) {
-            model.addObject("message", "Problema nel trovare il numero del dipendente");
-        }
-        return model;
-
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-            @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
-        ModelAndView model = new ModelAndView();
-        if (error != null) {
-            model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
-        }
-        if (logout != null) {
-            model.addObject("msg", "You've been logged out successfully.");
-        }
         model.setViewName("login");
         return model;
     }
@@ -66,7 +38,6 @@ public class MainController {
         try {
             request.logout();
         } catch (ServletException ex) {
-
         }
     }
 
@@ -85,17 +56,17 @@ public class MainController {
     }
 
     // for 403 access denied page
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public ModelAndView accesssDenied() {
+    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+    public ModelAndView redirection() {
         ModelAndView model = new ModelAndView();
-        // check if user is login
+        // check if user is logged in
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
-            System.out.println(userDetail);
-            model.addObject("username", userDetail.getUsername());
+            //passa il ruolo alla pagina redirect
+            model.addObject("ruolo", loggedDip.getUser().getUserRole().iterator().next().getRole());
         }
-        model.setViewName("403");
+        model.setViewName("redirect");
         return model;
     }
 

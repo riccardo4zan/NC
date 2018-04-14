@@ -31,10 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //SETTANDO I PERMESSI PER I VARI RUOLI
-                .antMatchers("/managere/**").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/ma/**").access("hasRole('ROLE_MANAGER')")
                 .antMatchers("/cq/**").access("hasRole('ROLE_CONTROLQUA')")
                 .antMatchers("/rq/**").access("hasRole('ROLE_RESPOQUA')")
-                .antMatchers("/operaio/**").access("hasRole('ROLE_OPERAIO')")
+                .antMatchers("/op/**").access("hasRole('ROLE_OPERAIO')")
                 .and()
                     .formLogin()
                     .loginPage("/")

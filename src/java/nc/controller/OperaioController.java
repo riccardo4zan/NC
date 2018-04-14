@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/operaio**")
+@RequestMapping("/op**")
 @ComponentScan("nc.dao")
 public class OperaioController {
 

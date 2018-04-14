@@ -40,13 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/")
                     .permitAll()
                     .failureUrl("/")
-                    .defaultSuccessUrl("/redirect")
                     .usernameParameter("username")
                     .passwordParameter("password")
                 .and()
                     .logout().logoutSuccessUrl("/logout")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/redirect");
+        http.formLogin().defaultSuccessUrl("/redirect", true);
     }
 
     @Bean

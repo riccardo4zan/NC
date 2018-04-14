@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String ruolo = request.getParameter("ruolo");
+    /**
     switch (ruolo) {
         case "ROLE_MANAGER":
             response.sendRedirect("/manager");
@@ -18,4 +19,6 @@
             response.sendRedirect("/");
             break;
     }
+    * */
 %>
+<h1><%=ruolo%></h1>

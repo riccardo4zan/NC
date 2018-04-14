@@ -23,7 +23,7 @@ public class User implements Serializable {
     private String password;
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
     @OneToOne(mappedBy = "user")
     private Dipendente dip;

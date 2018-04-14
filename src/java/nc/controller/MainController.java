@@ -32,6 +32,7 @@ public class MainController {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
         return model;
+
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)  

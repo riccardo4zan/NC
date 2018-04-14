@@ -3,11 +3,11 @@
 <c:choose>
     
     <c:when test="${ruolo == 'ROLE_MANAGER'}">
-        <c:redirect url="/managere"></c:redirect>
+        <c:redirect url="/ma"></c:redirect>
     </c:when>
     
     <c:when test="${ruolo == 'ROLE_OPERAIO'}">
-        <c:redirect url="/operaio"></c:redirect>
+        <c:redirect url="/op"></c:redirect>
     </c:when>
     
     <c:when test="${ruolo == 'ROLE_RESPOQUA'}">

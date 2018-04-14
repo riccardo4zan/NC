@@ -25,7 +25,7 @@ public class MainController {
     /**
      * Oggetto relativo al dipendente che ha effettuato il login
      */
-    public static Dipendente loggedDip;
+    private static Dipendente loggedDip;
 
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
@@ -89,6 +89,10 @@ public class MainController {
         }
         model.setViewName("redirect");
         return model;
+    }
+
+    public static Dipendente getLoggedDip() {
+        return loggedDip;
     }
 
 }

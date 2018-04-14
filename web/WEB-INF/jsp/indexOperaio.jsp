@@ -22,7 +22,6 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/operaio/">Home</a></li>
-                            <li><a href="/operaio/old">Segnalazioni chiuse</a></li>
                             <li><a href="/operaio/news">Invia una segnalazione</a>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -78,8 +77,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </c:if>
-            
+            </c:if>            
         </div> <!-- /container -->
         <!-- Bootstrap core JavaScript
         ================================================== -->

@@ -30,6 +30,17 @@ public class MainController {
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
+        /**
+         * Cerco di recuperare il riferimento all'utente loggato nella richiesta
+         * HTTP e di ricavarne il dipendente associato
+         */
+        try {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
+            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
+        } catch (Exception ex) {
+            model.addObject("message", "Problema nel trovare il numero del dipendente");
+        }
         return model;
     }
 

@@ -49,7 +49,7 @@
 		</c:if>
 
 		<form name='loginForm'
-			action="<c:url value='/login' />" method='POST'>
+			action="<c:url value='/' />" method='POST'>
 
 			<table>
 				<tr>

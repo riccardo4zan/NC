@@ -2,6 +2,7 @@ package nc.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import nc.model.Dipendente;
 import nc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,26 +32,17 @@ public class MainController {
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
-        /**
-         * Cerco di recuperare il riferimento all'utente loggato nella richiesta
-         * HTTP e di ricavarne il dipendente associato
-         */
-        try {
-            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
-            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
-        } catch (Exception ex) {
-            model.addObject("message", "Problema nel trovare il numero del dipendente");
-        }
         return model;
+
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void logout(HttpServletRequest request) {
-        try {
-            request.logout();
-        } catch (ServletException ex) {
-        }
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)  
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth!=null) new SecurityContextLogoutHandler().logout(request, response, auth);
+        model.setViewName("login");
+        return model;
     }
 
     // customize the error message
@@ -70,6 +63,24 @@ public class MainController {
     @RequestMapping(value = "/redirect", method = RequestMethod.GET)
     public ModelAndView redirection() {
         ModelAndView model = new ModelAndView();
+        /**
+         * Cerco di recuperare il riferimento all'utente loggato nella richiesta
+         * HTTP e di ricavarne il dipendente associato
+         */
+        try {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
+            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
+        } catch (Exception ex) {
+            model.addObject("message", "Problema nel trovare il numero del dipendente");
+        }
+        try {
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
+            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
+        } catch (Exception ex) {
+            model.addObject("message", "Problema nel trovare il numero del dipendente");
+        }
         // check if user is logged in
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {

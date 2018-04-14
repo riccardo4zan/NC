@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //SETTANDO I PERMESSI PER I VARI RUOLI
-                .antMatchers("/manager/**").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/managere/**").access("hasRole('ROLE_MANAGER')")
                 .antMatchers("/cq/**").access("hasRole('ROLE_CONTROLQUA')")
                 .antMatchers("/rq/**").access("hasRole('ROLE_RESPOQUA')")
                 .antMatchers("/operaio/**").access("hasRole('ROLE_OPERAIO')")
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .passwordParameter("password")
                 .and()
-                    .logout().logoutSuccessUrl("/logout")
+                    .logout().logoutSuccessUrl("/")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/redirect");
         http.formLogin().defaultSuccessUrl("/redirect", true);

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/manager**")
+@RequestMapping("/managere**")
 @ComponentScan("nc.dao")
 public class ManagerController {
     
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
     public String index(ModelMap model) {
-        return "/manager/indexManager";
+        return "/indexManager";
     }
     
 }

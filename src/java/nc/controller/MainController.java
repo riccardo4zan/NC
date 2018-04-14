@@ -1,6 +1,5 @@
 package nc.controller;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nc.model.Dipendente;
@@ -33,7 +32,6 @@ public class MainController {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
         return model;
-
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)  

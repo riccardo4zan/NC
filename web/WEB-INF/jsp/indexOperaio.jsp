@@ -45,24 +45,18 @@
             </nav>
 
             <c:if test="${not empty elaborazioniAperte}">
-                ${elaborazioniAperte}
-                ciao
-                <a href="/operaio/modifica">saaa</a>
                 <jsp:include page="operaio/elaborazioniAperte" />
             </c:if>
                 
             <c:if test="${not empty elaborazioniChiuse}">
-                mina ${elaborazioniChiuse}
                 <jsp:include page="operaio/elaborazioniChiuse" />
             </c:if>
             
             <c:if test="${not empty segnalazione}">
-                bene ${segnalazione}
                 <jsp:include page="segnalazione" />
             </c:if>
             
             <c:if test="${not empty elaborazione}">
-                cazzo ${elaborazione}
                 <jsp:include page="operaio/editElaborazione" />
             </c:if>
             

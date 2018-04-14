@@ -69,7 +69,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${aperte}" var="item">
+                        <c:forEach items="${chiuse}" var="item">
                             <tr>
                                 <td> <c:out value ="${item.codice}"/> </td>
                                 <td> <c:out value ="${item.dataFine}"/> </td>

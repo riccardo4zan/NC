@@ -1,5 +1,7 @@
 package nc.controller;
 
+import nc.service.ElaborazioneService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/op**")
 @ComponentScan("nc.dao")
 public class OperaioController {
+    
+    @Autowired
+    ElaborazioneService es;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         //inserire qui elaborazioni aperte
-        model.addObject("elaborazioniAperte", "quiElaborazioniAperte");
+        model.addObject("elaborazioniAperte", es.findOpen(MainController.loggedDip));
         model.setViewName("indexOperaio");
         return model;
     }
@@ -24,7 +29,7 @@ public class OperaioController {
     public ModelAndView old() {
         ModelAndView model = new ModelAndView();
         //inserire qui elaborazioni chiuse
-        model.addObject("elaborazioniChiuse", "quiElaborazioniChiuse");
+        model.addObject("elaborazioniChiuse", es.findClose(MainController.loggedDip));
         model.setViewName("indexOperaio");
         return model;
     }

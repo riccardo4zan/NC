@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-    <c:forEach items="${ArrayDiElaborazioni}" var="item">
+    <c:forEach items="${elaborazioniChiuse}" var="item">
 
         <tr>
             <td> <c:out value ="${item.Codice}"/> </td>

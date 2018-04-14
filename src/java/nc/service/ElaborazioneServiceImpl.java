@@ -2,6 +2,7 @@ package nc.service;
 
 import java.util.List;
 import nc.dao.ElaborazioneDao;
+import nc.model.Dipendente;
 import nc.model.Elaborazione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,16 @@ public class ElaborazioneServiceImpl implements ElaborazioneService{
     @Override
     public List<Elaborazione> findAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public List<Elaborazione> findOpen(Dipendente dip) {
+        return dao.findOpen(dip);
+    }
+
+    @Override
+    public List<Elaborazione> findClose(Dipendente dip) {
+        return dao.findClose(dip);
     }
     
 }

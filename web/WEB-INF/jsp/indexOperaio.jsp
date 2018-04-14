@@ -46,13 +46,13 @@
 
             <c:if test="${not empty elaborazioniAperte}">
                 <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp">
-                    <jsp:param name="elaborazioni" value="${instanceVar}"/>
+                    <jsp:param name="elaborazioniAperte" value="${elaborazioniAperte}"/>
                 </jsp:include>
             </c:if>
 
             <c:if test="${not empty elaborazioniChiuse}">
                 <jsp:include page="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp">
-                    <jsp:param name="elaborazioni" value="${instanceVar}"/>
+                    <jsp:param name="elaborazioniChiuse" value="${elaborazioniChiuse}"/>
                 </jsp:include>
             </c:if>
 

@@ -1,24 +1,25 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-    String ruolo = request.getParameter("ruolo");
-    /**
-    switch (ruolo) {
-        case "ROLE_MANAGER":
-            response.sendRedirect("/manager");
-            break;
-        case "ROLE_OPERAIO":
-            response.sendRedirect("/operaio");
-            break;
-        case "ROLE_RESPOQUA":
-            response.sendRedirect("/rq");
-            break;
-        case "ROLE_CONTROLQUA":
-            response.sendRedirect("/cq");
-            break;
-        default:
-            response.sendRedirect("/");
-            break;
-    }
-    * */
-%>
-<h1><%=ruolo%></h1>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+<c:choose>
+    
+    <c:when test="${ruolo == 'ROLE_MANAGER'}">
+        <c:redirect url="/managere"></c:redirect>
+    </c:when>
+    
+    <c:when test="${ruolo == 'ROLE_OPERAIO'}">
+        <c:redirect url="/operaio"></c:redirect>
+    </c:when>
+    
+    <c:when test="${ruolo == 'ROLE_RESPOQUA'}">
+        <c:redirect url="/rq"></c:redirect>
+    </c:when>
+    
+    <c:when test="${ruolo == 'ROLE_CONTROLQUA'}">
+        <c:redirect url="/cq"></c:redirect>
+    </c:when>
+    
+    <c:otherwise>
+        <c:redirect url="/"></c:redirect>
+    </c:otherwise>
+    
+</c:choose>

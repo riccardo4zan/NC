@@ -22,6 +22,15 @@ public class OperaioController {
         //inserire qui elaborazioni aperte
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("aperte", es.findOpen(MainController.getLoggedDip()));
+        model.setViewName("indexOperaio");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/old"}, method = RequestMethod.GET)
+    public ModelAndView old() {
+        ModelAndView model = new ModelAndView();
+        //inserire qui elaborazioni aperte
+        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("chiuse", es.findClose(MainController.getLoggedDip()));
         model.setViewName("indexOperaio");
         return model;
@@ -32,6 +41,7 @@ public class OperaioController {
     public ModelAndView modifica() {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
+        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("idElaborazione", "codiceElaborazione");
         model.setViewName("indexOperaio");
         return model;
@@ -42,8 +52,9 @@ public class OperaioController {
     public ModelAndView segnalazione() {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
+        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("segnalazione", "si");
-        model.setViewName("segnalazione");
+        model.setViewName("indexOperaio");
         return model;
     }
     

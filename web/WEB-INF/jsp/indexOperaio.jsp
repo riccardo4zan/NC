@@ -22,6 +22,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/operaio/">Home</a></li>
+                            <li><a href="/operaio/old">Elaborazioni completate</a></li>
                             <li><a href="/operaio/news">Invia una segnalazione</a>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -36,48 +37,29 @@
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-            
+
             <!-- operazioni da svolgere-->
             <c:if test="${not empty aperte}">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Codice elaborazione</th>
-                            <th>Data</th>
-                            <th>Modifica</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${aperte}" var="item">
-                            <tr>
-                                <td> <c:out value ="${item.codice}"/> </td>
-                                <td> <c:out value ="${item.dataInizio}"/> </td>
-                                <td><a href="editElaborazione.jsp?codice=${item.codice}">Modifica</a></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                <c:set var="aperte" value="${aperte}" scope="request"/>
+                <c:import url="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp"/>
             </c:if>
-            <!-- operazioni concluse -->
+
             <c:if test="${not empty chiuse}">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Codice elaborazione</th>
-                            <th>Data</th>
-                            <th>Modifica</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${chiuse}" var="item">
-                            <tr>
-                                <td> <c:out value ="${item.codice}"/> </td>
-                                <td> <c:out value ="${item.dataFine}"/> </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>            
+                <c:set var="chiuse" value="${chiuse}" scope="request"/>
+                <c:import url="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp"/>
+            </c:if>
+
+            <c:if test="${not empty segnalazione}">
+                <jsp:include page="/WEB-INF/jsp/segnalazione.jsp" />
+            </c:if>
+
+            <c:if test="${not empty idElaborazione}">
+                <jsp:include page="/WEB-INF/jsp/operaio/editElaborazione.jsp">
+                    <jsp:param name="idElaborazione" value="${idElaborazione}"/>
+                </jsp:include>
+            </c:if> 
+
+
         </div> <!-- /container -->
         <!-- Bootstrap core JavaScript
         ================================================== -->

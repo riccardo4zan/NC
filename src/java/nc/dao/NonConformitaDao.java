@@ -15,6 +15,7 @@ public interface NonConformitaDao {
     NonConformita findByCodice(int codice);
     void saveNonConformita (NonConformita toSave);
     List<NonConformita> findAll();
+    List<NonConformita> findAllAperte();
     int findCostoPerTipo(Date anno, Tipo tipo);
     int findCostoPerReparto(Date anno, Reparto rep);
     int findCostoPerFornitore(Date anno, Fornitore forn);

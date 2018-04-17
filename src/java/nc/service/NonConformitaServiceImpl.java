@@ -75,5 +75,10 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public int findCostoPerFornitore(Date anno, Fornitore forn) {
         return dao.findCostoPerFornitore(anno, forn);
     }
+
+    @Override
+    public List<NonConformita> findAllAperte() {
+        return dao.findAllAperte();
+    }
     
 }

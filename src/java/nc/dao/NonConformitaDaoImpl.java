@@ -86,4 +86,11 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         return sum;
     }
 
+    @Override
+    public List<NonConformita> findAllAperte() {
+        Criteria criteria = getSession().createCriteria(NonConformita.class);
+        criteria.add(Restrictions.isNull("dataChiusura"));
+        return (List<NonConformita>) criteria.list();
+    }
+
 }

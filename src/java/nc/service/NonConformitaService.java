@@ -1,7 +1,9 @@
 package nc.service;
 
+import java.sql.Date;
 import java.util.List;
 import nc.model.NonConformita;
+import nc.model.Tipo;
 
 /**
  *
@@ -12,4 +14,5 @@ public interface NonConformitaService {
     void saveNonConformita (NonConformita toSave);
     void updateNonConformita(NonConformita toUpdate);
     List<NonConformita> findAll();
+    int findCostoPerTipo(Date anno, Tipo tipo);
 }

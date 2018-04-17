@@ -1,8 +1,10 @@
 package nc.service;
 
+import java.sql.Date;
 import java.util.List;
 import nc.dao.NonConformitaDao;
 import nc.model.NonConformita;
+import nc.model.Tipo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +57,11 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     @Override
     public List<NonConformita> findAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public int findCostoPerTipo(Date anno, Tipo tipo) {
+        return dao.findCostoPerTipo(anno, tipo);
     }
     
 }

@@ -80,5 +80,15 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public List<NonConformita> findAllAperte() {
         return dao.findAllAperte();
     }
+
+    @Override
+    public List<NonConformita> findAllInElaborazione() {
+        return dao.findAllInElaborazione();
+    }
+
+    @Override
+    public List<NonConformita> findAllChiuse() {
+        return dao.findAllChiuse();
+    }
     
 }

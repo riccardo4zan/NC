@@ -73,13 +73,6 @@ public class MainController {
         } catch (Exception ex) {
             model.addObject("message", "Problema nel trovare il numero del dipendente");
         }
-        try {
-            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            this.loggedDip = us.findByUserName(user.getUsername()).getDip();
-            model.addObject("message", "La matricola del dipendente loggato è:" + this.loggedDip.getMatricola());
-        } catch (Exception ex) {
-            model.addObject("message", "Problema nel trovare il numero del dipendente");
-        }
         // check if user is logged in
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {

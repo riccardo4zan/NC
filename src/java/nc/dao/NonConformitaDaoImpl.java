@@ -3,7 +3,9 @@ package nc.dao;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import nc.model.Fornitore;
 import nc.model.NonConformita;
+import nc.model.Reparto;
 import nc.model.Tipo;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -47,6 +49,34 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         Criteria criteria = getSession().createCriteria(NonConformita.class);
         //raggruppa per tipo, e anno
         criteria.add(Restrictions.eq("tipo", tipo));
+        criteria.add(Restrictions.eq("dataChiusura", anno));
+        ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
+        int sum = 0;
+        for (NonConformita tmp : res) {
+            sum += tmp.getCosto();
+        }
+        return sum;
+    }
+
+    @Override
+    public int findCostoPerReparto(Date anno, Reparto rep) {
+        Criteria criteria = getSession().createCriteria(NonConformita.class);
+        //raggruppa per tipo, e anno
+        criteria.add(Restrictions.eq("reparto", rep));
+        criteria.add(Restrictions.eq("dataChiusura", anno));
+        ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
+        int sum = 0;
+        for (NonConformita tmp : res) {
+            sum += tmp.getCosto();
+        }
+        return sum;
+    }
+
+    @Override
+    public int findCostoPerFornitore(Date anno, Fornitore forn) {
+        Criteria criteria = getSession().createCriteria(NonConformita.class);
+        //raggruppa per tipo, e anno
+        criteria.add(Restrictions.eq("fornitore", forn));
         criteria.add(Restrictions.eq("dataChiusura", anno));
         ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
         int sum = 0;

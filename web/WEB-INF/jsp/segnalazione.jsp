@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="well form-horizontal" method="post"  id="addSegnalazione" action="addSegnalazione">
+    <form class="well form-horizontal" modelAttribute="segnalazione" method="get"  id="addSegnalazione" action="/addS">
         <fieldset>
             <legend>Segnala una Non Conformità</legend>
 

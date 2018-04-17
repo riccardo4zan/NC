@@ -6,7 +6,7 @@
     </div>
     <div class="form-group">
         <label> Data Inizio </label>
-        <input type="date" class="form-control" readonly="true" value="${DataInizio}" name="dataInizio"/>
+        <input type="date" class="form-control" readonly="true" value="${dataInizio}" name="dataInizio"/>
     </div>
     <div class="form-group">
         <label> Data Fine </label>
@@ -16,5 +16,5 @@
         <label> Non conformita </label>
         <input type="text" class="form-control" readonly="true" value="${nonConformita}" name="nonConformita"/>
     </div>
-    <input type="submit" class="form-control"  name="submit">Salva
+   <button type="submit" class="btn btn-primary">Salva</button>
 </form>

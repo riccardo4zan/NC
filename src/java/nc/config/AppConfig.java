@@ -44,7 +44,6 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         //Nome del Db a cui deve connettersi
-        ds.setUrl("jdbc:mysql://10.0.01.252:3306/5ib26");
         ds.setUrl("jdbc:mysql://10.0.1.252:3306/5ib26");
         //Username dell'utente
         ds.setUsername("5ib26");

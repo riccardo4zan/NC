@@ -9,18 +9,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/logincss.css" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script src="../resources/js/loginjs.js" type="text/javascript"></script>
     </head>
     <body onload='document.loginForm.username.focus();'>
         <div class="container">
-            <form class="form-signin" name='loginForm' action="<c:url value='/' />" method='POST'>
-                <center>
-                    <br><h2 class="form-signin-heading">Accedi</h2><br>
-                </center>
-                <div class="form-group">
-                    <input name="username" class="form-control" placeholder="Username" required autofocus><br>
-                    <input name="password" type="Password" class="form-control" placeholder="Password" required><br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Entra</button>
-                </div>        
+            <form class="box-centro" name='loginForm' action="<c:url value='/' />" method='POST'>
+                <div class="group">
+                    <input type="text" name="username" required ><span class="highlight"></span><span class="bar"></span>
+                    <label>Username</label>
+                </div>
+                <div class="group">
+                    <input name="password" type="Password" required ><span class="highlight"></span><span class="bar"></span>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="button buttonRosso">Log-In
+                    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                </button>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
         </div>

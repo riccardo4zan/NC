@@ -7,10 +7,6 @@ import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
 
-/**
- *
- * @author riccardo
- */
 public interface NonConformitaService {
     NonConformita findByCodice(int codice);
     void saveNonConformita (NonConformita toSave);

@@ -45,10 +45,11 @@ public class OperaioController {
     }
     
     //manca request param
-    @RequestMapping(value = {"/mod"}, method = RequestMethod.GET)
-    public ModelAndView modifica() {
+    @RequestMapping(value = {"/editElaborazione"}, method = RequestMethod.GET)
+    public ModelAndView modifica(@ModelAttribute("elaborazione")Elaborazione e) {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
+        es.updateElaborazione(e);
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("idElaborazione", "codiceElaborazione");
         model.setViewName("indexOperaio");
@@ -67,12 +68,13 @@ public class OperaioController {
         return model;
     }
     
-        @RequestMapping(value = {"/addS"}, method = RequestMethod.POST)
-    public ModelAndView addSegnalazione(@ModelAttribute Segnalazione s) {
+    @RequestMapping(value = {"/addS"}, method = RequestMethod.POST)
+    public ModelAndView addSegnalazione(@ModelAttribute("segnalazione") Segnalazione s) {
         ModelAndView model = new ModelAndView();
         ss.saveSegnalazione(s);
         //inserire qui codice elaborazione da parametro
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
+        model.addObject("aperte", es.findOpen(MainController.getLoggedDip()));
         model.setViewName("indexOperaio");
         return model;
     }

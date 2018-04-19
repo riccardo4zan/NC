@@ -31,7 +31,7 @@ public class Segnalazione implements Serializable {
 
     public Segnalazione() {
     }
-
+    
     public int getCodice() {
         return codice;
     }

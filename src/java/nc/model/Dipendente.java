@@ -54,6 +54,10 @@ public class Dipendente implements Serializable {
 
     public Dipendente() {
     }
+
+    public Dipendente(int matricola) {
+        this.matricola = matricola;
+    }
     
     public int getMatricola() {
         return matricola;

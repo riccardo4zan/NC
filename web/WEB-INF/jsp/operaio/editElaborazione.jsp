@@ -1,20 +1,20 @@
 <h1> Elaborazione numero: ${codice} </h1>
-<form  name="" action="">
+<form:form name="editElaborazione" modelAttribute="elaborazione" action="/editElaborazione" method="post">
     <div class="form-group">
-        <label> Descrizione </label>
-        <textarea class="form-control" name="descrizione"> ${descrizione} </textarea>
+        <form:label path="descrizione"> Descrizione </form:label>>
+        <form:input type="text" path="descrizione" class="form-control" name="descrizione"> ${descrizione} />
     </div>
     <div class="form-group">
-        <label> Data Inizio </label>
-        <input type="date" class="form-control" readonly="true" value="${dataInizio}" name="dataInizio"/>
+        <form:label path="dataInizio"> Data Inizio </form:label>>
+        <form:input type="date" path="dataInizio" class="form-control" readonly="true" value="${dataInizio}" name="dataInizio"/>
     </div>
     <div class="form-group">
-        <label> Data Fine </label>
-        <input type="date" class="form-control"  placeholder="data fine" name="dataFine"/>
+        <form:label path="dataFine"> Data Fine </form:label>>
+        <input type="date"  path="dataFine" class="form-control"  placeholder="data fine" name="dataFine"/>
     </div>
     <div class="form-group">
-        <label> Non conformita </label>
-        <input type="text" class="form-control" readonly="true" value="${nonConformita}" name="nonConformita"/>
+        <form:label path="nonConformita"> Non conformita  </form:label>
+        <form:input type="text"  path="nonConformita" class="form-control" readonly="true" value="${nonConformita.getCodice()}" name="nonConformita"/>
     </div>
    <button type="submit" class="btn btn-primary">Salva</button>
-</form>
+</form:form>

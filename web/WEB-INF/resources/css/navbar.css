@@ -8,3 +8,17 @@ body {
     background-color: #333333 !important;
     color: #cecece !important;
 }
+
+.contenuto{
+    text-align:center;
+}
+
+.childs{
+    margin:auto;
+    display:inline-block;
+}
+
+.istogramma{
+    margin-left: 30px;
+    margin-right: 30px;
+}

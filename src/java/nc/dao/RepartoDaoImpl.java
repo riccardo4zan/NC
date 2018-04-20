@@ -8,10 +8,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author riccardo
- */
 @Repository("RepartoDao")
 public class RepartoDaoImpl implements RepartoDao{
     

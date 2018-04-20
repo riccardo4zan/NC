@@ -41,14 +41,14 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public int findCostoPerTipo(int anno, Tipo tipo) {
+    public double findCostoPerTipo(int anno, Tipo tipo) {
         String sql = "SELECT * FROM NonConformita WHERE Tipo = :nome_tipo AND year(DataChiusura) = :anno";
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(NonConformita.class);
         query.setParameter("nome_tipo", tipo.getNome());
         query.setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
-        int sum = 0;
+        double sum = 0;
         if (res != null) {
             for (NonConformita tmp : res) {
                 sum += tmp.getCosto();
@@ -67,14 +67,14 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public int findCostoPerReparto(int anno, Reparto rep) {
+    public double findCostoPerReparto(int anno, Reparto rep) {
         String sql = "SELECT * FROM NonConformita WHERE IDReparto = :nome_reparto AND year(DataChiusura) = :anno";
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(NonConformita.class);
         query.setParameter("nome_reparto", rep.getNome());
         query.setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
-        int sum = 0;
+        double sum = 0;
         if (res != null) {
             for (NonConformita tmp : res) {
                 sum += tmp.getCosto();
@@ -96,14 +96,14 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public int findCostoPerFornitore(int anno, Fornitore forn) {
+    public double findCostoPerFornitore(int anno, Fornitore forn) {
         String sql = "SELECT * FROM NonConformita WHERE PivaFornitore = :nome_forn AND year(DataChiusura) = :anno";
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(NonConformita.class);
         query.setParameter("nome_forn", forn.getPiva());
         query.setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
-        int sum = 0;
+        double sum = 0;
         if (res != null) {
             for (NonConformita tmp : res) {
                 sum += tmp.getCosto();

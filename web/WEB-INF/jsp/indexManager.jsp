@@ -1,4 +1,5 @@
 <%@page import="nc.model.Fornitore"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,7 +20,6 @@
         <link href="/resources/css/navbar.css" rel="stylesheet">
 
     <body>
-
         <div class="contenuto">
             <!-- Static navbar -->
             <nav class="navbar navbar-default">
@@ -107,7 +107,24 @@
                     <div id="fornitori"></div>
                 </div>
             </div>
-
+            
+            reparti<br>
+            <c:forEach items="${cazzo}" var="item">
+                ${item.nome}
+            </c:forEach><br>
+            
+            fornitore<BR>
+            <c:forEach items="${fornitoriData}" var="item">
+                ["${item.etichetta}","${item.valD}"],
+            </c:forEach>
+                <br>reparto<BR>
+            <c:forEach items="${repartiData}" var="item">
+                ["${item.etichetta}","${item.valD}"],
+            </c:forEach>
+               <BR> tipi<BR>
+            <c:forEach items="${tipiData}" var="item">
+                ["${item.etichetta}","${item.valD}"],
+            </c:forEach>
 
         </div> <!-- /container -->
 
@@ -123,16 +140,14 @@
         <script type="text/javascript" src="/resources/js/chart-loader.js"></script>
         <script type="text/javascript">
             // colori che sarebbe meglio mettere https://canvasjs.com/javascript-charts/animated-chart/
-            var colors = ["#5DA5DA","#FAA43A","#60BD68","#F17CB0","#B2912F" ,"#B276B2","#DECF3F","#F15854"];
+            var colors = ["#5DA5DA", "#FAA43A", "#60BD68", "#F17CB0", "#B2912F", "#B276B2", "#DECF3F", "#F15854"];
             google.charts.load("current", {packages: ["corechart"]});
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ["Clienti", "Vendite"],
-                    ["404", 200],
-                    ["non mi ", 250],
-                    ["bello", 300],
-                    ["Ciao", 350]
+
+                    ["404", 200]
                 ]);
                 var options = {
                     colors: colors,

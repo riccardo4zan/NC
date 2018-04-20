@@ -22,54 +22,64 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/ma**")
 @ComponentScan("nc.dao")
 public class ManagerController {
-    
+
     @Autowired
     NonConformitaService ncs;
-    
-    @Autowired 
+
+    @Autowired
     TipoService ts;
-    
+
     @Autowired
     RepartoService rs;
-    
+
     @Autowired
     FornitoreService fs;
-    
-    
+
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         int anno = Calendar.getInstance().get(Calendar.YEAR);
-        
+
         //inserire qui elaborazioni aperte
-        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
-        
+        model.addObject("matricola", MainController.getLoggedDip().getMatricola());
+
         // prendo tutti i tipi, i reparti e i fornitori presenti
         List<Reparto> reparti = rs.findAll();
         List<Fornitore> fornitori = fs.findAll();
         List<Tipo> tipi = ts.findAll();
-        
+       
+        model.addObject("cazzo", reparti);
+
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
         List<ChartData> fornitoriData = new ArrayList<>();
         List<ChartData> tipiData = new ArrayList<>();
         List<ChartData> repartiData = new ArrayList<>();
-        
-        for(Fornitore tmp : fornitori) {
-            fornitoriData.add(new ChartData(tmp.getPiva(), ncs.findCostoPerFornitore(anno, tmp)));
+
+        for (Fornitore tmp : fornitori) {
+            double costo = ncs.findCostoPerFornitore(anno, tmp);
+            if (costo != 0) {
+                fornitoriData.add(new ChartData(tmp.getPiva(), costo));
+            }
         }
-        for(Reparto tmp : reparti) {
-            repartiData.add(new ChartData(tmp.getNome(), ncs.findCostoPerReparto(anno, tmp)));
+        for (Reparto tmp : reparti) {
+            double costo = ncs.findCostoPerReparto(anno, tmp);
+            if (costo != 0) {
+                repartiData.add(new ChartData(tmp.getNome(), costo));
+            }
         }
-        for(Tipo tmp : tipi) {
-            tipiData.add(new ChartData(tmp.getNome(), ncs.findCostoPerTipo(anno, tmp)));
+        for (Tipo tmp : tipi) {
+            double costo = ncs.findCostoPerTipo(anno, tmp);
+            if (costo != 0) {
+                tipiData.add(new ChartData(tmp.getNome(), costo));
+            }
         }
-        
+
         model.addObject("repartiData", repartiData);
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
-        
+
         model.setViewName("indexManager");
         return model;
     }
-    
+
 }

@@ -8,6 +8,7 @@ import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -46,16 +47,26 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
 
     @Override
     public int findCostoPerTipo(Date anno, Tipo tipo) {
-        Criteria criteria = getSession().createCriteria(NonConformita.class);
-        //raggruppa per tipo, e anno
-        criteria.add(Restrictions.eq("tipo", tipo));
-        criteria.add(Restrictions.eq("dataChiusura", anno));
-        ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
+        String sql = "SELECT * FROM NonConformita WHERE Tipo = :nome_tipo AND DataChiusura > :anno";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("nome_tipo", tipo.getNome());
+        query.setParameter("anno", anno);
+        ArrayList<NonConformita> res = new ArrayList<>(query.list());
         int sum = 0;
         for (NonConformita tmp : res) {
             sum += tmp.getCosto();
         }
         return sum;
+
+        /**
+         * Criteria criteria = getSession().createCriteria(NonConformita.class);
+         * //raggruppa per tipo, e anno criteria.add(Restrictions.eq("tipo",
+         * tipo)); criteria.add(Restrictions.eq("dataChiusura", anno));
+         * ArrayList<NonConformita> res = new ArrayList<>(criteria.list()); int
+         * sum = 0; for (NonConformita tmp : res) { sum += tmp.getCosto(); }
+         * return sum;
+         */
     }
 
     @Override

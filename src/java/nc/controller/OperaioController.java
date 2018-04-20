@@ -1,5 +1,6 @@
 package nc.controller;
 
+import nc.model.Dipendente;
 import nc.model.Elaborazione;
 import nc.model.Segnalazione;
 import nc.service.ElaborazioneService;
@@ -11,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -51,7 +53,7 @@ public class OperaioController {
         //inserire qui codice elaborazione da parametro
         es.updateElaborazione(e);
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
-        model.addObject("idElaborazione", "codiceElaborazione");
+        model.addObject("idElaborazione", e.getCodice());
         model.setViewName("indexOperaio");
         return model;
     }
@@ -68,9 +70,11 @@ public class OperaioController {
         return model;
     }
     
-    @RequestMapping(value = {"/addS"}, method = RequestMethod.POST)
-    public ModelAndView addSegnalazione(@ModelAttribute("segnalazione") Segnalazione s) {
+    @RequestMapping(value = {"/addS"}, params={"descrizione"}, method = RequestMethod.POST)
+    public ModelAndView addSegnalazione(@RequestParam("descrizione") String desc) {
         ModelAndView model = new ModelAndView();
+        Segnalazione s=new Segnalazione(desc);
+        s.setDipendente(MainController.getLoggedDip());
         ss.saveSegnalazione(s);
         //inserire qui codice elaborazione da parametro
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());

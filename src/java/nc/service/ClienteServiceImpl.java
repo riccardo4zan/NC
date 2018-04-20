@@ -38,7 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> findAllClienti() {
+    public List<Cliente> findAll() {
         return dao.findAllClienti();
     }
 }

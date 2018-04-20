@@ -1,6 +1,9 @@
 package nc.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +33,11 @@ public class Segnalazione implements Serializable {
     private Dipendente dipendente;
 
     public Segnalazione() {
+    }
+
+    public Segnalazione(String descrizione) {
+        this.descrizione = descrizione;
+        this.data= Calendar.getInstance().getTime();;
     }
     
     public int getCodice() {

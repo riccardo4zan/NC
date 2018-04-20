@@ -11,5 +11,5 @@ public interface ClienteService {
     Cliente findByPiva(String piva);
     void saveCliente(Cliente toSave);
     void updateCliente(Cliente toUpdate);
-    List<Cliente> findAllClienti();
+    List<Cliente> findAll();
 }

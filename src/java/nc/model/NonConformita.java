@@ -19,52 +19,75 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class NonConformita implements Serializable {
-    @Id @GeneratedValue
-    @Column(name="Codice")
+
+    @Id
+    @GeneratedValue
+    @Column(name = "Codice")
     private int codice;
-    @Column(name="Descrizione")
+    @Column(name = "Descrizione")
     private String descrizione;
-    @Column(name="AzioniContenimento")
+    @Column(name = "AzioniContenimento")
     private String azioniContenimento;
-    @Column(name="AzioniCorrettive")
+    @Column(name = "AzioniCorrettive")
     private String azioniCorrettive;
-    @Column(name="AzioniPreventive")
+    @Column(name = "AzioniPreventive")
     private String azioniPreventive;
-    @Column(name="DataApertura")
+    @Column(name = "DataApertura")
     private Date dataApertura;
-    @Column(name="DataChiusura")
+    @Column(name = "DataChiusura")
     private Date dataChiusura;
-    @Column(name="Cause")
+    @Column(name = "Cause")
     private String cause;
-    @Column(name="Gravita")
+    @Column(name = "Gravita")
     private int gravita;
-    @Column(name="Costo")
+    @Column(name = "Costo")
     private double costo;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="Tipo")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Tipo")
     private Tipo tipo;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="PivaFornitore")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PivaFornitore")
     private Fornitore fornitore;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="PivaCliente")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PivaCliente")
     private Cliente cliente;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="IDReparto")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "IDReparto")
     private Reparto reparto;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="MatricolaDipendente")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "MatricolaDipendente")
     private Dipendente dipendente;
-    @OneToMany(fetch=FetchType.EAGER,mappedBy="nonConformita")
-    private Set<Elaborazione> elaborazioni; 
-    @ManyToMany(fetch=FetchType.EAGER,mappedBy="pezziNC")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "nonConformita")
+    private Set<Elaborazione> elaborazioni;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "pezziNC")
     private Set<Pezzo> pezziCorrelati;
-    @ManyToMany(fetch=FetchType.EAGER,mappedBy="parteTeam")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "parteTeam")
     private Set<Dipendente> team;
 
     public NonConformita() {
     }
-    
+
+    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Reparto reparto) {
+        this.descrizione = descrizione;
+        this.dataApertura = dataApertura;
+        this.tipo = tipo;
+        this.reparto = reparto;
+    }
+
+    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Cliente cliente) {
+        this.descrizione = descrizione;
+        this.dataApertura = dataApertura;
+        this.tipo = tipo;
+        this.cliente = cliente;
+    }
+
+    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Fornitore fornitore) {
+        this.descrizione = descrizione;
+        this.dataApertura = dataApertura;
+        this.tipo = tipo;
+        this.fornitore = fornitore;
+    }
+
     public int getCodice() {
         return codice;
     }

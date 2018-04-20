@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="well form-horizontal" method="get"  id="addSegnalazione" action="">
+    <form class="well form-horizontal" method="post"  id="addSegnalazione" action="/addS">
         <fieldset>
             <legend>Segnala una Non Conformità</legend>
 
@@ -8,7 +8,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea class="form-control" name="descSegnalazione" placeholder="Descrizione"></textarea>
+                        <textarea class="form-control" id="descrizione" name="descSegnalazione" placeholder="Descrizione"></textarea>
                     </div>
                 </div>
             </div>

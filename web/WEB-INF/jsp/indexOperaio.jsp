@@ -14,7 +14,7 @@
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!-- Custom styles for this template -->
         <link href="/resources/css/navbar.css" rel="stylesheet">
-    <body onload="currentDate()">
+    <body >
         <div class="container">
 
             <!-- Static navbar -->
@@ -51,8 +51,9 @@
             </c:if>
 
             <c:if test="${not empty segnalazione}">
-                <jsp:include page="/WEB-INF/jsp/operaio/inviaSegnalazione.jsp" />
+                <jsp:include page="/WEB-INF/jsp/operaio/segnalazione.jsp" />
             </c:if>
+            
 
             <c:if test="${not empty idElaborazione}">
                 <jsp:include page="/WEB-INF/jsp/operaio/editElaborazione.jsp">
@@ -68,6 +69,5 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/resources/js/jquery-slim.min.js"><\/script>')</script>
         <script src="/resources/js/bootstrap.min.js"></script>
-         <script src="/resources/js/dataSegnalazione"></script>
     </body>
 </html>

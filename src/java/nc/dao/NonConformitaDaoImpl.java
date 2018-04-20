@@ -1,6 +1,7 @@
 package nc.dao;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import nc.model.Fornitore;
@@ -8,6 +9,7 @@ import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,11 +49,10 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
 
     @Override
     public int findCostoPerTipo(Date anno, Tipo tipo) {
-        String sql = "SELECT * FROM NonConformita WHERE Tipo = :nome_tipo AND DataChiusura > :anno";
-        SQLQuery query = getSession().createSQLQuery(sql);
-        query.addEntity(NonConformita.class);
+        String sql = "FROM NonConformita WHERE Tipo = :nome_tipo AND DataChiusura > :anno";
+        Query query = getSession().createQuery(sql);
         query.setParameter("nome_tipo", tipo.getNome());
-        query.setParameter("anno", anno);
+        query.setParameter("anno", (java.sql.Date)anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
         int sum = 0;
         for (NonConformita tmp : res) {

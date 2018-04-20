@@ -21,7 +21,6 @@
     <body>
 
         <div class="contenuto">
-
             <!-- Static navbar -->
             <nav class="navbar navbar-default">
                 <div class="container-fluid">

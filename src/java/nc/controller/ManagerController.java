@@ -1,7 +1,7 @@
 package nc.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import nc.model.Fornitore;
 import nc.model.Reparto;
@@ -39,7 +39,8 @@ public class ManagerController {
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
-        Date anno = new Date();
+        int anno = Calendar.getInstance().get(Calendar.YEAR);
+        
         //inserire qui elaborazioni aperte
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         
@@ -54,13 +55,13 @@ public class ManagerController {
         List<ChartData> repartiData = new ArrayList<>();
         
         for(Fornitore tmp : fornitori) {
-            fornitoriData.add(new ChartData(tmp.getPiva(), ncs.findCostoPerFornitore((java.sql.Date) anno, tmp)));
+            fornitoriData.add(new ChartData(tmp.getPiva(), ncs.findCostoPerFornitore(anno, tmp)));
         }
         for(Reparto tmp : reparti) {
-            fornitoriData.add(new ChartData(tmp.getNome(), ncs.findCostoPerReparto((java.sql.Date) anno, tmp)));
+            repartiData.add(new ChartData(tmp.getNome(), ncs.findCostoPerReparto(anno, tmp)));
         }
         for(Tipo tmp : tipi) {
-            fornitoriData.add(new ChartData(tmp.getNome(), ncs.findCostoPerTipo((java.sql.Date) anno, tmp)));
+            tipiData.add(new ChartData(tmp.getNome(), ncs.findCostoPerTipo(anno, tmp)));
         }
         
         model.addObject("repartiData", repartiData);

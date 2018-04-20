@@ -1,6 +1,5 @@
 package nc.service;
 
-import java.sql.Date;
 import java.util.List;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
@@ -15,7 +14,7 @@ public interface NonConformitaService {
     List<NonConformita> findAllAperte();
     List<NonConformita> findAllInElaborazione();
     List<NonConformita> findAllChiuse();
-    int findCostoPerTipo(Date anno, Tipo tipo);
-    int findCostoPerReparto(Date anno, Reparto rep);
-    int findCostoPerFornitore(Date anno, Fornitore forn);
+    int findCostoPerTipo(int anno, Tipo tipo);
+    int findCostoPerReparto(int anno, Reparto rep);
+    int findCostoPerFornitore(int anno, Fornitore forn);
 }

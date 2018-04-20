@@ -1,7 +1,5 @@
 package nc.dao;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import nc.model.Fornitore;
@@ -9,7 +7,6 @@ import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,10 +14,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author riccardo
- */
 @Repository("NonConformitaDao")
 public class NonConformitaDaoImpl implements NonConformitaDao {
 
@@ -48,15 +41,18 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public int findCostoPerTipo(Date anno, Tipo tipo) {
-        String sql = "FROM NonConformita WHERE Tipo = :nome_tipo AND DataChiusura > :anno";
-        Query query = getSession().createQuery(sql);
+    public int findCostoPerTipo(int anno, Tipo tipo) {
+        String sql = "SELECT * FROM NonConformita WHERE Tipo = :nome_tipo AND year(DataChiusura) = :anno";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
         query.setParameter("nome_tipo", tipo.getNome());
-        query.setParameter("anno", (java.sql.Date)anno);
+        query.setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
         int sum = 0;
-        for (NonConformita tmp : res) {
-            sum += tmp.getCosto();
+        if (res != null) {
+            for (NonConformita tmp : res) {
+                sum += tmp.getCosto();
+            }
         }
         return sum;
 
@@ -71,7 +67,21 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public int findCostoPerReparto(Date anno, Reparto rep) {
+    public int findCostoPerReparto(int anno, Reparto rep) {
+        String sql = "SELECT * FROM NonConformita WHERE IDReparto = :nome_reparto AND year(DataChiusura) = :anno";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("nome_reparto", rep.getNome());
+        query.setParameter("anno", anno);
+        ArrayList<NonConformita> res = new ArrayList<>(query.list());
+        int sum = 0;
+        if (res != null) {
+            for (NonConformita tmp : res) {
+                sum += tmp.getCosto();
+            }
+        }
+        return sum;
+        /*
         Criteria criteria = getSession().createCriteria(NonConformita.class);
         //raggruppa per tipo, e anno
         criteria.add(Restrictions.eq("reparto", rep));
@@ -82,10 +92,25 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
             sum += tmp.getCosto();
         }
         return sum;
+         */
     }
 
     @Override
-    public int findCostoPerFornitore(Date anno, Fornitore forn) {
+    public int findCostoPerFornitore(int anno, Fornitore forn) {
+        String sql = "SELECT * FROM NonConformita WHERE PivaFornitore = :nome_forn AND year(DataChiusura) = :anno";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("nome_forn", forn.getPiva());
+        query.setParameter("anno", anno);
+        ArrayList<NonConformita> res = new ArrayList<>(query.list());
+        int sum = 0;
+        if (res != null) {
+            for (NonConformita tmp : res) {
+                sum += tmp.getCosto();
+            }
+        }
+        return sum;
+        /*
         Criteria criteria = getSession().createCriteria(NonConformita.class);
         //raggruppa per tipo, e anno
         criteria.add(Restrictions.eq("fornitore", forn));
@@ -96,6 +121,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
             sum += tmp.getCosto();
         }
         return sum;
+         */
     }
 
     @Override

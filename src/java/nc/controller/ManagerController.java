@@ -23,13 +23,13 @@ import org.springframework.web.servlet.ModelAndView;
 @ComponentScan("nc.dao")
 public class ManagerController {
     @Autowired
-    NonConformitaService ncs;
+    private NonConformitaService ncs;
     @Autowired
-    TipoService ts;
+    private TipoService ts;
     @Autowired
-    RepartoService rs;
+    private RepartoService rs;
     @Autowired
-    FornitoreService fs;
+    private FornitoreService fs;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public ModelAndView index() {

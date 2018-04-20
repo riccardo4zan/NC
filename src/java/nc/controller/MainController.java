@@ -22,6 +22,7 @@ public class MainController {
 
     @Autowired
     private UserService us;
+    
     /**
      * Oggetto relativo al dipendente che ha effettuato il login
      */
@@ -83,6 +84,8 @@ public class MainController {
         model.setViewName("redirect");
         return model;
     }
+    
+    
 
     public static Dipendente getLoggedDip() {
         return loggedDip;

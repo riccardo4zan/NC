@@ -64,11 +64,7 @@ public class NonConformita implements Serializable {
 
     public NonConformita() {
     }
-
-    public NonConformita(int codice) {
-        this.codice = codice;
-    }
-
+    
     public int getCodice() {
         return codice;
     }

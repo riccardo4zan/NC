@@ -45,7 +45,9 @@ public class CQualitaController {
     private DipendenteService ds;
 
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
-    public String index(ModelMap model) {
+    public String index() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("NCAperte", "si");
         return "indexCQualita";
     }
 
@@ -63,7 +65,7 @@ public class CQualitaController {
         /**
          * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
          */
-        model.addObject("addNCInterna", "si");
+        model.addObject("NCInterna", "si");
         model.setViewName("indexCQualita");
         return model;
     }
@@ -78,45 +80,51 @@ public class CQualitaController {
         /**
          * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
          */
-        model.addObject("addNCEsterna", "si");
+        model.addObject("NCEsterna", "si");
         model.setViewName("indexCQualita");
         return model;
     }
 
     @RequestMapping(value = {"/addNCInterna"}, params = {"desc", "tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("tipo") Tipo tipo, @RequestParam("reparto") Reparto reparto, @RequestParam("dataInizio") Date dataI) {
+    public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") Date dataI) {
         ModelAndView model = new ModelAndView();
         //Creando la NC e precompilando i campi
-        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, tipo, reparto);
+        Tipo t = ts.findByNome(tipo);
+        //fa un po'schifo far scegliere dal codice e non dal nome di un reparto rivedere
+        Reparto r = rs.findByID(reparto);
+        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, r);
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
         model.addObject("newnc", newnc);
         /**
          * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
          */
-
+        model.addObject("NCAperte", "si");
         model.setViewName("indexCQualita");
         return model;
     }
 
     @RequestMapping(value = {"/addNCEsterna"}, params = {"desc", "tipo", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCEsterna(@RequestParam("desc") String desc, @RequestParam("tipo") Tipo tipo, @RequestParam("fornitore") Fornitore fornitore, @RequestParam("cliente") Cliente cliente, @RequestParam("dataInizio") Date dataI) {
+    public ModelAndView addNCEsterna(@RequestParam("desc") String desc, @RequestParam("tipo") String tipo, @RequestParam("fornitore") String fornitore, @RequestParam("cliente") String cliente, @RequestParam("dataInizio") Date dataI) {
         ModelAndView model = new ModelAndView();
         //Creando la NC e precompilando i campi
+        Tipo t = ts.findByNome(tipo);
         if (fornitore == null) {
-            NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, tipo, cliente);
+            Cliente c = cs.findByPiva(cliente);
+            NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, c);
             newnc.setDipendente(MainController.getLoggedDip());
             model.addObject("newnc", newnc);
 
-            model.addObject("addNCEsterna", "si");
+            model.addObject("NCAperte", "si");
             model.setViewName("indexCQualita");
             return model;
         }
-        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, tipo, fornitore);
+        Fornitore f = fs.findByPiva(fornitore);
+        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, f);
         newnc.setDipendente(MainController.getLoggedDip());
         model.addObject("newnc", newnc);
 
-        model.addObject("addNCEsterna", "si");
+        model.addObject("NCAperte", "si");
         model.setViewName("indexCQualita");
         return model;
     }

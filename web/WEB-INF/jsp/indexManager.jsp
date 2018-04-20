@@ -9,16 +9,11 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Gestione NC</title>
-
         <!-- Bootstrap core CSS -->
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-
         <!-- Custom styles for this template -->
         <link href="/resources/css/navbar.css" rel="stylesheet">
-
     <body>
         <div class="contenuto">
             <!-- Static navbar -->
@@ -107,23 +102,20 @@
                     <div id="fornitori"></div>
                 </div>
             </div>
-            
+
             reparti<br>
-            <c:forEach items="${cazzo}" var="item">
-                ${item.nome}
-            </c:forEach><br>
-            
-            fornitore<BR>
-            <c:forEach items="${fornitoriData}" var="item">
-                ["${item.etichetta}","${item.valD}"],
+
+            fornitore<br>
+            <c:forEach items="${fornitoriData}" var="i">
+                ["${i.etichetta}","${i.valD}"],
             </c:forEach>
-                <br>reparto<BR>
-            <c:forEach items="${repartiData}" var="item">
-                ["${item.etichetta}","${item.valD}"],
+            <br>reparto<BR>
+            <c:forEach items="${repartiData}" var="i">
+                ["${i.etichetta}","${i.valD}"],
             </c:forEach>
-               <BR> tipi<BR>
-            <c:forEach items="${tipiData}" var="item">
-                ["${item.etichetta}","${item.valD}"],
+            <BR> tipi<BR>
+            <c:forEach items="${tipiData}" var="i">
+                ["${i.etichetta}","${item.valD}"],
             </c:forEach>
 
         </div> <!-- /container -->
@@ -249,6 +241,8 @@
             }
         </script>
 
+        <!--DEBUG FOX-->
+        <c:out value="${out1}"></c:out>
 
     </body>
 </html>

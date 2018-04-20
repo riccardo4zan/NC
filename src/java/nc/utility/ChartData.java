@@ -1,5 +1,8 @@
 package nc.utility;
 
+/**
+ * Oggetto usato per passare dati ai grafici
+ */
 public class ChartData {
     
     private final String etichetta;

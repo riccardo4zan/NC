@@ -22,16 +22,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/ma**")
 @ComponentScan("nc.dao")
 public class ManagerController {
-
     @Autowired
     NonConformitaService ncs;
-
     @Autowired
     TipoService ts;
-
     @Autowired
     RepartoService rs;
-
     @Autowired
     FornitoreService fs;
 
@@ -47,13 +43,11 @@ public class ManagerController {
         List<Reparto> reparti = rs.findAll();
         List<Fornitore> fornitori = fs.findAll();
         List<Tipo> tipi = ts.findAll();
-       
-        model.addObject("cazzo", reparti);
 
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
-        List<ChartData> fornitoriData = new ArrayList<>();
-        List<ChartData> tipiData = new ArrayList<>();
-        List<ChartData> repartiData = new ArrayList<>();
+        ArrayList<ChartData> repartiData = new ArrayList<>();
+        ArrayList<ChartData> fornitoriData = new ArrayList<>();
+        ArrayList<ChartData> tipiData = new ArrayList<>();
 
         for (Fornitore tmp : fornitori) {
             double costo = ncs.findCostoPerFornitore(anno, tmp);
@@ -77,6 +71,15 @@ public class ManagerController {
         model.addObject("repartiData", repartiData);
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
+        
+        /**
+         * Debug fox
+         */
+        String tmp = "";
+        for(Reparto t:reparti){
+            tmp+=t.getNome() + " " + t.getId();
+        }
+        model.addObject("out1",tmp);
 
         model.setViewName("indexManager");
         return model;

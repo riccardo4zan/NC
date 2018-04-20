@@ -20,7 +20,7 @@ public class Cliente implements Serializable {
     @Column(name="Piva")
     private String piva;
     @Column(name="Nome")
-    private int nome;
+    private String nome;
     @OneToMany(fetch=FetchType.EAGER,mappedBy="cliente")
     private Set<NonConformita> nonConformitaCorrelate;
 
@@ -31,7 +31,7 @@ public class Cliente implements Serializable {
         return piva;
     }
 
-    public int getNome() {
+    public String getNome() {
         return nome;
     }
 
@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
         this.piva = piva;
     }
 
-    public void setNome(int nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 

@@ -71,15 +71,6 @@ public class ManagerController {
         model.addObject("repartiData", repartiData);
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
-        
-        /**
-         * Debug fox
-         */
-        String tmp = "";
-        for(Reparto t:reparti){
-            tmp+=t.getNome() + " " + t.getId();
-        }
-        model.addObject("out1",tmp);
 
         model.setViewName("indexManager");
         return model;

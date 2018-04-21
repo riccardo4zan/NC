@@ -49,25 +49,25 @@
             <c:if test="${not empty NCInterna}">
                 <c:set var="Tipi" value="${Tipi}" scope="request"/>
                 <c:set var="Reparti" value="${Reparti}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/CQualita/newNCInterna.jsp"/>
+                <c:import url="/WEB-INF/jsp/cq/newNCInterna.jsp"/>
             </c:if>
 
             <c:if test="${not empty NCEsterna}">
                 <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
                 <c:set var="Clienti" value="${Clienti}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/CQualita/newNCEsterna.jsp"/>
+                <c:import url="/WEB-INF/jsp/cq/newNCEsterna.jsp"/>
             </c:if>
 
             <c:if test="${not empty NCAperte}">
-                <jsp:include page="/WEB-INF/jsp/CQualita/NCAperte.jsp" />
+                <jsp:include page="/WEB-INF/jsp/cq/NCAperte.jsp" />
             </c:if>
 
             <c:if test="${not empty NCChiuse}">
-                <jsp:include page="/WEB-INF/jsp/CQualita/NCChiuse.jsp" />
+                <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
             </c:if>
 
             <c:if test="${not empty NCElaborazione}">
-                <jsp:include page="/WEB-INF/jsp/CQualita/NCElaborazione.jsp" />
+                <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
             </c:if>
 
 

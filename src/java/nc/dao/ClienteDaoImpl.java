@@ -1,8 +1,11 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Cliente;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +37,10 @@ public class ClienteDaoImpl implements ClienteDao{
 
     @Override
     public List<Cliente> findAllClienti() {
-        Criteria criteria = getSession().createCriteria(Cliente.class);
-        return (List<Cliente>) criteria.list();
+        String sql = "SELECT * FROM Clienti";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Cliente.class);
+        return new ArrayList<>(query.list());
     }
       
 }

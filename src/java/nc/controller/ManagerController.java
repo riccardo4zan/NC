@@ -43,6 +43,10 @@ public class ManagerController {
         List<Reparto> reparti = rs.findAll();
         List<Fornitore> fornitori = fs.findAll();
         List<Tipo> tipi = ts.findAll();
+        
+        model.addObject("sponi", reparti);
+        model.addObject("triplo", fornitori);
+        model.addObject("rete", tipi);
 
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
         ArrayList<ChartData> repartiData = new ArrayList<>();

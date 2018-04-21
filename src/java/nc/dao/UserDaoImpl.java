@@ -1,11 +1,14 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import nc.model.Reparto;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import nc.model.User;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -38,8 +41,10 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAll() {
-        Criteria criteria = getSession().createCriteria(User.class);
-        return (List<User>) criteria.list();
+        String sql = "SELECT * FROM users";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(User.class);
+        return new ArrayList<>(query.list());
     }
 
 }

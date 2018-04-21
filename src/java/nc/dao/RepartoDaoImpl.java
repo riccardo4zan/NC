@@ -1,8 +1,9 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Reparto;
-import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,9 @@ public class RepartoDaoImpl implements RepartoDao{
 
     @Override
     public List<Reparto> findAll() {
-        Criteria criteria = getSession().createCriteria(Reparto.class);
-        return (List<Reparto>) criteria.list();
+        String sql = "SELECT * FROM Reparti";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Reparto.class);
+        return new ArrayList<>(query.list());
     }
 }

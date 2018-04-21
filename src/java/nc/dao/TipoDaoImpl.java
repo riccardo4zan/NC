@@ -1,8 +1,9 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Tipo;
-import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,10 @@ public class TipoDaoImpl implements TipoDao {
 
     @Override
     public List<Tipo> findAll() {
-        Criteria criteria = getSession().createCriteria(Tipo.class);
-        return (List<Tipo>) criteria.list();
+        String sql = "SELECT * FROM Tipi";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Tipo.class);
+        return new ArrayList<>(query.list());
     }
 
 }

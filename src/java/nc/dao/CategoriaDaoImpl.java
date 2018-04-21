@@ -1,8 +1,11 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Categoria;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +37,10 @@ public class CategoriaDaoImpl implements CategoriaDao {
 
     @Override
     public List<Categoria> findAllCategorie() {
-        Criteria criteria = getSession().createCriteria(Categoria.class);
-        return (List<Categoria>) criteria.list();
+        String sql = "SELECT * FROM Categorie";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Categoria.class);
+        return new ArrayList<>(query.list());
     }
 
 }

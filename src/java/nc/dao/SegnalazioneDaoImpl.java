@@ -1,8 +1,9 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Segnalazione;
-import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,10 @@ public class SegnalazioneDaoImpl implements SegnalazioneDao {
 
     @Override
     public List<Segnalazione> findAll() {
-        Criteria criteria = getSession().createCriteria(Segnalazione.class);
-        return (List<Segnalazione>) criteria.list();
+        String sql = "SELECT * FROM Segnalazioni";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Segnalazione.class);
+        return new ArrayList<>(query.list());
     }
 
 }

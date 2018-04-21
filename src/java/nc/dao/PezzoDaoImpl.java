@@ -1,8 +1,11 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Pezzo;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +37,10 @@ public class PezzoDaoImpl implements PezzoDao {
 
     @Override
     public List<Pezzo> findAll() {
-        Criteria criteria = getSession().createCriteria(Pezzo.class);
-        return (List<Pezzo>) criteria.list();
+        String sql = "SELECT * FROM Pezzi";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Pezzo.class);
+        return new ArrayList<>(query.list());
     }
 
 }

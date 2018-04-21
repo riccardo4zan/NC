@@ -37,8 +37,10 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
 
     @Override
     public List<NonConformita> findAll() {
-        Criteria criteria = getSession().createCriteria(NonConformita.class);
-        return (List<NonConformita>) criteria.list();
+        String sql = "SELECT * FROM NonConformita";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        return new ArrayList<>(query.list());
     }
 
     @Override

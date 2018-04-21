@@ -1,9 +1,12 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -36,8 +39,10 @@ public class ElaborazioneDaoImpl implements ElaborazioneDao{
 
     @Override
     public List<Elaborazione> findAll() {
-        Criteria criteria = getSession().createCriteria(Elaborazione.class);
-        return (List<Elaborazione>) criteria.list();
+        String sql = "SELECT * FROM Elaborazioni";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Elaborazione.class);
+        return new ArrayList<>(query.list());
     }
 
     @Override

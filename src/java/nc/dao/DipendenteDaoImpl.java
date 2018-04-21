@@ -1,8 +1,11 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Dipendente;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +37,10 @@ public class DipendenteDaoImpl implements DipendenteDao{
 
     @Override
     public List<Dipendente> findAll() {
-        Criteria criteria = getSession().createCriteria(Dipendente.class);
-        return (List<Dipendente>) criteria.list();
+        String sql = "SELECT * FROM Dipendenti";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Dipendente.class);
+        return new ArrayList<>(query.list());
     }
 
 }

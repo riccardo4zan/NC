@@ -103,7 +103,19 @@
                 </div>
             </div>
 
-            reparti<br>
+            sponi<br>
+            <c:forEach items="${sponi}" var="i">
+                ${i.nome}
+            </c:forEach><br><br>
+            triplo<br>
+            <c:forEach items="${triplo}" var="i">
+                ${i.nome}
+            </c:forEach><br><br>
+            rete<br>
+            <c:forEach items="${rete}" var="i">
+                ${i.nome}
+            </c:forEach><br><br>
+
 
             fornitore<br>
             <c:forEach items="${fornitoriData}" var="i">

@@ -1,8 +1,11 @@
 package nc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import nc.model.Fornitore;
+import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +37,9 @@ public class FornitoreDaoImpl implements FornitoreDao {
 
     @Override
     public List<Fornitore> findAll() {
-        Criteria criteria = getSession().createCriteria(Fornitore.class);
-        return (List<Fornitore>) criteria.list();
+        String sql = "SELECT * FROM Fornitori";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Fornitore.class);
+        return new ArrayList<>(query.list());
     }
 }

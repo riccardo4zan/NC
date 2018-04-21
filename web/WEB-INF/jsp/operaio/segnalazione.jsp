@@ -3,15 +3,12 @@
         <fieldset>
             <legend>Segnala una Non Conformità</legend>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">Descrizione</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea class="form-control" id="descrizione" name="descSegnalazione" placeholder="Descrizione"></textarea>
-                    </div>
+            <form action="#">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <textarea type="text" rows= "7" cols="50" ></textarea>
+                    <label class="mdl-textfield__label" for="sample5">Text lines...</label>
                 </div>
-            </div>
+            </form>
 
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>

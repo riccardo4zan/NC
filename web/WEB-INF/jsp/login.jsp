@@ -24,7 +24,7 @@
                     <input name="password" type="Password" required ><span class="highlight"></span><span class="bar"></span>
                     <label>Password</label>
                 </div>
-                <button type="submit" class="button buttonRosso">Log-In
+                <button type="submit" class="button buttonBlue">Log-In
                     <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
                 </button>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

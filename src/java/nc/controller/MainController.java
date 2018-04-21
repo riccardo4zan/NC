@@ -3,6 +3,7 @@ package nc.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import nc.model.Dipendente;
+import nc.model.User;
 import nc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -11,10 +12,12 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -42,6 +45,27 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth!=null) new SecurityContextLogoutHandler().logout(request, response, auth);
         model.setViewName("login");
+        return model;
+    }
+    
+    @RequestMapping(value = "/showChangePsswd", method = RequestMethod.POST)  
+    public ModelAndView showChangePassword() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("changePassword");
+        return model;
+    }
+
+    @RequestMapping(value = "/ChangePsswd", params={"psswd"}, method = RequestMethod.POST)  
+    public ModelAndView showChangePassword(@RequestParam("psswd")String password) {
+        ModelAndView model = new ModelAndView();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	String hashedPassword = passwordEncoder.encode(password);
+        //Cambio della password dell'user associato al dipendente associato
+        User usr = loggedDip.getUser();
+        usr.setPassword(hashedPassword);
+        us.updateUser(usr);
+        model.addObject("ruolo", loggedDip.getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("redirect");
         return model;
     }
 

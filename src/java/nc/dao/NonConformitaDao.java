@@ -16,4 +16,5 @@ public interface NonConformitaDao {
     double findCostoPerTipo(int anno, Tipo tipo);
     double findCostoPerReparto(int anno, Reparto rep);
     double findCostoPerFornitore(int anno, Fornitore forn);
+    double findAllCostoPerNonConformita(int anno);
 }

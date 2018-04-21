@@ -70,15 +70,14 @@ public class OperaioController {
         return model;
     }
     
-    @RequestMapping(value = {"/addS"}, params={"descrizione"}, method = RequestMethod.POST)
-    public ModelAndView addSegnalazione(@RequestParam("descrizione") String desc) {
+    @RequestMapping(value = {"/addS"}, params={"descSegnalazione"}, method = RequestMethod.GET)
+    public ModelAndView addSegnalazione(@RequestParam("descSegnalazione") String desc) {
         ModelAndView model = new ModelAndView();
         Segnalazione s=new Segnalazione(desc);
         s.setDipendente(MainController.getLoggedDip());
         ss.saveSegnalazione(s);
         //inserire qui codice elaborazione da parametro
-        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
-        model.addObject("aperte", es.findOpen(MainController.getLoggedDip()));
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole()); 
         model.setViewName("indexOperaio");
         return model;
     }

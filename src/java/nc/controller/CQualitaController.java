@@ -1,6 +1,5 @@
 package nc.controller;
 
-import java.util.Date;
 import nc.model.Cliente;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
@@ -15,7 +14,6 @@ import nc.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,14 +83,14 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/addNCInterna"}, params = {"desc", "tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") Date dataI) {
+    @RequestMapping(value = {"/addNCInterna"}, params = {"desc","azioniContenimento","cause","gravita","tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
+    public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") String dataI) {
         ModelAndView model = new ModelAndView();
         //Creando la NC e precompilando i campi
         Tipo t = ts.findByNome(tipo);
-        //fa un po'schifo far scegliere dal codice e non dal nome di un reparto rivedere
+        
         Reparto r = rs.findByID(reparto);
-        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, r);
+        NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, r);
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
         model.addObject("newnc", newnc);
@@ -104,14 +102,14 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/addNCEsterna"}, params = {"desc", "tipo", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCEsterna(@RequestParam("desc") String desc, @RequestParam("tipo") String tipo, @RequestParam("fornitore") String fornitore, @RequestParam("cliente") String cliente, @RequestParam("dataInizio") Date dataI) {
+    @RequestMapping(value = {"/addNCEsterna"}, params = {"desc","azioniContenimento","tipo", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
+    public ModelAndView addNCEsterna(@RequestParam("desc") String desc,@RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("fornitore") String fornitore, @RequestParam("cliente") String cliente, @RequestParam("dataInizio") String dataI) {
         ModelAndView model = new ModelAndView();
         //Creando la NC e precompilando i campi
         Tipo t = ts.findByNome(tipo);
         if (fornitore == null) {
             Cliente c = cs.findByPiva(cliente);
-            NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, c);
+            NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, c);
             newnc.setDipendente(MainController.getLoggedDip());
             model.addObject("newnc", newnc);
 
@@ -120,7 +118,7 @@ public class CQualitaController {
             return model;
         }
         Fornitore f = fs.findByPiva(fornitore);
-        NonConformita newnc = new NonConformita(desc, (java.sql.Date) dataI, t, f);
+        NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, f);
         newnc.setDipendente(MainController.getLoggedDip());
         model.addObject("newnc", newnc);
 

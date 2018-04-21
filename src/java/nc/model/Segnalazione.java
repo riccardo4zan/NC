@@ -37,7 +37,7 @@ public class Segnalazione implements Serializable {
 
     public Segnalazione(String descrizione) {
         this.descrizione = descrizione;
-        this.data= Calendar.getInstance().getTime();;
+        this.data= Calendar.getInstance().getTime();
     }
     
     public int getCodice() {

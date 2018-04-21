@@ -30,7 +30,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="#">Home</a></li>
                             <li><a href="#">Lista segnalazioni</a></li>
-                            <li><a href="#">Apri segnalazione</a></li>
+                            <li><a href="/cq/NCInterna">Apri ncinterna</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -48,7 +48,7 @@
             <!-- operazioni da svolgere-->
             <c:if test="${not empty NCInterna}">
                 <c:set var="Tipi" value="${Tipi}" scope="request"/>
-                <c:set var="Tipi" value="${Reparti}" scope="request"/>
+                <c:set var="Reparti" value="${Reparti}" scope="request"/>
                 <c:import url="/WEB-INF/jsp/CQualita/newNCInterna.jsp"/>
             </c:if>
 
@@ -69,13 +69,6 @@
             <c:if test="${not empty NCElaborazione}">
                 <jsp:include page="/WEB-INF/jsp/CQualita/NCElaborazione.jsp" />
             </c:if>
-
-
-            <c:if test="${not empty idNC}">
-                <jsp:include page="/WEB-INF/jsp/CQualita/.jsp">
-
-                </jsp:include>
-            </c:if> 
 
 
         </div> <!-- /container -->

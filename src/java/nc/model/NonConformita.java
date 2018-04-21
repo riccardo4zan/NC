@@ -33,9 +33,9 @@ public class NonConformita implements Serializable {
     @Column(name = "AzioniPreventive")
     private String azioniPreventive;
     @Column(name = "DataApertura")
-    private Date dataApertura;
+    private String dataApertura;
     @Column(name = "DataChiusura")
-    private Date dataChiusura;
+    private String dataChiusura;
     @Column(name = "Cause")
     private String cause;
     @Column(name = "Gravita")
@@ -67,23 +67,32 @@ public class NonConformita implements Serializable {
     public NonConformita() {
     }
 
-    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Reparto reparto) {
+    public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo, Reparto reparto) {
         this.descrizione = descrizione;
+        this.azioniContenimento = azioniContenimento;
         this.dataApertura = dataApertura;
+        this.cause = cause;
+        this.gravita = gravita;
         this.tipo = tipo;
         this.reparto = reparto;
     }
 
-    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Cliente cliente) {
+    public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo, Cliente cliente) {
         this.descrizione = descrizione;
+        this.azioniContenimento = azioniContenimento;
         this.dataApertura = dataApertura;
+        this.cause = cause;
+        this.gravita = gravita;
         this.tipo = tipo;
         this.cliente = cliente;
     }
 
-    public NonConformita(String descrizione, Date dataApertura, Tipo tipo, Fornitore fornitore) {
+    public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo, Fornitore fornitore) {
         this.descrizione = descrizione;
+        this.azioniContenimento = azioniContenimento;
         this.dataApertura = dataApertura;
+        this.cause = cause;
+        this.gravita = gravita;
         this.tipo = tipo;
         this.fornitore = fornitore;
     }
@@ -108,11 +117,11 @@ public class NonConformita implements Serializable {
         return azioniPreventive;
     }
 
-    public Date getDataApertura() {
+    public String getDataApertura() {
         return dataApertura;
     }
 
-    public Date getDataChiusura() {
+    public String getDataChiusura() {
         return dataChiusura;
     }
 
@@ -180,11 +189,11 @@ public class NonConformita implements Serializable {
         this.azioniPreventive = azioniPreventive;
     }
 
-    public void setDataApertura(Date dataApertura) {
+    public void setDataApertura(String dataApertura) {
         this.dataApertura = dataApertura;
     }
 
-    public void setDataChiusura(Date dataChiusura) {
+    public void setDataChiusura(String dataChiusura) {
         this.dataChiusura = dataChiusura;
     }
 

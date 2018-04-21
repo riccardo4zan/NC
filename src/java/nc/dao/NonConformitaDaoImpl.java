@@ -1,6 +1,7 @@
 package nc.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
@@ -115,6 +116,37 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         //raggruppa per tipo, e anno
         criteria.add(Restrictions.eq("fornitore", forn));
         criteria.add(Restrictions.eq("dataChiusura", anno));
+        ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
+        int sum = 0;
+        for (NonConformita tmp : res) {
+            sum += tmp.getCosto();
+        }
+        return sum;
+         */
+    }
+
+    @Override
+    public double findAllCostoPerNonConformita(int anno) {
+        int a= Calendar.YEAR;
+        String sql = "SELECT * FROM NonConformita WHERE year(DataApertura) = :annoI AND year(DataChiusura) = :annoF";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("annoI", a);
+        query.setParameter("annoF", anno);
+        ArrayList<NonConformita> res = new ArrayList<>(query.list());
+        double sum = 0;
+        if (res != null) {
+            for (NonConformita tmp : res) {
+                sum += tmp.getCosto();
+            }
+        }
+        return sum;
+        /*
+        Criteria criteria = getSession().createCriteria(NonConformita.class);
+        Date d = new Date (Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR);
+        //raggruppa per anno
+        criteria.add(Restrictions.eq("annoI", d));
+        criteria.add(Restrictions.eq("annoF", anno));
         ArrayList<NonConformita> res = new ArrayList<>(criteria.list());
         int sum = 0;
         for (NonConformita tmp : res) {

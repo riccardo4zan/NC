@@ -43,20 +43,16 @@ public class ManagerController {
         List<Reparto> reparti = rs.findAll();
         List<Fornitore> fornitori = fs.findAll();
         List<Tipo> tipi = ts.findAll();
-        
-        model.addObject("sponi", reparti);
-        model.addObject("triplo", fornitori);
-        model.addObject("rete", tipi);
 
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
         ArrayList<ChartData> repartiData = new ArrayList<>();
         ArrayList<ChartData> fornitoriData = new ArrayList<>();
         ArrayList<ChartData> tipiData = new ArrayList<>();
-
+        
         for (Fornitore tmp : fornitori) {
             double costo = ncs.findCostoPerFornitore(anno, tmp);
             if (costo != 0) {
-                fornitoriData.add(new ChartData(tmp.getPiva(), costo));
+                fornitoriData.add(new ChartData(tmp.getNome(), costo));
             }
         }
         for (Reparto tmp : reparti) {
@@ -71,10 +67,17 @@ public class ManagerController {
                 tipiData.add(new ChartData(tmp.getNome(), costo));
             }
         }
-
         model.addObject("repartiData", repartiData);
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
+        
+        // ricavo dati istogramma
+        ArrayList<ChartData> istogramma = new ArrayList<>();
+        String[] mesi = {"", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre" ,"Dicembre"};
+        for(int i=1; i<=12; i++){
+            istogramma.add(new ChartData(mesi[i], ncs.findCostoAnnoPerMese(i, anno)));
+        }
+        model.addObject("istogramma", istogramma);
 
         model.setViewName("indexManager");
         return model;

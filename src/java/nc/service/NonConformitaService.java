@@ -17,4 +17,5 @@ public interface NonConformitaService {
     double findCostoPerTipo(int anno, Tipo tipo);
     double findCostoPerReparto(int anno, Reparto rep);
     double findCostoPerFornitore(int anno, Fornitore forn);
+    double findCostoAnnoPerMese(int mese, int anno);
 }

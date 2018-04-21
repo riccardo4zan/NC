@@ -103,32 +103,9 @@
                 </div>
             </div>
 
-            sponi<br>
-            <c:forEach items="${sponi}" var="i">
-                ${i.nome}
-            </c:forEach><br><br>
-            triplo<br>
-            <c:forEach items="${triplo}" var="i">
-                ${i.nome}
-            </c:forEach><br><br>
-            rete<br>
-            <c:forEach items="${rete}" var="i">
-                ${i.nome}
-            </c:forEach><br><br>
 
 
-            fornitore<br>
-            <c:forEach items="${fornitoriData}" var="i">
-                ["${i.etichetta}","${i.valD}"],
-            </c:forEach>
-            <br>reparto<BR>
-            <c:forEach items="${repartiData}" var="i">
-                ["${i.etichetta}","${i.valD}"],
-            </c:forEach>
-            <BR> tipi<BR>
-            <c:forEach items="${tipiData}" var="i">
-                ["${i.etichetta}","${item.valD}"],
-            </c:forEach>
+
 
         </div> <!-- /container -->
 
@@ -142,6 +119,8 @@
         <!-- Grafici manager -->
         <script type="text/javascript" src="/resources/js/util.js"></script>
         <script type="text/javascript" src="/resources/js/chart-loader.js"></script>
+
+        <!-- grafici a torta -->
         <script type="text/javascript">
             // colori che sarebbe meglio mettere https://canvasjs.com/javascript-charts/animated-chart/
             var colors = ["#5DA5DA", "#FAA43A", "#60BD68", "#F17CB0", "#B2912F", "#B276B2", "#DECF3F", "#F15854"];
@@ -149,9 +128,10 @@
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ["Clienti", "Vendite"],
-
-                    ["404", 200]
+                    ["Fornitore", "Costo"]
+            <c:forEach items="${fornitoriData}" var="i">
+                    , ["${i.etichetta}", "${i.valD}"]
+            </c:forEach>
                 ]);
                 var options = {
                     colors: colors,
@@ -174,11 +154,10 @@
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ["Clienti", "Vendite"],
-                    ["404", 200],
-                    ["non mi ", 250],
-                    ["bello", 300],
-                    ["Ciao", 350]
+                    ["Prodotto", "Costo"],
+            <c:forEach items="${tipiData}" var="i">
+                    ["${i.etichetta}", "${i.valD}"],
+            </c:forEach>
                 ]);
                 var options = {
                     colors: colors,
@@ -201,11 +180,10 @@
             google.charts.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ["Clienti", "Vendite"],
-                    ["404", 200],
-                    ["non mi ", 250],
-                    ["bello", 300],
-                    ["Ciao", 350]
+                    ["Reparto", "Costo"]
+            <c:forEach items="${repartiData}" var="i">
+                    , ["${i.etichetta}", "${i.valD}"]
+            </c:forEach>
                 ]);
                 var options = {
                     colors: colors,
@@ -225,25 +203,25 @@
 
         </script>
 
+        <!-- /grafici a torta -->
+
+        <!-- istogramma -->
         <script type="text/javascript">
             google.charts.load('current', {'packages': ['bar']});
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ['', 'Sales'],
-                    ['2014', 1000],
-                    ['2015', 1170],
-                    ['2016', 660],
-                    ['2016', 660],
-                    ['2016', 660],
-                    ['2016', 660],
-                    ['2017', 1030]
+                    ['', 'Sales']
+            <c:forEach items="${istogramma}" var="i">
+                        , ["${i.etichetta}","${i.valD}"]
+            </c:forEach>
                 ]);
 
                 var options = {
                     legend: {position: 'none'},
-                    colors: "#81C784"
+                    colors: "#81C784",
+                    vAxis: {minValue: 0}
                 };
 
                 var div = document.getElementById("istogramma");
@@ -252,6 +230,7 @@
                 chart.draw(data, google.charts.Bar.convertOptions(options));
             }
         </script>
+        <!-- /istogramma -->
 
         <!--DEBUG FOX-->
         <c:out value="${out1}"></c:out>

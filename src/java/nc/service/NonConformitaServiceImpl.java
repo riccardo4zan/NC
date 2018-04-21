@@ -90,4 +90,9 @@ public class NonConformitaServiceImpl implements NonConformitaService{
         return dao.findAllChiuse();
     }
     
+    @Override
+    public double findCostoAnnoPerMese(int mese, int anno){
+        return dao.findCostoAnnoPerMese(mese, anno);
+    }
+    
 }

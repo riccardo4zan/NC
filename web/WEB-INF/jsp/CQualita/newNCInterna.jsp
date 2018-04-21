@@ -16,7 +16,7 @@
             <label> Reparto </label>
            <select id="tipo" name="tipo" >   
                 <c:forEach items="${Reparti}" var="reparti">
-                    <option value="${reparti.codice}">${reparti.codice}</option>
+                    <option value="${reparti.codice}">${reparti.nome}</option>
                 </c:foreach>
             </select>
         </div>

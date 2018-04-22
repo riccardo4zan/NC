@@ -139,11 +139,10 @@ public class CQualitaController {
         return model;
     }
     
-    @RequestMapping(value = "/rimuoviSegnalazione/{id}" ,method = RequestMethod.GET)
-    public ModelAndView rimuoviSegnalazione(@PathVariable("id") int id ) {
+    @RequestMapping(value = "/rimuoviSegnalazione",params = {"id"} ,method = RequestMethod.GET)
+    public ModelAndView rimuoviSegnalazione(@RequestParam("id") String id ) {
         ModelAndView model = new ModelAndView();
-        ss.deleteSegnalazione(id);
-        model.addObject("segnalazioni", ss.findAll());
+        ss.deleteSegnalazione(Integer.parseInt(id));
         model.setViewName("indexCQualita");
         return model;
     }

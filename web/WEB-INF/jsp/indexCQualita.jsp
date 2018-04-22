@@ -23,8 +23,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/segnalazioni">Lista segnalazioni</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="/cq/apriNC">Apri NC</a>
+                            <a class="nav-link" href="/cq/apriNC">Apri non conformita`</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cq/NCElaborazione">Non conformita` in elaborazione</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cq/NCChiuse">Non conformita` chiuse</a>
                         </li>
                     </ul>
                     <div class="navbar-nav destra">
@@ -44,7 +53,7 @@
             <div class="col-lg-2 col-md-2"></div>
             <div class="col-lg-8 col-md-8">
                 
-                <c:if test="${not empty NCInterna}">
+                <c:if test="${not empty NC}">
                     <c:set var="Tipi" value="${Tipi}" scope="request"/>
                     <c:set var="Reparti" value="${Reparti}" scope="request"/>
                     <c:set var="Fornitori" value="${Fornitori}" scope="request"/>

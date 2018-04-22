@@ -54,6 +54,22 @@ public class CQualitaController {
         return "indexCQualita";
     }
 
+    @RequestMapping(value = {"/NCElaborazione"}, method = RequestMethod.GET)
+    public String NCElaborazione() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+
+    @RequestMapping(value = {"/NCChiuse"}, method = RequestMethod.GET)
+    public String NCChiuse() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("NCChiuse", ncs.findAllChiuse());
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView NC() {
         ModelAndView model = new ModelAndView();
@@ -61,6 +77,7 @@ public class CQualitaController {
         model.addObject("Reparti", rs.findAll());
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
+        model.addObject("NC", "si");
         model.setViewName("indexCQualita");
         return model;
     }
@@ -95,10 +112,21 @@ public class CQualitaController {
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
         model.addObject("newnc", newnc);
-        model.addObject("NCAperte", "si");
+        model.addObject("NCAperte", ncs.findAllAperte());
         model.setViewName("indexCQualita");
         return model;
     }
+    
+    // metodo modfica nc passare codice nc 
+     @RequestMapping(value = {"/editNC"}, method = RequestMethod.GET)
+    public String editNC() {
+        ModelAndView model = new ModelAndView();
+        //codice modifica nc
+        model.addObject("NCAperte", ncs.findAllAperte());
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+
 
     @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
     public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
@@ -135,6 +163,7 @@ public class CQualitaController {
     public ModelAndView rimuoviSegnalazione(@RequestParam("id") String id) {
         ModelAndView model = new ModelAndView();
         ss.deleteSegnalazione(Integer.parseInt(id));
+        model.addObject("segnalazioni", ss.findAll());
         model.setViewName("indexCQualita");
         return model;
     }

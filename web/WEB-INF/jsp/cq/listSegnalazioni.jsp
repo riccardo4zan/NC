@@ -18,7 +18,7 @@
             <td> ${item.titolo}</td>
             <td> ${item.data} </td>
             <td> ${item.dipendente.reparto.nome}</td>
-            <td><a href="/cq/dettaglioSegnalazione?id=${item.codice}"><span class="glyphicon glyphicon-search"></span></a></td>
+            <td><a href="/cq/dettaglioSegnalazione?id=${item.codice}"><span class="glyphicon glyphicon-search"></span>Visualizza </a></td>
         </tr>
     </c:forEach>
 </tbody>

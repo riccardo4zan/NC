@@ -66,7 +66,7 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/addNC"}, params = {"desc", "azioniContenimento", "cause", "gravita", "tipo", "reparto", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addNC"}, params = {"desc", "azioniContenimento", "cause", "gravita", "tipo", "reparto", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.POST)
     public ModelAndView addNC(
             @RequestParam("desc") String desc,
             @RequestParam("azioniContenimento") String AC,

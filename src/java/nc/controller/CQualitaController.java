@@ -1,11 +1,9 @@
 package nc.controller;
 
-import java.util.List;
 import nc.model.Cliente;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
-import nc.model.Segnalazione;
 import nc.model.Tipo;
 import nc.service.ClienteService;
 import nc.service.DipendenteService;
@@ -53,41 +51,27 @@ public class CQualitaController {
     public String index() {
         ModelAndView model = new ModelAndView();
         model.addObject("NCAperte", "si");
+        model.addObject("Matricola",MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
 
-    /**
-     * Dati da prendere dal requestParam Data apertura Tipo Descrizione Piva
-     * Fornitore oppure ID reparto oppure PivaCliente (controllo se uno di
-     * questi ha un valore valido)
-     */
-    @RequestMapping(value = {"/NCInterna"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView NCInterna() {
         ModelAndView model = new ModelAndView();
         model.addObject("Tipi", ts.findAll());
         model.addObject("Reparti", rs.findAll());
+        model.addObject("Fornitori", fs.findAll());
+        model.addObject("Clienti", cs.findAll());
       
         model.addObject("NCInterna", "si");
         model.setViewName("indexCQualita");
         return model;
     }
 
-    @RequestMapping(value = {"/NCEsterna"}, method = RequestMethod.GET)
-    public ModelAndView NCEsterna() {
-        ModelAndView model = new ModelAndView();
-        model.addObject("Tipi", ts.findAll());
-        model.addObject("Fornitori", fs.findAll());
-        model.addObject("Clienti", cs.findAll());
-     
-        model.addObject("NCEsterna", "si");
-        model.setViewName("indexCQualita");
-        return model;
-    }
-
-    @RequestMapping(value = {"/addNCInterna"}, params = {"desc","azioniContenimento","cause","gravita","tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addNC"}, params = {"desc","azioniContenimento","cause","gravita","tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
     public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") String dataI) {
         ModelAndView model = new ModelAndView();
-       
+        
         Tipo t = ts.findByNome(tipo);
         Reparto r = rs.findByID(reparto);
         NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, r);
@@ -123,15 +107,7 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
-
-    /**
-     * Passami il codice della NonConformità attraverso il GET o il post
-     *
-     * Bottone accanto al nome della NC nella lista che se cliccato manda alla
-     * pagina di gestione del team delle NC
-     *
-     * @return
-     */
+    
     @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
     public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
         ModelAndView model = new ModelAndView();
@@ -142,17 +118,10 @@ public class CQualitaController {
         //Passo la lista dei dipendenti già associati al team
         model.addObject("dipendentiAssociati", tm.getTeam());
 
-        /**
-         * NOME DELLA VIEW PER AGGIUNGERE AL TEAM
-         */
         model.addObject("teamOp", "si");
         model.setViewName("indexCQualita");
         return model;
     }
-
-    /**
-     * MANCA METODO PER IL TEAM OPERATIVO
-     */
     
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
@@ -170,7 +139,7 @@ public class CQualitaController {
         return model;
     }
     
-        @RequestMapping(value = "/rimuoviSegnalazione/{id}" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/rimuoviSegnalazione/{id}" ,method = RequestMethod.GET)
     public ModelAndView rimuoviSegnalazione(@PathVariable("id") int id ) {
         ModelAndView model = new ModelAndView();
         ss.deleteSegnalazione(id);

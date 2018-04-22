@@ -22,7 +22,8 @@
     <div class="form-group">
         <div class="form-group">
             <label> Tipo </label>
-            <select id="tipo" name="tipo" >   
+            <select id="tipo" name="tipo" >
+                <option value="">Nullo</option>
                 <c:forEach items="${Tipi}" var="tipo">
                     <option value="${tipo.nome}">${tipo.nome}</option>
                 </c:forEach>
@@ -30,9 +31,28 @@
         </div>
         <div class="form-group">
             <label> Reparto </label>
-           <select id="reparto" name="reparto" >   
+           <select id="reparto" name="reparto" >
+               <option value="">Nullo</option>
                 <c:forEach items="${Reparti}" var="reparto">
                     <option value="${reparto.id}">${reparto.nome}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label> Fornitore </label>
+           <select id="fornitore" name="fornitori" >
+               <option value="">Nullo</option>
+                <c:forEach items="${Fornitori}" var="fornitore">
+                    <option value="${fornitore.piva}">${fornitore.nome}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="form-group">
+            <label> Cliente </label>
+           <select id="cliente" name="reparto" >
+               <option value="">Nullo</option>
+                <c:forEach items="${Clienti}" var="clienti">
+                    <option value="${clienti.id}">${clienti.nome}</option>
                 </c:forEach>
             </select>
         </div>

@@ -30,11 +30,11 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/cq/">Home</a></li>
                             <li><a href="/cq/segnalazioni">Lista segnalazioni</a></li>
-                            <li><a href="/cq/NCInterna">Apri ncinterna</a></li>
+                            <li><a href="/cq/apriNC">Apri NC</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matricola qui <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${Matricola}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">I miei dati</a></li>
                                     <li><a href="/logout">Logout</a></li>
@@ -49,13 +49,9 @@
             <c:if test="${not empty NCInterna}">
                 <c:set var="Tipi" value="${Tipi}" scope="request"/>
                 <c:set var="Reparti" value="${Reparti}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/cq/newNCInterna.jsp"/>
-            </c:if>
-
-            <c:if test="${not empty NCEsterna}">
                 <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
                 <c:set var="Clienti" value="${Clienti}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/cq/newNCEsterna.jsp"/>
+                <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
             </c:if>
 
             <c:if test="${not empty NCAperte}">

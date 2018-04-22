@@ -67,26 +67,6 @@ public class NonConformita implements Serializable {
     public NonConformita() {
     }
 
-    public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo, Reparto reparto) {
-        this.descrizione = descrizione;
-        this.azioniContenimento = azioniContenimento;
-        this.dataApertura = dataApertura;
-        this.cause = cause;
-        this.gravita = gravita;
-        this.tipo = tipo;
-        this.reparto = reparto;
-    }
-
-    public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo, Cliente cliente) {
-        this.descrizione = descrizione;
-        this.azioniContenimento = azioniContenimento;
-        this.dataApertura = dataApertura;
-        this.cause = cause;
-        this.gravita = gravita;
-        this.tipo = tipo;
-        this.cliente = cliente;
-    }
-
     public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo) {
         this.descrizione = descrizione;
         this.azioniContenimento = azioniContenimento;

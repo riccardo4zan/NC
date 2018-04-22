@@ -1,7 +1,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,33 +9,40 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Gestione NC</title>
-        <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/resources/css/navbar.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link href="../resources/css/main.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <body >
-        <div style="line-height:-20px !important; " class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-            <header class="sfondo mdl-layout__header">
-                <div class="mdl-layout__header-row">
-                    <span class="mdl-layout-title">Impostazioni</span>
-                    <div class="mdl-layout-spacer"></div>
-                    <nav class="mdl-navigation mdl-layout--large-screen-only">
-                        <a class="mdl-navigation__link" href="/operaio/">Home</a>
-                        <a class="mdl-navigation__link" href="/operaio/old">Elaborazioni completate</a>
-                        <a class="mdl-navigation__link" href="/operaio/news">Invia una segnalazione</a>
-                    </nav>
+        <div>
+            <nav class="custom navbar navbar-expand-lg navbar-dark">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/operaio/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/operaio/old">Elaborazioni completate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/operaio/news">Invia una segnalazione</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav destra">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Impostazioni
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">I miei dati</a>
+                                <a class="dropdown-item" href="/logout">LogOut</a>
+                            </div>
+                        </li>
+                    </div>
                 </div>
-            </header>
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout-title">Title</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="#">I miei dati</a>
-                    <a class="mdl-navigation__link"  href="/logout">Logout</a>
-                </nav>
-            </div>
-            <main class="mdl-layout__content">
-                <div class="page-content">
+            </nav>
+            <main class="row">
+                <div class="col-lg-3 col-md-3"></div>
+                <div class="col-lg-6 col-md-6">
                     <c:if test="${not empty aperte}">
                         <c:set var="aperte" value="${aperte}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp"/>
@@ -57,10 +64,11 @@
                         </jsp:include>
                     </c:if> 
                 </div>
+                <div class="col-lg-3 col-md-3"></div>
             </main>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/resources/js/jquery-slim.min.js"><\/script>')</script>
-        <script src="/resources/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

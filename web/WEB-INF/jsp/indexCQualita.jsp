@@ -6,74 +6,78 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Gestione NC</title>
-        <!-- Bootstrap core CSS -->
-        <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <!-- Custom styles for this template -->
-        <link href="/resources/css/navbar.css" rel="stylesheet">
+        <link href="../resources/css/main.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <body>
-        <div class="container">
-            <!-- Static navbar -->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/cq/">Home</a></li>
-                            <li><a href="/cq/segnalazioni">Lista segnalazioni</a></li>
-                            <li><a href="/cq/apriNC">Apri NC</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${Matricola}<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">I miei dati</a></li>
-                                    <li><a href="/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
+        <div>
+            <nav class="custom navbar navbar-expand-lg navbar-dark">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cq/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cq/segnalazioni">Lista segnalazioni</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cq/apriNC">Apri NC</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav destra">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Impostazioni
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">I miei dati</a>
+                                <a class="dropdown-item" href="/logout">LogOut</a>
+                            </div>
+                        </li>
+                    </div>
+                </div>
             </nav>
-            <!-- operazioni da svolgere-->
-            <c:if test="${not empty NCInterna}">
-                <c:set var="Tipi" value="${Tipi}" scope="request"/>
-                <c:set var="Reparti" value="${Reparti}" scope="request"/>
-                <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
-                <c:set var="Clienti" value="${Clienti}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
-            </c:if>
+            <div class="row">
+            <div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-8 col-md-8">
+                <c:if test="${not empty NCInterna}">
+                    <c:set var="Tipi" value="${Tipi}" scope="request"/>
+                    <c:set var="Reparti" value="${Reparti}" scope="request"/>
+                    <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
+                    <c:set var="Clienti" value="${Clienti}" scope="request"/>
+                    <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
+                </c:if>
 
-            <c:if test="${not empty NCAperte}">
-                <jsp:include page="/WEB-INF/jsp/cq/NCAperte.jsp" />
-            </c:if>
+                <c:if test="${not empty NCAperte}">
+                    <jsp:include page="/WEB-INF/jsp/cq/NCAperte.jsp" />
+                </c:if>
 
-            <c:if test="${not empty NCChiuse}">
-                <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
-            </c:if>
+                <c:if test="${not empty NCChiuse}">
+                    <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
+                </c:if>
 
-            <c:if test="${not empty NCElaborazione}">
-                <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
-            </c:if>
+                <c:if test="${not empty NCElaborazione}">
+                    <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
+                </c:if>
 
-            <c:if test="${not empty segnalazioni}">
-                <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
-            </c:if>
+                <c:if test="${not empty segnalazioni}">
+                    <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
+                    <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
+                </c:if>
 
-            <c:if test="${not empty segnalazione}">
-                <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
-            </c:if>
-
-        </div> <!-- /container -->
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
+                <c:if test="${not empty segnalazione}">
+                    <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
+                    <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
+                </c:if>
+            </div>
+            <div class="col-lg-2 col-md-2"></div>
+            </div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/resources/js/jquery-slim.min.js"><\/script>')</script>
-        <script src="/resources/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

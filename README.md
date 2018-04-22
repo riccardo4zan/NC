@@ -93,3 +93,5 @@ ALTER TABLE PezzoNC ADD CONSTRAINT PezzoNC_ibfk_1 FOREIGN KEY (CodicePezzo) REFE
 ALTER TABLE Segnalazioni ADD CONSTRAINT Segnalazioni_ibfk_1 FOREIGN KEY (MatricolaDipendente) REFERENCES Dipendenti (Matricola);
 
 ALTER TABLE user_roles ADD CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username);
+
+alter table Segnalazioni add Titolo varchar(50) not null;

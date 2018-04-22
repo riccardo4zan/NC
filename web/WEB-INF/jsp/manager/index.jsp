@@ -169,7 +169,7 @@
         ]);
         var options = {
             legend: {position: 'none'},
-            colors: "#81C784"
+            colors: "#81C784",
         };
         var div = document.getElementById("istogramma");
         var chart = new google.charts.Bar(document.getElementById('istogramma'));

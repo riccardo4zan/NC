@@ -97,12 +97,10 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
 
     @Override
     public double findAllCostoPerNonConformita(int anno) {
-        int a = Calendar.YEAR;
-        String sql = "SELECT * FROM NonConformita WHERE year(DataApertura) = :annoI AND (year(DataChiusura) = :anno OR isnull(DataChiusura))";
-        SQLQuery query = getSession().createSQLQuery(sql);
-        query.addEntity(NonConformita.class);
-        query.setParameter("annoI", a);
-        query.setParameter("annoF", anno);
+        Query query = getSession().createSQLQuery(
+                "SELECT * FROM NonConformita WHERE year(DataApertura) = :anno")
+                .addEntity(NonConformita.class)
+                .setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
         double sum = 0;
         if (res != null) {

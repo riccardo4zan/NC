@@ -21,11 +21,11 @@
                 <div class="container-fluid">
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/cq/">Home</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Matricola qui <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${matricola}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">I miei dati</a></li>
                                     <li><a href="/logout">Logout</a></li>
@@ -45,8 +45,8 @@
                                 <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                             </div>
                             <div class="media-body media-text-right">
-                                <h2>123</h2>
-                                <p class="m-b-0">Ordini questo mese</p>
+                                <h2>${totale}&euro;</h2>
+                                <p class="m-b-0">Costo non conformità quest'anno</p>
                             </div>
                         </div>
                     </div>
@@ -102,10 +102,6 @@
                     <div id="fornitori"></div>
                 </div>
             </div>
-
-
-
-
 
         </div> <!-- /container -->
 
@@ -231,9 +227,6 @@
             }
         </script>
         <!-- /istogramma -->
-
-        <!--DEBUG FOX-->
-        <c:out value="${out1}"></c:out>
 
     </body>
 </html>

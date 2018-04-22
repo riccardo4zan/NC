@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author riccardo
- */
 @Transactional
 @Service("NonConformitaService")
 public class NonConformitaServiceImpl implements NonConformitaService{
@@ -93,6 +89,11 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     @Override
     public double findCostoAnnoPerMese(int mese, int anno){
         return dao.findCostoAnnoPerMese(mese, anno);
+    }
+
+    @Override
+    public double findAllCostoPerNonConformita(int anno) {
+        return dao.findAllCostoPerNonConformita(anno);
     }
     
 }

@@ -38,6 +38,10 @@ public class ManagerController {
 
         //inserire qui elaborazioni aperte
         model.addObject("matricola", MainController.getLoggedDip().getMatricola());
+        
+        //dati thumbnais
+        model.addObject("totale", ncs.findAllCostoPerNonConformita(anno));
+        
 
         // prendo tutti i tipi, i reparti e i fornitori presenti
         List<Reparto> reparti = rs.findAll();

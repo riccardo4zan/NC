@@ -9,20 +9,13 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Gestione NC</title>
-
         <!-- Bootstrap core CSS -->
         <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-
-
         <!-- Custom styles for this template -->
         <link href="/resources/css/navbar.css" rel="stylesheet">
-
     <body>
-
         <div class="container">
-
             <!-- Static navbar -->
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
@@ -44,7 +37,6 @@
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-
             <!-- operazioni da svolgere-->
             <c:if test="${not empty NCInterna}">
                 <c:set var="Tipi" value="${Tipi}" scope="request"/>
@@ -65,23 +57,18 @@
             <c:if test="${not empty NCElaborazione}">
                 <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
             </c:if>
-            
+
             <c:if test="${not empty segnalazioni}">
                 <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
                 <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
             </c:if>
-            
+
             <c:if test="${not empty segnalazione}">
                 <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
                 <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
             </c:if>
-            
-            
-
 
         </div> <!-- /container -->
-
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

@@ -15,7 +15,6 @@ import nc.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +27,7 @@ public class CQualitaController {
 
     @Autowired
     private SegnalazioneService ss;
-    
+
     @Autowired
     private TipoService ts;
 
@@ -51,7 +50,7 @@ public class CQualitaController {
     public String index() {
         ModelAndView model = new ModelAndView();
         model.addObject("NCAperte", "si");
-        model.addObject("Matricola",MainController.getLoggedDip().getMatricola());
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
 
@@ -62,19 +61,38 @@ public class CQualitaController {
         model.addObject("Reparti", rs.findAll());
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
-      
         model.addObject("NCInterna", "si");
         model.setViewName("indexCQualita");
         return model;
     }
 
-    @RequestMapping(value = {"/addNC"}, params = {"desc","azioniContenimento","cause","gravita","tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") String dataI) {
+    @RequestMapping(value = {"/addNC"}, params = {"desc", "azioniContenimento", "cause", "gravita", "tipo", "reparto", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
+    public ModelAndView addNC(
+            @RequestParam("desc") String desc,
+            @RequestParam("azioniContenimento") String AC,
+            @RequestParam("cause") String cause,
+            @RequestParam("gravita") int gravita,
+            @RequestParam("tipo") String tipo,
+            @RequestParam(value = "reparto", required = false) Integer reparto,
+            @RequestParam(value = "fornitore", required = false) String fornitore,
+            @RequestParam(value = "cliente", required = false) String cliente,
+            @RequestParam("dataInizio") String dataI) {
+
         ModelAndView model = new ModelAndView();
-        
         Tipo t = ts.findByNome(tipo);
-        Reparto r = rs.findByID(reparto);
-        NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, r);
+        NonConformita newnc = newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
+        //Apertura di una NC interna
+        if (reparto != null) {
+            Reparto r = rs.findByID(reparto);
+            newnc.setReparto(r);
+        } //Apertura di una NC esterna
+        else if (cliente != null) {
+            Cliente c = cs.findByPiva(cliente);
+            newnc.setCliente(c);
+        } else if (fornitore != null) {
+            Fornitore f = fs.findByPiva(fornitore);
+            newnc.setFornitore(f);
+        }
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
         model.addObject("newnc", newnc);
@@ -83,31 +101,6 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/addNCEsterna"}, params = {"desc","azioniContenimento","tipo", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
-    public ModelAndView addNCEsterna(@RequestParam("desc") String desc,@RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("fornitore") String fornitore, @RequestParam("cliente") String cliente, @RequestParam("dataInizio") String dataI) {
-        ModelAndView model = new ModelAndView();
-        
-        Tipo t = ts.findByNome(tipo);
-        if (fornitore == null) {
-            Cliente c = cs.findByPiva(cliente);
-            NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, c);
-            newnc.setDipendente(MainController.getLoggedDip());
-            model.addObject("newnc", newnc);
-
-            model.addObject("NCAperte", "si");
-            model.setViewName("indexCQualita");
-            return model;
-        }
-        Fornitore f = fs.findByPiva(fornitore);
-        NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, f);
-        newnc.setDipendente(MainController.getLoggedDip());
-        model.addObject("newnc", newnc);
-
-        model.addObject("NCAperte", "si");
-        model.setViewName("indexCQualita");
-        return model;
-    }
-    
     @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
     public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
         ModelAndView model = new ModelAndView();
@@ -122,7 +115,7 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
-    
+
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
         ModelAndView model = new ModelAndView();
@@ -130,21 +123,21 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
-    
-    @RequestMapping(value = "/dettaglioSegnalazione",params = {"id"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = "/dettaglioSegnalazione", params = {"id"}, method = RequestMethod.GET)
     public ModelAndView dettaglioSegnalazione(@RequestParam("id") String id) {
         ModelAndView model = new ModelAndView();
         model.addObject("segnalazione", ss.findByCodice(Integer.parseInt(id)));
         model.setViewName("indexCQualita");
         return model;
     }
-    
-    @RequestMapping(value = "/rimuoviSegnalazione",params = {"id"} ,method = RequestMethod.GET)
-    public ModelAndView rimuoviSegnalazione(@RequestParam("id") String id ) {
+
+    @RequestMapping(value = "/rimuoviSegnalazione", params = {"id"}, method = RequestMethod.GET)
+    public ModelAndView rimuoviSegnalazione(@RequestParam("id") String id) {
         ModelAndView model = new ModelAndView();
         ss.deleteSegnalazione(Integer.parseInt(id));
         model.setViewName("indexCQualita");
         return model;
     }
-    
+
 }

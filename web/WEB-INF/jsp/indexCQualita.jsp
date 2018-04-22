@@ -28,8 +28,8 @@
                 <div class="container-fluid">
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Lista segnalazioni</a></li>
+                            <li><a href="/cq/">Home</a></li>
+                            <li><a href="/cq/segnalazioni">Lista segnalazioni</a></li>
                             <li><a href="/cq/NCInterna">Apri ncinterna</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -69,6 +69,13 @@
             <c:if test="${not empty NCElaborazione}">
                 <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
             </c:if>
+            
+            <c:if test="${not empty segnalazioni}">
+                <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
+                <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
+            </c:if>
+            
+            
 
 
         </div> <!-- /container -->

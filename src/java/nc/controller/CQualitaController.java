@@ -1,15 +1,18 @@
 package nc.controller;
 
+import java.util.List;
 import nc.model.Cliente;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
+import nc.model.Segnalazione;
 import nc.model.Tipo;
 import nc.service.ClienteService;
 import nc.service.DipendenteService;
 import nc.service.FornitoreService;
 import nc.service.NonConformitaService;
 import nc.service.RepartoService;
+import nc.service.SegnalazioneService;
 import nc.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +27,9 @@ import org.springframework.web.servlet.ModelAndView;
 @ComponentScan("nc.dao")
 public class CQualitaController {
 
+    @Autowired
+    private SegnalazioneService ss;
+    
     @Autowired
     private TipoService ts;
 
@@ -156,4 +162,14 @@ public class CQualitaController {
     /**
      * MANCA METODO PER IL TEAM OPERATIVO
      */
+    
+    @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
+    public ModelAndView segnalazioni() {
+        ModelAndView model = new ModelAndView();
+        List<Segnalazione> segnalazioni = ss.findAll();
+        model.addObject("segnalazioni", segnalazioni);
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
 }

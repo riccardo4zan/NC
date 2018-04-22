@@ -109,8 +109,6 @@ public class MainController {
         return model;
     }
     
-    
-
     public static Dipendente getLoggedDip() {
         return loggedDip;
     }

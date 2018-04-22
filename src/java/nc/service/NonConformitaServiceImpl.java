@@ -92,8 +92,13 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     }
 
     @Override
-    public double findAllCostoPerNonConformita(int anno) {
-        return dao.findAllCostoPerNonConformita(anno);
+    public double findCostoNCPerAnno(int anno) {
+        return dao.findCostoNCPerAnno(anno);
+    }
+
+    @Override
+    public int findNumeroNCAnno(int anno) {
+        return dao.findNumeroNCAnno(anno);
     }
     
 }

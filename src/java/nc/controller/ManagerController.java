@@ -3,9 +3,11 @@ package nc.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import nc.model.Categoria;
 import nc.model.Fornitore;
 import nc.model.Reparto;
 import nc.model.Tipo;
+import nc.service.CategoriaService;
 import nc.service.FornitoreService;
 import nc.service.NonConformitaService;
 import nc.service.RepartoService;
@@ -16,18 +18,26 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/ma**")
 @ComponentScan("nc.dao")
 public class ManagerController {
+    
+    @Autowired
+    private CategoriaService cs;
+    
     @Autowired
     private NonConformitaService ncs;
+    
     @Autowired
     private TipoService ts;
+    
     @Autowired
     private RepartoService rs;
+    
     @Autowired
     private FornitoreService fs;
 
@@ -40,7 +50,11 @@ public class ManagerController {
         model.addObject("matricola", MainController.getLoggedDip().getMatricola());
         
         //dati thumbnais
-        model.addObject("totale", ncs.findAllCostoPerNonConformita(anno));
+        double presente = ncs.findCostoNCPerAnno(anno), passato = ncs.findCostoNCPerAnno(anno-1);
+        model.addObject("totale", presente);
+        model.addObject("ncAnno", ncs.findNumeroNCAnno(anno));
+        if(passato!=0) model.addObject("differenza", ((presente-passato)*100)/passato);
+        else model.addObject("differenza", 0);
         
 
         // prendo tutti i tipi, i reparti e i fornitori presenti
@@ -78,13 +92,35 @@ public class ManagerController {
         // ricavo dati istogramma
         ArrayList<ChartData> istogramma = new ArrayList<>();
         String[] mesi = {"", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre" ,"Dicembre"};
+        double max = 0;
         for(int i=1; i<=12; i++){
-            istogramma.add(new ChartData(mesi[i], ncs.findCostoAnnoPerMese(i, anno)));
+            double costo = ncs.findCostoAnnoPerMese(i, anno);
+            if(costo>max) max=costo;
+            istogramma.add(new ChartData(mesi[i], costo));
         }
         model.addObject("istogramma", istogramma);
-
+        model.addObject("max", max);
+        
         model.setViewName("indexManager");
         return model;
     }
-
+    
+    @RequestMapping(value = "/creaCategoria", method = RequestMethod.GET)
+    public ModelAndView creaCategoria() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("segnalazione", "se");
+        model.setViewName("indexManager");
+        return model;
+    }
+    
+    @RequestMapping(value = "/addCat", params = {"desc"}, method = RequestMethod.GET)
+    public ModelAndView creaCategoria(@RequestParam("desc") String desc) {
+        ModelAndView model = new ModelAndView();
+        Categoria nuovaC = new Categoria(desc);
+        cs.saveCategoria(nuovaC);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("redirect");
+        return model;
+    }
+    
 }

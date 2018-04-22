@@ -43,26 +43,22 @@
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
+                    
                     <c:if test="${not empty aperte}">
-                        <c:set var="aperte" value="${aperte}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp"/>
                     </c:if>
 
                     <c:if test="${not empty chiuse}">
-                        <c:set var="chiuse" value="${chiuse}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp"/>
                     </c:if>
 
                     <c:if test="${not empty segnalazione}">
                         <jsp:include page="/WEB-INF/jsp/operaio/segnalazione.jsp" />
                     </c:if>
-
-
                     <c:if test="${not empty idElaborazione}">
-                        <jsp:include page="/WEB-INF/jsp/operaio/editElaborazione.jsp">
-                            <jsp:param name="idElaborazione" value="${idElaborazione}"/>
-                        </jsp:include>
+                        
                     </c:if> 
+                    
                 </div>
                 <div class="col-lg-3 col-md-3"></div>
             </main>

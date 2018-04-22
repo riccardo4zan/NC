@@ -29,6 +29,10 @@ public class Categoria implements Serializable {
     public Categoria() {
     }
 
+    public Categoria(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public int getCodice() {
         return codice;
     }

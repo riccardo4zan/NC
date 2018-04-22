@@ -1,7 +1,6 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-/**
- *
- * @author riccardo
- */
 @Entity
 public class NonConformita implements Serializable {
 

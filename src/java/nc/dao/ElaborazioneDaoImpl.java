@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
-import nc.model.NonConformita;
-import nc.model.Reparto;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

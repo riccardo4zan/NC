@@ -1,7 +1,6 @@
 package nc.dao;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
@@ -96,9 +95,9 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     }
 
     @Override
-    public double findAllCostoPerNonConformita(int anno) {
+    public double findCostoNCPerAnno(int anno) {
         Query query = getSession().createSQLQuery(
-                "SELECT * FROM NonConformita WHERE year(DataApertura) = :anno")
+                "SELECT * FROM NonConformita WHERE year(DataChiusura) = :anno")
                 .addEntity(NonConformita.class)
                 .setParameter("anno", anno);
         ArrayList<NonConformita> res = new ArrayList<>(query.list());
@@ -134,6 +133,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         return (List<NonConformita>) criteria.list();
     }
 
+    @Override
     public double findCostoAnnoPerMese(int mese, int anno) {
         Query query = getSession().createSQLQuery(
                 "SELECT * FROM NonConformita WHERE year(DataChiusura) = :anno AND month(DataChiusura)=:mese ")
@@ -148,6 +148,12 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
             }
         }
         return sum;
+    }
+    
+    @Override
+    public int findNumeroNCAnno(int anno){
+        
+        return 1;
     }
 
 }

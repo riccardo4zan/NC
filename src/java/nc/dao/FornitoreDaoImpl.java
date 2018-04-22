@@ -3,18 +3,12 @@ package nc.dao;
 import java.util.ArrayList;
 import java.util.List;
 import nc.model.Fornitore;
-import nc.model.Reparto;
-import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author riccardo
- */
 @Repository("FornitoreDao")
 public class FornitoreDaoImpl implements FornitoreDao {
     

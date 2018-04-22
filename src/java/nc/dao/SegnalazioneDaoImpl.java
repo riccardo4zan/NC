@@ -28,6 +28,11 @@ public class SegnalazioneDaoImpl implements SegnalazioneDao {
         return (Segnalazione) getSession().get(Segnalazione.class, codice);
     }
 
+     public void deleteSegnalazione(int codice) {
+        Segnalazione s = (Segnalazione) getSession().load(Segnalazione.class, codice);
+	if(s!=null) getSession().delete(s);
+    }
+ 
     @Override
     public void saveSegnalazione(Segnalazione toSave) {
         getSession().persist(toSave);

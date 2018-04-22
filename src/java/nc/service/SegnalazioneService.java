@@ -10,6 +10,7 @@ import nc.model.Segnalazione;
 public interface SegnalazioneService {
     Segnalazione findByCodice(int codice);
     void saveSegnalazione (Segnalazione toSave);
+    void deleteSegnalazione(int codice);
     void updateSegnalazione(Segnalazione toUpdate);
     List<Segnalazione> findAll();
 }

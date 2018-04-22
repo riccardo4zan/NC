@@ -27,6 +27,10 @@ public class SegnalazioneServiceImpl implements SegnalazioneService {
     public void saveSegnalazione(Segnalazione toSave) {
         dao.saveSegnalazione(toSave);
     }
+    
+    public void deleteSegnalazione(int codice) {
+        dao.deleteSegnalazione(codice);
+    }
 
     @Override
     public void updateSegnalazione(Segnalazione toUpdate) {

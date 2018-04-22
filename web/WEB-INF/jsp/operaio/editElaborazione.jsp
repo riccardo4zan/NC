@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <h1> Elaborazione numero: ${codice} </h1>
 <form:form name="editElaborazione" modelAttribute="elaborazione" action="/editElaborazione" method="post">
     <div class="form-group">
@@ -10,7 +12,7 @@
     </div>
     <div class="form-group">
         <form:label path="dataFine"> Data Fine </form:label>>
-        <input type="date"  path="dataFine" class="form-control"  placeholder="data fine" name="dataFine"/>
+        <form:input type="date"  path="dataFine" class="form-control"  placeholder="data fine" name="dataFine"/>
     </div>
     <div class="form-group">
         <form:label path="nonConformita"> Non conformita  </form:label>

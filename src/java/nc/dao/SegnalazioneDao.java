@@ -10,5 +10,6 @@ import nc.model.Segnalazione;
 public interface SegnalazioneDao {
     Segnalazione findByCodice(int codice);
     void saveSegnalazione (Segnalazione toSave);
+    void deleteSegnalazione(int codice);
     List<Segnalazione> findAll();
 }

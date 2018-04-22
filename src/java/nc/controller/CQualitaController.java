@@ -17,6 +17,7 @@ import nc.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,12 +64,9 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCInterna"}, method = RequestMethod.GET)
     public ModelAndView NCInterna() {
         ModelAndView model = new ModelAndView();
-        //Passo tutta la lista dei possibili tipi di NC
         model.addObject("Tipi", ts.findAll());
         model.addObject("Reparti", rs.findAll());
-        /**
-         * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
-         */
+      
         model.addObject("NCInterna", "si");
         model.setViewName("indexCQualita");
         return model;
@@ -77,13 +75,10 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCEsterna"}, method = RequestMethod.GET)
     public ModelAndView NCEsterna() {
         ModelAndView model = new ModelAndView();
-        //Passo tutta la lista dei possibili tipi di NC
         model.addObject("Tipi", ts.findAll());
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
-        /**
-         * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
-         */
+     
         model.addObject("NCEsterna", "si");
         model.setViewName("indexCQualita");
         return model;
@@ -92,17 +87,13 @@ public class CQualitaController {
     @RequestMapping(value = {"/addNCInterna"}, params = {"desc","azioniContenimento","cause","gravita","tipo", "reparto", "dataInizio"}, method = RequestMethod.GET)
     public ModelAndView addNCInterna(@RequestParam("desc") String desc, @RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("reparto") int reparto, @RequestParam("dataInizio") String dataI) {
         ModelAndView model = new ModelAndView();
-        //Creando la NC e precompilando i campi
+       
         Tipo t = ts.findByNome(tipo);
-        
         Reparto r = rs.findByID(reparto);
         NonConformita newnc = new NonConformita(desc,AC, dataI,cause,gravita, t, r);
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
         model.addObject("newnc", newnc);
-        /**
-         * NOME DELLA VIEW PER AGGIUNGERE NUOVE NC
-         */
         model.addObject("NCAperte", "si");
         model.setViewName("indexCQualita");
         return model;
@@ -111,7 +102,7 @@ public class CQualitaController {
     @RequestMapping(value = {"/addNCEsterna"}, params = {"desc","azioniContenimento","tipo", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.GET)
     public ModelAndView addNCEsterna(@RequestParam("desc") String desc,@RequestParam("azioniContenimento") String AC,@RequestParam("cause") String cause,@RequestParam("gravita") int gravita, @RequestParam("tipo") String tipo, @RequestParam("fornitore") String fornitore, @RequestParam("cliente") String cliente, @RequestParam("dataInizio") String dataI) {
         ModelAndView model = new ModelAndView();
-        //Creando la NC e precompilando i campi
+        
         Tipo t = ts.findByNome(tipo);
         if (fornitore == null) {
             Cliente c = cs.findByPiva(cliente);
@@ -166,8 +157,7 @@ public class CQualitaController {
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
         ModelAndView model = new ModelAndView();
-        List<Segnalazione> segnalazioni = ss.findAll();
-        model.addObject("segnalazioni", segnalazioni);
+        model.addObject("segnalazioni", ss.findAll());
         model.setViewName("indexCQualita");
         return model;
     }
@@ -176,6 +166,15 @@ public class CQualitaController {
     public ModelAndView dettaglioSegnalazione(@RequestParam("id") String id) {
         ModelAndView model = new ModelAndView();
         model.addObject("segnalazione", ss.findByCodice(Integer.parseInt(id)));
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+        @RequestMapping(value = "/rimuoviSegnalazione/{id}" ,method = RequestMethod.GET)
+    public ModelAndView rimuoviSegnalazione(@PathVariable("id") int id ) {
+        ModelAndView model = new ModelAndView();
+        ss.deleteSegnalazione(id);
+        model.addObject("segnalazioni", ss.findAll());
         model.setViewName("indexCQualita");
         return model;
     }

@@ -5,16 +5,20 @@
     <thead>
         <tr>
             <th>Codice segnalazione</th>
+            <th>Titolo</th>
             <th>Data</th>
-            <th>Vedi di pi&ugrave;</th>
+            <th>Reparto</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
     <c:forEach items="${segnalazioni}" var="item">
         <tr>
             <td> ${item.codice} </td>
+            <td> ${item.titolo}</td>
             <td> ${item.data} </td>
-            <td><a href="editElaborazione.jsp?codice=${item.codice}">Modifica</a></td>
+            <td> ${item.dipendente.reparto.nome}</td>
+            <td><a href="editElaborazione.jsp?codice=${item.codice}"><span class="glyphicon glyphicon-search"></span></a></td>
         </tr>
     </c:forEach>
 </tbody>

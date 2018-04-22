@@ -1,8 +1,6 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
@@ -14,16 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author riccardo
- */
 @Entity
 @Table(name="Segnalazioni")
 public class Segnalazione implements Serializable {
     @Id @GeneratedValue
     @Column(name="Codice")
     private int codice;
+    @Column(name="Titolo")
+    private String titolo;
     @Column(name="Descrizione")
     private String descrizione;
     @Column(name="Data")
@@ -35,9 +31,18 @@ public class Segnalazione implements Serializable {
     public Segnalazione() {
     }
 
-    public Segnalazione(String descrizione) {
+    public Segnalazione(String descrizione, String titolo) {
         this.descrizione = descrizione;
+        this.titolo = titolo;
         this.data= Calendar.getInstance().getTime();
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
     
     public int getCodice() {

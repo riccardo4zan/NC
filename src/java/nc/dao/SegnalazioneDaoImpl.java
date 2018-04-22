@@ -35,7 +35,7 @@ public class SegnalazioneDaoImpl implements SegnalazioneDao {
 
     @Override
     public List<Segnalazione> findAll() {
-        String sql = "SELECT * FROM Segnalazioni";
+        String sql = "SELECT * FROM Segnalazioni ORDER BY Data ASC";
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(Segnalazione.class);
         return new ArrayList<>(query.list());

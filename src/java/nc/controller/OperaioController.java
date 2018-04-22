@@ -1,6 +1,5 @@
 package nc.controller;
 
-import nc.model.Dipendente;
 import nc.model.Elaborazione;
 import nc.model.Segnalazione;
 import nc.service.ElaborazioneService;
@@ -8,7 +7,6 @@ import nc.service.SegnalazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,15 +68,15 @@ public class OperaioController {
         return model;
     }
     
-    @RequestMapping(value = {"/addS"}, params={"descSegnalazione"}, method = RequestMethod.GET)
-    public ModelAndView addSegnalazione(@RequestParam("descSegnalazione") String desc) {
+    @RequestMapping(value = {"/addS"}, params={"desc", "titolo"}, method = RequestMethod.GET)
+    public ModelAndView addSegnalazione(@RequestParam("desc") String desc, @RequestParam("titolo") String titolo) {
         ModelAndView model = new ModelAndView();
-        Segnalazione s=new Segnalazione(desc);
+        Segnalazione s = new Segnalazione(desc, titolo);
         s.setDipendente(MainController.getLoggedDip());
         ss.saveSegnalazione(s);
         //inserire qui codice elaborazione da parametro
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole()); 
-        model.setViewName("indexOperaio");
+        model.setViewName("redirect");
         return model;
     }
     

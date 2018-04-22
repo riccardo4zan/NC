@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
+import nc.model.NonConformita;
 import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,18 +49,20 @@ public class ElaborazioneDaoImpl implements ElaborazioneDao{
 
     @Override
     public List<Elaborazione> findOpen(Dipendente dip) {
-        Criteria criteria = getSession().createCriteria(Elaborazione.class);
-        criteria.add(Restrictions.eq("dipendente",dip));
-        criteria.add(Restrictions.isNull("dataFine"));
-        return (List<Elaborazione>) criteria.list();
+        Query query = getSession().createSQLQuery(
+                "SELECT * FROM Elaborazioni WHERE MatricolaDipendente = :dip AND isnull(DataFine)")
+                .addEntity(Elaborazione.class)
+                .setParameter("dip", dip.getMatricola());
+        return new ArrayList<>(query.list());
     }
 
     @Override
     public List<Elaborazione> findClose(Dipendente dip) {
-        Criteria criteria = getSession().createCriteria(Elaborazione.class);
-        criteria.add(Restrictions.eq("dipendente",dip));
-        criteria.add(Restrictions.isNotNull("dataFine"));
-        return (List<Elaborazione>) criteria.list();
+        Query query = getSession().createSQLQuery(
+                "SELECT * FROM Elaborazioni WHERE MatricolaDipendente = :dip AND DataFine IS NOT NULL")
+                .addEntity(Elaborazione.class)
+                .setParameter("dip", dip.getMatricola());
+        return new ArrayList<>(query.list());
     }
     
 }

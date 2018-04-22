@@ -75,6 +75,11 @@
                 <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
             </c:if>
             
+            <c:if test="${not empty segnalazione}">
+                <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
+                <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
+            </c:if>
+            
             
 
 

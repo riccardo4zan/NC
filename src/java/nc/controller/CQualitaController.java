@@ -172,4 +172,12 @@ public class CQualitaController {
         return model;
     }
     
+    @RequestMapping(value = "/dettaglioSegnalazione",params = {"id"}, method = RequestMethod.GET)
+    public ModelAndView dettaglioSegnalazione(@RequestParam("id") String id) {
+        ModelAndView model = new ModelAndView();
+        model.addObject("segnalazione", ss.findByCodice(Integer.parseInt(id)));
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
 }

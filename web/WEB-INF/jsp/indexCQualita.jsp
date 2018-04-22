@@ -36,7 +36,7 @@
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
-            </nav>
+            </nav>            
             <!-- operazioni da svolgere-->
             <c:if test="${not empty NCInterna}">
                 <c:set var="Tipi" value="${Tipi}" scope="request"/>

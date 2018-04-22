@@ -15,7 +15,7 @@
         <h4><b>Reparto:</b> ${segnalazione.dipendente.reparto.nome}</h4>
     </div>
     
-    <a href="/cq/aggiungiNC"><input type="button" value="Apri NC"></a>
+    <a href="/cq/addNC"><input type="button" value="Apri NC"></a>
     <a href="/cq/rimuoviSegnalazione?id=${segnalazione.codice}"><input type="button" value="Elimina segnalazione"></a>
     
 </div>

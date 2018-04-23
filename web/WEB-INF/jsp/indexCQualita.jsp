@@ -64,9 +64,6 @@
                     <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
                 </c:if>
                     
-                    
-               
-
                 <c:if test="${not empty NCAperte}">
                     <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
                     <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
@@ -80,6 +77,12 @@
                     <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
                 </c:if>
 
+                 <c:if test="${not empty apriElaborazione}">
+                    <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
+                    <c:set var="ncPassata" value="${ncPassata}" scope="request"/>
+                    <c:import url="/WEB-INF/jsp/cq/newElaborazione.jsp"/>
+                </c:if>
+                 
                 <c:if test="${not empty segnalazioni}">
                     <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
                     <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>

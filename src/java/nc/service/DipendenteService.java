@@ -12,4 +12,5 @@ public interface DipendenteService {
     void saveDipendente (Dipendente toSave);
     void updateDipendente(Dipendente toUpdate);
     List<Dipendente> findAll();
+    List<Dipendente> findAllOperaiReparto(int reparto);
 }

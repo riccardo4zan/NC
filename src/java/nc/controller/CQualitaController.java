@@ -151,6 +151,31 @@ public class CQualitaController {
         return model;
     }
 
+     @RequestMapping(value = {"/newElaborazione"},params={"id"}, method = RequestMethod.GET)
+    public String newElaborazione(@RequestParam("id") int id) {
+        ModelAndView model = new ModelAndView();
+        NonConformita nc=ncs.findByCodice(id);
+        model.addObject("apriElaborazione",ds.findAllOperaiReparto(nc.getReparto().getId()));
+        model.addObject("ncPassata",id);
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+    
+    
+    
+    //finire metodo aggiunta Elaborazioni cazzo mollo
+    
+    @RequestMapping(value = {"/addElaborazione"},params={"desc","dataInizio","dipendente"}, method = RequestMethod.GET)
+    public String addElaborazione(@RequestParam("desc") int id) {
+        ModelAndView model = new ModelAndView();
+        NonConformita nc=ncs.findByCodice(id);
+        model.addObject("apriElaborazione",ds.findAllOperaiReparto(nc.getReparto().getId()));
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+
+    
+    
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
         ModelAndView model = new ModelAndView();

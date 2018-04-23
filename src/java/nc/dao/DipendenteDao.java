@@ -11,4 +11,5 @@ public interface DipendenteDao {
     Dipendente findByMatricola(int matricola);
     void saveDipendente (Dipendente toSave);
     List<Dipendente> findAll();
+    List<Dipendente> findAllOperaiReparto(int reparto);
 }

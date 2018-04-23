@@ -24,7 +24,7 @@
         <tr>
             <td> ${item.codice} </td>
             <td> ${item.dataInizio} </td>
-            <td><a href="editElaborazione.jsp?codice=${item.codice}">Modifica</a></td>
+            <td><a href="/op/editElaborazione?codice=${item.codice}">Modifica</a></td>
         </tr>
     </c:forEach>
 </tbody>

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<h1> Elaborazione numero: ${codice} </h1>
+<h2> Elaborazione numero: ${codice} </h2>
 <form:form name="editElaborazione" modelAttribute="elaborazione" action="/editElaborazione" method="post">
     <div class="form-group">
         <form:label path="descrizione"> Descrizione </form:label>>

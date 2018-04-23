@@ -36,7 +36,7 @@
                                 Impostazioni
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">I miei dati</a>
+                                <a class="dropdown-item" href="/op/dati">I miei dati</a>
                                 <a class="dropdown-item" href="/logout">LogOut</a>
                             </div>
                         </li>

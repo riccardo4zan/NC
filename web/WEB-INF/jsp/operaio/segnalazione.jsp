@@ -1,5 +1,5 @@
 <form method="GET" action="/operaio/addS">
-    <div class="row">
+    <div class="row mt">
         <legend>Segnala una Non Conformità</legend>
     </div>
     <div class="form-group">

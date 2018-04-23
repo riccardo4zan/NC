@@ -1,5 +1,6 @@
 package nc.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import nc.model.Fornitore;
@@ -152,8 +153,10 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
     
     @Override
     public int findNumeroNCAnno(int anno){
-        
-        return 1;
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE year(DataChiusura) = :anno OR isnull(DataChiusura)")
+                .setParameter("anno", anno);
+        return ((BigInteger) query.uniqueResult()).intValue();
     }
 
 }

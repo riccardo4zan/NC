@@ -97,6 +97,7 @@
                         <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
                     </c:if>
+                    
                     <c:if test="${changePassword}">
                         <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
                     </c:if>

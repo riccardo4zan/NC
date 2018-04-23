@@ -108,7 +108,7 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/apriNC"}, params = {"desc"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/apriNC"}, params = {"desc","reparto"}, method = RequestMethod.GET)
     public ModelAndView apriNCconDescrizione(@RequestParam(value = "desc", required=false) String descrizione) {
         ModelAndView model = new ModelAndView();
         model.addObject("Tipi", ts.findAll());
@@ -116,6 +116,7 @@ public class CQualitaController {
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
         model.addObject("Descrizione",descrizione);
+
         model.addObject("NC", "si");
         model.setViewName("indexCQualita");
         return model;

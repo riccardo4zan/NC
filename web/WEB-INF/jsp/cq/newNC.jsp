@@ -4,7 +4,7 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <div class="form-group">
         <label>Descrizione</label>
-        <textarea class="form-control" name="desc" rows="3"></textarea>
+        <textarea class="form-control" name="desc" rows="3">${Descrizione}</textarea>
     </div>
     <div class="form-group">
         <label>Azioni contenitive</label>

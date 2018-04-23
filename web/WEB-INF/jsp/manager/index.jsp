@@ -1,72 +1,77 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <br><br>
 <!-- cards -->
-<div class="row">
-    <div class="col-lg-4 col-md-4 center">
-        <div class="card p-30">
-            <div class="media">
-                <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
-                </div>
-                <div class="media-body media-text-right">
-                    <h2>${totale}&euro;</h2>
-                    <p class="m-b-0">Costo non conformità quest'anno</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-4 center">
-        <div class="card p-30">
-            <div class="media">
-                <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
-                </div>
-                <div class="media-body media-text-right">
-                    <h2>${ncAnno}</h2>
-                    <p class="m-b-0">Non Conformità riscontrate quest'anno</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-4 center">
-        <div class="card p-30">
-            <div class="media">
-                <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
-                </div>
-                <div class="media-body media-text-right">
-                    ${passato}
-                    <h2 class="<c:if test="${differenza<=0}">pos</c:if><c:if test="${differenza>0}">neg</c:if>">${differenza}&percnt;</h2>
-                        <p class="m-b-0">Differenza percentuale costi NC rispetto allo scorso anno</p>
+<div class="col-lg-2 col-md-2 col-sm-2"></div>
+<div class="col-lg-8 col-md-8 col-sm-8">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 center">
+            <div class="card p-30 mh">
+                <div class="media">
+                    <div class="media-left meida media-middle">
+                        <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2><center>${totale}&euro;</center></h2>
+                        <p class="m-b-0"><center>Costo non conformità quest'anno</center></p>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- /cards -->
+        <div class="col-lg-4 col-md-4 center">
+            <div class="card p-30 mh">
+                <div class="media">
+                    <div class="media-left meida media-middle">
+                        <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2><center>${ncAnno}</center></h2>
+                        <p class="m-b-0"><center>Non Conformità riscontrate quest'anno</center></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 center">
+            <div class="card p-30 mh">
+                <div class="media">
+                    <div class="media-left meida media-middle">
+                        <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        ${passato}
+                        <h2 class="<c:if test="${differenza<=0}">pos</c:if><c:if test="${differenza>0}">neg</c:if>"><center>${differenza}&percnt;</center></h2>
+                            <p class="m-b-0"><center>Differenza percentuale costi NC rispetto allo scorso anno</center></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /cards -->
 
-    <!-- istogramma -->
-    <br><br><br><br>
-    <div class="row">
-        <h3>Costo Non Conformità per mese</h3><br><br>
-        <div class="col-lg-12 col-md-12" >
-            <div class="istogramma" id="istogramma"></div>
+        <!-- istogramma -->
+        <br><br><br><br>
+        <div class="row">
+            <h3>Costo Non Conformità per mese</h3>
+            <div class="col-lg-12 col-md-12" >
+                <div class="istogramma" id="istogramma"></div>
+            </div>
+        </div>
+
+        <!-- grafici torta -->
+        <br><br><br><br>
+        <div class="row contenuto">
+            <h3>Grafici a torta</h3>
+            <div class="row">
+            <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
+                <div id="reparti" ></div>
+            </div>
+            <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
+                <div id="prodotti" ></div>
+            </div>
+            <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
+                <div id="fornitori"></div>
+            </div></div>
         </div>
     </div>
-
-    <!-- grafici torta -->
-    <br><br><br><br>
-    <div class="row contenuto">
-        <h3>Grafici a torta</h3><br><br>
-        <div class="childs col-lg-4 col-md-4" style="height: 400px; width: 400px;">
-            <div id="reparti" ></div>
-        </div>
-        <div class="childs col-lg-4 col-md-4" style="height: 400px; width: 400px;">
-            <div id="prodotti" ></div>
-        </div>
-        <div class="childs col-lg-4 col-md-4" style="height: 400px; width: 400px;">
-            <div id="fornitori"></div>
-        </div>
-    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2"></div>
 
     <!-- Grafici manager -->
     <script type="text/javascript" src="/resources/js/chart-loader.js"></script>

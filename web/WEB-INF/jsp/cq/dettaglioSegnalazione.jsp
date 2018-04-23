@@ -12,6 +12,6 @@
             Segnalato in data ${segnalazione.data}
         </div>
         
-        <a href="/cq/newNC"><input type="button" value="Apri NC" >Apri non conformita`</a>
-    <a href="/cq/rimuoviSegnalazione?id=${segnalazione.codice}"><input type="button" value="Elimina segnalazione">Elimina segnalazione</a>
+        <a href="/cq/apriNC?desc=${segnalazione.descrizione}">Apri non conformita`</a>
+        <a href="/cq/rimuoviSegnalazione?id=${segnalazione.codice}">Elimina segnalazione</a>
     </div>

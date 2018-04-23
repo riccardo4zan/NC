@@ -76,9 +76,21 @@ public class CQualitaController {
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
+    
+    @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
+    public ModelAndView apriNC() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("Tipi", ts.findAll());
+        model.addObject("Reparti", rs.findAll());
+        model.addObject("Fornitori", fs.findAll());
+        model.addObject("Clienti", cs.findAll());
+        model.addObject("NC", "si");
+        model.setViewName("indexCQualita");
+        return model;
+    }
 
     @RequestMapping(value = {"/apriNC"}, params = {"desc"}, method = RequestMethod.GET)
-    public ModelAndView NC(@RequestParam(value = "desc", required=false) String descrizione) {
+    public ModelAndView apriNCconDescrizione(@RequestParam(value = "desc", required=false) String descrizione) {
         ModelAndView model = new ModelAndView();
         model.addObject("Tipi", ts.findAll());
         model.addObject("Reparti", rs.findAll());

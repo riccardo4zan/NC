@@ -60,7 +60,7 @@
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniChiuse.jsp"/>
                     </c:if>
 
-                    <c:if test="${not empty segnalazione}">
+                    <c:if test="${segnalazione}">
                         <jsp:include page="/WEB-INF/jsp/operaio/segnalazione.jsp" />
                     </c:if>
                     

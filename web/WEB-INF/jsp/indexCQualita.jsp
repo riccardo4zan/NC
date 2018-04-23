@@ -54,7 +54,7 @@
                 <div class="col-lg-2 col-md-2"></div>
                 <div class="col-lg-8 col-md-8">
                     
-                    <c:if test="${not empty NC}">
+                    <c:if test="${NC}">
                         <c:set var="Tipi" value="${Tipi}" scope="request"/>
                         <c:set var="Reparti" value="${Reparti}" scope="request"/>
                         <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
@@ -100,8 +100,6 @@
                     <c:if test="${changePassword}">
                         <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
                     </c:if>
-
-
 
                 </div>
                 <div class="col-lg-2 col-md-2"></div>

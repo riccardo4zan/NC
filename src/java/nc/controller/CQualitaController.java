@@ -179,7 +179,7 @@ public class CQualitaController {
             @RequestParam(value="azioniCorrettive",required=false) String Acor,
             @RequestParam(value="azioniPreventive",required=false) String Aprev, 
             @RequestParam(value="dataF",required=false) String dataF, 
-            @RequestParam(value="costo",required=false) Double costo) {
+            @RequestParam(value="costo",required=false) double costo) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
         nc.setDescrizione(desc);
@@ -187,7 +187,8 @@ public class CQualitaController {
         nc.setAzioniCorrettive(Acor);
         nc.setAzioniPreventive(Aprev);
         nc.setDataChiusura(dataF);
-        nc.setCosto(costo);
+        Double c=costo;
+        if(!c.isNaN())nc.setCosto(costo);
         ncs.updateNonConformita(nc);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());

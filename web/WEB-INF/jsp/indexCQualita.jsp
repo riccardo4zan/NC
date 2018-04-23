@@ -52,7 +52,10 @@
             <div class="row">
             <div class="col-lg-2 col-md-2"></div>
             <div class="col-lg-8 col-md-8">
-                
+                 ${NCAperte}
+                 
+                 
+                 
                 <c:if test="${not empty NC}">
                     <c:set var="Tipi" value="${Tipi}" scope="request"/>
                     <c:set var="Reparti" value="${Reparti}" scope="request"/>
@@ -60,10 +63,13 @@
                     <c:set var="Clienti" value="${Clienti}" scope="request"/>
                     <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
                 </c:if>
+                    
+                    
+               
 
                 <c:if test="${not empty NCAperte}">
                     <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
-                    <jsp:include page="/WEB-INF/jsp/cq/NCAperte.jsp" />
+                    <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
                 </c:if>
 
                 <c:if test="${not empty NCChiuse}">

@@ -165,5 +165,47 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         Query query = getSession().createSQLQuery("SELECT Tipo FROM NonConformita GROUP BY Tipo HAVING count(*)=(SELECT max(massimo) from (select count(*) as massimo from NonConformita group by Tipo) as tmp);");
         return (String) query.list().get(0);
     }
+    
+    @Override
+    public int findNumeroNCPerReparto(int anno, int codice) {
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE (year(DataChiusura) = :anno OR isnull(DataChiusura)) AND IDReparto = :reparto")
+                .setParameter("anno", anno)
+                .setParameter("reparto", codice);
+        return ((BigInteger) query.uniqueResult()).intValue();
+    }
+    
+    @Override
+    public int findNumeroNCReparti(int anno) {
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE (year(DataChiusura) = :anno OR isnull(DataChiusura)) AND IDReparto IS NOT NULL")
+                .setParameter("anno", anno);
+        return ((BigInteger) query.uniqueResult()).intValue();
+    }
+    
+    @Override
+    public int findNumeroNCClienti(int anno) {
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE (year(DataChiusura) = :anno OR isnull(DataChiusura)) AND PivaCliente IS NOT NULL")
+                .setParameter("anno", anno);
+        return ((BigInteger) query.uniqueResult()).intValue();
+    }
+    
+    @Override
+    public int findNumeroNCFornitori(int anno) {
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE (year(DataChiusura) = :anno OR isnull(DataChiusura)) AND PivaFornitore")
+                .setParameter("anno", anno);
+        return ((BigInteger) query.uniqueResult()).intValue();
+    }
+    
+    @Override
+    public int findNumAnnoPerMese(int mese, int anno) {
+        Query query = getSession().createSQLQuery(
+                "SELECT count(*) FROM NonConformita WHERE year(DataApertura) = :anno AND month(DataApertura)=:mese ")
+                .setParameter("mese", mese)
+                .setParameter("anno", anno);
+        return ((BigInteger) query.uniqueResult()).intValue();
+    }
  
 }

@@ -48,7 +48,7 @@
         <!-- istogramma -->
         <br><br><br><br>
         <div class="row">
-            <h3>Costo Non Conformità per mese</h3>
+            <h3>Numero Non Conformità per mese</h3>
             <div class="col-lg-12 col-md-12" >
                 <div class="istogramma" id="istogramma"></div>
             </div>
@@ -60,13 +60,13 @@
             <h3>Grafici a torta</h3>
             <div class="row">
             <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
+                <div id="tipi" ></div>
+            </div>
+            <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
                 <div id="reparti" ></div>
             </div>
             <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
-                <div id="prodotti" ></div>
-            </div>
-            <div class="childs col-lg-4 col-md-4" style="height: 300px; width: 300px;">
-                <div id="fornitori"></div>
+                <div id="interneEsterne"></div>
             </div></div>
         </div>
     </div>
@@ -84,8 +84,8 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ["Fornitore", "Costo"]
-    <c:forEach items="${fornitoriData}" var="i">
-                , ["${i.etichetta}", "${i.valD}"]
+    <c:forEach items="${tipiData}" var="i">
+                , ["${i.etichetta}", "${i.valI}"]
     </c:forEach>
             ]);
             var options = {
@@ -100,7 +100,7 @@
                     fontSize: 16
                 }
             };
-            var chart = new google.visualization.PieChart(document.getElementById('fornitori'));
+            var chart = new google.visualization.PieChart(document.getElementById('tipi'));
             chart.draw(data, options);
         }
 </script>
@@ -110,34 +110,8 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ["Prodotto", "Costo"],
-    <c:forEach items="${tipiData}" var="i">
-            ["${i.etichetta}", "${i.valD}"],
-    </c:forEach>
-        ]);
-        var options = {
-            colors: colors,
-            width: 300,
-            height: 300,
-            chartArea: {'width': '90%', 'height': '90%'},
-            legend: {position: 'none'},
-            pieHole: 0.4,
-            pieSliceTextStyle: {
-                color: 'white',
-                fontSize: 16
-            }
-        };
-        var chart = new google.visualization.PieChart(document.getElementById('prodotti'));
-        chart.draw(data, options);
-    }
-</script>
-<script type="text/javascript">
-    google.charts.load("current", {packages: ["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ["Reparto", "Costo"]
     <c:forEach items="${repartiData}" var="i">
-            , ["${i.etichetta}", "${i.valD}"]
+            ["${i.etichetta}", "${i.valI}"],
     </c:forEach>
         ]);
         var options = {
@@ -155,6 +129,32 @@
         var chart = new google.visualization.PieChart(document.getElementById('reparti'));
         chart.draw(data, options);
     }
+</script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ["Reparto", "Costo"]
+    <c:forEach items="${interneEsterne}" var="i">
+            , ["${i.etichetta}", "${i.valI}"]
+    </c:forEach>
+        ]);
+        var options = {
+            colors: colors,
+            width: 300,
+            height: 300,
+            chartArea: {'width': '90%', 'height': '90%'},
+            legend: {position: 'none'},
+            pieHole: 0.4,
+            pieSliceTextStyle: {
+                color: 'white',
+                fontSize: 16
+            }
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('interneEsterne'));
+        chart.draw(data, options);
+    }
 
 </script>
 
@@ -168,7 +168,7 @@
         var data = google.visualization.arrayToDataTable([
             ['', 'Sales']
     <c:forEach items="${istogramma}" var="i">
-            , ["${i.etichetta}", "${i.valD}"]
+            , ["${i.etichetta}", "${i.valI}"]
     </c:forEach>
         ]);
         var options = {

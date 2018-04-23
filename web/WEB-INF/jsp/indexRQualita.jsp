@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </nav>
+            
             <c:if test="${not empty ncAnno}">
                 <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
             </c:if>

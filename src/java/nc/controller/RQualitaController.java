@@ -10,6 +10,7 @@ import nc.model.Tipo;
 import nc.model.User;
 import nc.service.DipendenteService;
 import nc.service.NonConformitaService;
+import nc.service.RepartoService;
 import nc.service.TipoService;
 import nc.service.UserService;
 import nc.utility.ChartData;
@@ -28,6 +29,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class RQualitaController {
 
     @Autowired
+    private RepartoService rs;
+    
+    @Autowired
     private TipoService ts;
 
     @Autowired
@@ -43,61 +47,60 @@ public class RQualitaController {
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         int anno = Calendar.getInstance().get(Calendar.YEAR);
-
+        
+        // dati per thumbnails e grafici a torta
+        int aperte = ncs.findAllAperte().size();
+        int elaborazione = ncs.findAllInElaborazione().size();
+        int chiuse = ncs.findAllChiuse().size();
+        
+        int repartiNC = ncs.findNumeroNCReparti(anno);
+        int fornitoriNC = ncs.findNumeroNCFornitori(anno);
+        int clientiNC = ncs.findNumeroNCClienti(anno);
+        
         //inserire qui elaborazioni aperte
         model.addObject("matricola", MainController.getLoggedDip().getMatricola());
 
         //dati thumbnais
         model.addObject("ncAnno", ncs.findNumeroNCAnno(anno));
-        model.addObject("ncAperte", ncs.findAllAperte().size()+ncs.findAllInElaborazione().size());
+        model.addObject("ncAperte", aperte+elaborazione);
         model.addObject("tipoNC", ncs.findTipoNCProblematico());
         
         // prendo tutti i tipi, i reparti e i fornitori presenti
-       
+        List<Reparto> reparti = rs.findAll();
 
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
         ArrayList<ChartData> repartiData = new ArrayList<>();
-        ArrayList<ChartData> fornitoriData = new ArrayList<>();
         ArrayList<ChartData> tipiData = new ArrayList<>();
-
-        /**
-        for (Fornitore tmp : fornitori) {
-            double costo = ncs.findCostoPerFornitore(anno, tmp);
-            if (costo != 0) {
-                fornitoriData.add(new ChartData(tmp.getNome(), costo));
-            }
-        }
+        ArrayList<ChartData> interneEsterne = new ArrayList<>();
+        
+        if(aperte>0) tipiData.add(new ChartData("Aperte", aperte));
+        if(elaborazione>0) tipiData.add(new ChartData("In elaborazione", elaborazione));
+        if(chiuse>0) tipiData.add(new ChartData("Chiuse", chiuse));
+        
+        if(repartiNC>0) interneEsterne.add(new ChartData("reparti", repartiNC));
+        if(fornitoriNC>0) interneEsterne.add(new ChartData("fornitori", fornitoriNC));
+        if(clientiNC>0) interneEsterne.add(new ChartData("clienti", clientiNC));
+        
         for (Reparto tmp : reparti) {
-            double costo = ncs.findCostoPerReparto(anno, tmp);
-            if (costo != 0) {
-                repartiData.add(new ChartData(tmp.getNome(), costo));
-            }
-        }
-        for (Tipo tmp : tipi) {
-            double costo = ncs.findCostoPerTipo(anno, tmp);
-            if (costo != 0) {
-                tipiData.add(new ChartData(tmp.getNome(), costo));
+            int num = ncs.findNumeroNCPerReparto(anno, tmp.getId());
+            if (num != 0) {
+                repartiData.add(new ChartData(tmp.getNome(), num));
             }
         }
         
         model.addObject("tipiData", tipiData);
-        model.addObject("fornitoriData", fornitoriData);
-
+        model.addObject("repartiData", repartiData);
+        model.addObject("interneEsterne", interneEsterne);
+        
         // ricavo dati istogramma
         ArrayList<ChartData> istogramma = new ArrayList<>();
         String[] mesi = {"", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"};
         double max = 0;
         for (int i = 1; i <= 12; i++) {
-            double costo = ncs.findCostoAnnoPerMese(i, anno);
-            if (costo > max) {
-                max = costo;
-            }
-            istogramma.add(new ChartData(mesi[i], costo));
+            istogramma.add(new ChartData(mesi[i], ncs.findNumAnnoPerMese(i, anno)));
         }
         model.addObject("istogramma", istogramma);
-        model.addObject("max", max);
-        */
-        
+
         model.setViewName("indexRQualita");
         return model;
     }

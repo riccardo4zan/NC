@@ -20,4 +20,9 @@ public interface NonConformitaDao {
     double findCostoAnnoPerMese(int mese, int anno);
     int findNumeroNCAnno(int anno);
     String findTipoNCProblematico();
+    int findNumeroNCPerReparto(int anno, int codice);
+    int findNumeroNCReparti(int anno);
+    int findNumeroNCClienti(int anno);
+    int findNumeroNCFornitori(int anno);
+    int findNumAnnoPerMese(int mese, int anno);
 }

@@ -105,5 +105,30 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public String findTipoNCProblematico() {
         return dao.findTipoNCProblematico();
     }
+
+    @Override
+    public int findNumeroNCPerReparto(int anno, int codice) {
+        return dao.findNumeroNCPerReparto(anno, codice);
+    }
+
+    @Override
+    public int findNumeroNCReparti(int anno) {
+        return dao.findNumeroNCReparti(anno);
+    }
+
+    @Override
+    public int findNumeroNCClienti(int anno) {
+        return dao.findNumeroNCClienti(anno);
+    }
+
+    @Override
+    public int findNumeroNCFornitori(int anno) {
+        return dao.findNumeroNCFornitori(anno);
+    }
+
+    @Override
+    public int findNumAnnoPerMese(int mese, int anno) {
+        return dao.findNumAnnoPerMese(mese, anno);
+    }
     
 }

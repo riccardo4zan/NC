@@ -94,11 +94,13 @@
                         <c:import url="/WEB-INF/jsp/cq/visualizzaNC.jsp"/>
                     </c:if>
 
+                    <!-- mostrare la lista delle segnalazioni -->
                     <c:if test="${not empty segnalazioni}">
                         <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
                     </c:if>
 
+                    <!-- mostrare la segnalazione nel dettaglio -->
                     <c:if test="${not empty segnalazione}">
                         <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>

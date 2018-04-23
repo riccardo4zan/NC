@@ -41,7 +41,7 @@
             <c:if test="${not empty istogramma}">
                 <c:import url="/WEB-INF/jsp/manager/index.jsp"/>
             </c:if>
-            <c:if test="${not empty segnalazione}">
+            <c:if test="${segnalazione}">
                 <c:import url="/WEB-INF/jsp/manager/creaCategoria.jsp" />
             </c:if>
 

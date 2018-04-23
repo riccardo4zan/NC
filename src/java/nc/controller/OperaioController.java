@@ -81,7 +81,7 @@ public class OperaioController {
         ModelAndView model = new ModelAndView();
         //inserire qui codice elaborazione da parametro
         model.addObject("matricola", MainController.getLoggedDip().getMatricola());
-        model.addObject("segnalazione", "si");
+        model.addObject("segnalazione", true);
         model.setViewName("indexOperaio");
         return model;
     }

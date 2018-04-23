@@ -28,22 +28,22 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/ma**")
 @ComponentScan("nc.dao")
 public class ManagerController {
-    
+
     @Autowired
     private CategoriaService cs;
-    
+
     @Autowired
     private NonConformitaService ncs;
-    
+
     @Autowired
     private TipoService ts;
-    
+
     @Autowired
     private RepartoService rs;
-    
+
     @Autowired
     private FornitoreService fs;
-    
+
     @Autowired
     private UserService us;
 
@@ -54,14 +54,16 @@ public class ManagerController {
 
         //inserire qui elaborazioni aperte
         model.addObject("matricola", MainController.getLoggedDip().getMatricola());
-        
+
         //dati thumbnais
-        double presente = ncs.findCostoNCPerAnno(anno), passato = ncs.findCostoNCPerAnno(anno-1);
+        double presente = ncs.findCostoNCPerAnno(anno), passato = ncs.findCostoNCPerAnno(anno - 1);
         model.addObject("totale", presente);
         model.addObject("ncAnno", ncs.findNumeroNCAnno(anno));
-        if(passato!=0) model.addObject("differenza", ((presente-passato)*100)/passato);
-        else model.addObject("differenza", 0);
-        
+        if (passato != 0) {
+            model.addObject("differenza", ((presente - passato) * 100) / passato);
+        } else {
+            model.addObject("differenza", 0);
+        }
 
         // prendo tutti i tipi, i reparti e i fornitori presenti
         List<Reparto> reparti = rs.findAll();
@@ -72,7 +74,7 @@ public class ManagerController {
         ArrayList<ChartData> repartiData = new ArrayList<>();
         ArrayList<ChartData> fornitoriData = new ArrayList<>();
         ArrayList<ChartData> tipiData = new ArrayList<>();
-        
+
         for (Fornitore tmp : fornitori) {
             double costo = ncs.findCostoPerFornitore(anno, tmp);
             if (costo != 0) {
@@ -94,31 +96,33 @@ public class ManagerController {
         model.addObject("repartiData", repartiData);
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
-        
+
         // ricavo dati istogramma
         ArrayList<ChartData> istogramma = new ArrayList<>();
-        String[] mesi = {"", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre" ,"Dicembre"};
+        String[] mesi = {"", "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"};
         double max = 0;
-        for(int i=1; i<=12; i++){
+        for (int i = 1; i <= 12; i++) {
             double costo = ncs.findCostoAnnoPerMese(i, anno);
-            if(costo>max) max=costo;
+            if (costo > max) {
+                max = costo;
+            }
             istogramma.add(new ChartData(mesi[i], costo));
         }
         model.addObject("istogramma", istogramma);
         model.addObject("max", max);
-        
+
         model.setViewName("indexManager");
         return model;
     }
-    
+
     @RequestMapping(value = "/creaCategoria", method = RequestMethod.GET)
     public ModelAndView creaCategoria() {
         ModelAndView model = new ModelAndView();
-        model.addObject("segnalazione", "se");
+        model.addObject("segnalazione", true);
         model.setViewName("indexManager");
         return model;
     }
-    
+
     @RequestMapping(value = "/addCat", params = {"desc"}, method = RequestMethod.GET)
     public ModelAndView aggiungiCategoria(@RequestParam("desc") String desc) {
         ModelAndView model = new ModelAndView();
@@ -128,15 +132,15 @@ public class ManagerController {
         model.setViewName("redirect");
         return model;
     }
-    
-        @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
     public ModelAndView visualizzaDati() {
         ModelAndView model = new ModelAndView();
         model.addObject("datiPersonali", MainController.getLoggedDip());
         model.setViewName("indexCQualita");
         return model;
     }
-    
+
     @RequestMapping(value = {"/cambiaPassword"}, method = RequestMethod.GET)
     public ModelAndView cambiaPassword() {
         ModelAndView model = new ModelAndView();
@@ -145,19 +149,19 @@ public class ManagerController {
         model.setViewName("indexCQualita");
         return model;
     }
-    
+
     @RequestMapping(value = {"/saveNewPasswd"}, params = {"psswd1"}, method = RequestMethod.POST)
     public ModelAndView savePassword(@RequestParam("psswd1") String psswd) {
         ModelAndView model = new ModelAndView();
         //Controllo e cambio della password
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hpsswd = passwordEncoder.encode(psswd);       
-        User u = MainController.getLoggedDip().getUser();       
+        String hpsswd = passwordEncoder.encode(psswd);
+        User u = MainController.getLoggedDip().getUser();
         u.setPassword(hpsswd);
-        us.updateUser(u);    
+        us.updateUser(u);
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
         return model;
     }
-    
+
 }

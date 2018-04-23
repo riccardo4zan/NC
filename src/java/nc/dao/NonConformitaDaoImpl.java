@@ -113,25 +113,28 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
 
     @Override
     public List<NonConformita> findAllAperte() {
-        Criteria criteria = getSession().createCriteria(NonConformita.class);
-        criteria.add(Restrictions.isNull("dataChiusura"));
-        criteria.add(Restrictions.isNull("azioniCorrettive"));
-        return (List<NonConformita>) criteria.list();
+        String sql = "SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND isnull(AzioniCorrettive) ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        return new ArrayList<>(query.list());
     }
+
 
     @Override
     public List<NonConformita> findAllInElaborazione() {
-        Criteria criteria = getSession().createCriteria(NonConformita.class);
-        criteria.add(Restrictions.isNull("dataChiusura"));
-        criteria.add(Restrictions.isNotNull("azioniCorrettive"));
-        return (List<NonConformita>) criteria.list();
+        String sql = "SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND AzioniCorrettive IS NOT NULL ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        return new ArrayList<>(query.list());
     }
+
 
     @Override
     public List<NonConformita> findAllChiuse() {
-        Criteria criteria = getSession().createCriteria(NonConformita.class);
-        criteria.add(Restrictions.isNotNull("dataChiusura"));
-        return (List<NonConformita>) criteria.list();
+        String sql = "SELECT * FROM NonConformita WHERE DataChiusura IS NOT NULL ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        return new ArrayList<>(query.list());
     }
 
     @Override
@@ -150,9 +153,9 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         }
         return sum;
     }
-    
+
     @Override
-    public int findNumeroNCAnno(int anno){
+    public int findNumeroNCAnno(int anno) {
         Query query = getSession().createSQLQuery(
                 "SELECT count(*) FROM NonConformita WHERE year(DataChiusura) = :anno OR isnull(DataChiusura)")
                 .setParameter("anno", anno);

@@ -120,7 +120,7 @@ public class ManagerController {
     }
     
     @RequestMapping(value = "/addCat", params = {"desc"}, method = RequestMethod.GET)
-    public ModelAndView creaCategoria(@RequestParam("desc") String desc) {
+    public ModelAndView aggiungiCategoria(@RequestParam("desc") String desc) {
         ModelAndView model = new ModelAndView();
         Categoria nuovaC = new Categoria(desc);
         cs.saveCategoria(nuovaC);

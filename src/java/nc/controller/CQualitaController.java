@@ -99,7 +99,6 @@ public class CQualitaController {
         return model;
     }
 
-    // aggiunta nc
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView apriNC() {
         ModelAndView model = new ModelAndView();
@@ -299,6 +298,24 @@ public class CQualitaController {
         User u = MainController.getLoggedDip().getUser();
         u.setPassword(hpsswd);
         us.updateUser(u);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/aggiungiTipoNC"}, method = RequestMethod.GET)
+    public ModelAndView aggiungiTipoNC() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("aggiungiTipo", true);
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/addTipo"}, params = {"nome", "descrizione"}, method = RequestMethod.POST)
+    public ModelAndView addTipoNC(@RequestParam("nome") String nome,@RequestParam("descrizione") String descrizione) {
+        ModelAndView model = new ModelAndView();
+        Tipo nt = new Tipo(nome,descrizione);
+        ts.saveTipo(nt);
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
         return model;

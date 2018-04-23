@@ -14,7 +14,7 @@
             <th>Data inizio</th>
             <th>Data fine</th>
             <th>Costo </th>
-            <th>Visualizza</th>
+          <th></th>
         </tr>
     </thead>
     <tbody>

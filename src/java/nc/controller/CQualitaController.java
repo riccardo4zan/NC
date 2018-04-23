@@ -59,6 +59,8 @@ public class CQualitaController {
     @Autowired
     private UserService us;
 
+    //ncaperte chiuse elaborazione
+    
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
@@ -91,6 +93,8 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
+    
+    // aggiunta nc
     
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView apriNC() {
@@ -152,17 +156,46 @@ public class CQualitaController {
         return model;
     }
     
-    // metodo modfica nc passare codice nc 
-     @RequestMapping(value = {"/editNC"}, method = RequestMethod.GET)
-    public String editNC() {
+    //  modfica nc 
+    
+     @RequestMapping(value = {"/editNC"},params={"id","desc","azioniContenitive"}, method = RequestMethod.GET)
+    public String editNC(@RequestParam("id") int id,@RequestParam("desc") String desc,@RequestParam("azioniContenitive") String AC) {
         ModelAndView model = new ModelAndView();
-        //codice modifica nc
-        model.addObject("NCAperte", ncs.findAllAperte());
+        model.addObject("editNC", id);
+        model.addObject("desc", desc);
+        model.addObject("azioniContenitive", AC);
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+        return "indexCQualita";
+    }
+    
+     @RequestMapping(value = {"/modNC"},params={"codNC","desc","azioniContenimento","azioniCorrettive","azioniPreventive","dataF","costo"}, method = RequestMethod.POST)
+        public String modNC(@RequestParam("codNC") int id,@RequestParam("desc") String desc,@RequestParam("azioniContenimeto") String Acon,@RequestParam("azioniCorrettive") String Acor,
+                            @RequestParam("azioniPreventive") String Aprev,@RequestParam("dataF") String dataF,@RequestParam("costo") String costo) {
+        ModelAndView model = new ModelAndView();
+        NonConformita nc=ncs.findByCodice(id);
+        nc.setDescrizione(desc);
+        nc.setAzioniContenimento(Acon);
+        nc.setAzioniCorrettive(Acor);
+        nc.setAzioniPreventive(Aprev);
+        nc.setDataChiusura(dataF);
+        nc.setCosto(Integer.parseInt(costo));
+        ncs.updateNonConformita(nc);
+        model.addObject("NCElaborazione",ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
 
+    //metodo per vedere nc passare codice    
+           @RequestMapping(value = {"/visualizzaNC"},params={"id"}, method = RequestMethod.GET)
+    public String visualizzaNC(@RequestParam("id") int id) {
+        ModelAndView model = new ModelAndView();
+        model.addObject("NCChiesta",ncs.findByCodice(id));
+        //codice da fare
+        return "indexCQualita";
+    }
 
+//teamop
+        
     @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
     public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
         ModelAndView model = new ModelAndView();
@@ -178,6 +211,9 @@ public class CQualitaController {
         return model;
     }
 
+    
+    //elaborazioni
+    
      @RequestMapping(value = {"/newElaborazione"},params={"id"}, method = RequestMethod.GET)
     public String newElaborazione(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
@@ -190,9 +226,8 @@ public class CQualitaController {
     
     
     
-    //finire metodo aggiunta Elaborazioni cazzo mollo
     
-    @RequestMapping(value = {"/addElaborazione"},params={"desc","dataInizio","codNC","dipendente"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addElaborazione"},params={"desc","dataInizio","codNC","dipendente"}, method = RequestMethod.POST)
     public String addElaborazione(@RequestParam("desc") String desc,@RequestParam("dataInizio") String dataI,@RequestParam("codNC") int id,@RequestParam("dipendente") int matr) {
         ModelAndView model = new ModelAndView();
         Dipendente dip=ds.findByMatricola(matr);
@@ -203,6 +238,8 @@ public class CQualitaController {
         return "indexCQualita";
     }
 
+    
+   //segnalazioni
     
     
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
@@ -229,6 +266,10 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
+    
+    
+    //dati personali 
+    
     
     @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
     public ModelAndView visualizzaDati() {

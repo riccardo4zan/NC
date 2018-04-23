@@ -12,7 +12,7 @@
             <th>Azioni di contenimento</th>
             <th>Data inizio</th>
             <th>Tipo </th>
-            <th>Modifica</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
                 <td> ${nc.azioniContenimento} </td>
                 <td> ${nc.dataApertura}</td>
                 <td> ${nc.tipo.nome}</td>
-                <td><a href="/cq/editNC?id=${nc.codice}">Modifica</a></td>
+                <td><a href="/cq/editNC?id=${nc.codice}&desc=${nc.descrizione}&azioniContenitive=${nc.azioniContenimento}">Modifica</a></td>
             </tr>
         </c:forEach>
     </tbody>

@@ -9,32 +9,35 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Gestione NC</title>
+        <link href="../resources/css/main.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <link href="/resources/css/main.css" rel="stylesheet" type="text/css"/>  
-        <!-- Custom styles for this template -->
-        <link href="/resources/css/navbar.css" rel="stylesheet">
     <body>
         <div class="contenuto">
             <!-- Static navbar -->
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="/cq/">Home</a></li>
-                            <li><a href="/creaCategoria">Aggiungi categoria di prodotto</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${matricola}<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">I miei dati</a></li>
-                                    <li><a href="/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
+            
+            <nav class="custom navbar navbar-expand-lg navbar-dark">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/cq/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/creaCategoria">Aggiungi categoria di prodotto</a></a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav destra">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Impostazioni
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">I miei dati</a>
+                                <a class="dropdown-item" href="/logout">LogOut</a>
+                            </div>
+                        </li>
+                    </div>
+                </div>
             </nav>
 
             <c:if test="${not empty istogramma}">

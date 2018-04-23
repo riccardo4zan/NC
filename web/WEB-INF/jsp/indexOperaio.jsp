@@ -63,8 +63,9 @@
                     <c:if test="${not empty segnalazione}">
                         <jsp:include page="/WEB-INF/jsp/operaio/segnalazione.jsp" />
                     </c:if>
-                    <c:if test="${not empty idElaborazione}">
-
+                    
+                    <c:if test="${not empty elaborazione}">
+                        <c:import url="/WEB-INF/jsp/operaio/editElaborazione.jsp"/>
                     </c:if> 
 
                     <!-- Visualizzazione dei dati personali e cambio della password --> 

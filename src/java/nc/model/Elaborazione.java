@@ -1,7 +1,6 @@
 package nc.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,25 +10,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author riccardo
- */
 @Entity
 @Table(name="Elaborazioni")
 public class Elaborazione implements Serializable {
+    
     @Id @GeneratedValue
     @Column(name="Codice")
     private int codice;
+    
     @Column(name="Descrizione")
     private String descrizione;
+    
     @Column(name="DataInizio")
     private String dataInizio;
+    
     @Column(name="DataFine")
     private String dataFine;
+    
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MatricolaDipendente")
     private Dipendente dipendente;
+    
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="CodiceNC")
     private NonConformita nonConformita;

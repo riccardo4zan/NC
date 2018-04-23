@@ -23,7 +23,7 @@
                             <a class="nav-link" href="/cq/">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/creaCategoria">Aggiungi categoria di prodotto</a></a>
+                            <a class="nav-link" href="/cq/creaCategoria">Aggiungi categoria di prodotto</a></a>
                         </li>
                     </ul>
                     <div class="navbar-nav destra">

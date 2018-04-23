@@ -2,22 +2,41 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <h2> Elaborazione numero: ${codice} </h2>
-<form:form name="editElaborazione" modelAttribute="elaborazione" action="/editElaborazione" method="post">
+<form action="/cq/modNC" method="POST">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <input type="hidden" class="form-control"  name="codice" value="${codice}">
+
     <div class="form-group">
-        <form:label path="descrizione"> Descrizione </form:label>>
-        <form:input type="text" path="descrizione" class="form-control" name="descrizione"> ${descrizione} />
+        <label>Descrizione</label>
+        <textarea class="form-control" name="desc" rows="3">${desc}</textarea>
     </div>
+
     <div class="form-group">
-        <form:label path="dataInizio"> Data Inizio </form:label>>
-        <form:input type="date" path="dataInizio" class="form-control" readonly="true" value="${dataInizio}" name="dataInizio"/>
+        <label>Azioni contenitive</label>
+        <textarea class="form-control" name="azioniContenimento" rows="3">${azioniContenitive}</textarea>
     </div>
+
     <div class="form-group">
-        <form:label path="dataFine"> Data Fine </form:label>>
-        <form:input type="date"  path="dataFine" class="form-control"  placeholder="data fine" name="dataFine"/>
+        <label>Azioni correttive</label>
+        <textarea class="form-control" name="azioniCorrettive" rows="3"></textarea>
     </div>
+
     <div class="form-group">
-        <form:label path="nonConformita"> Non conformita  </form:label>
-        <form:input type="text"  path="nonConformita" class="form-control" readonly="true" value="${nonConformita.getCodice()}" name="nonConformita"/>
+        <label>Azioni preventive</label>
+        <textarea class="form-control" name="azioniPreventive" rows="3"></textarea>
     </div>
-   <button type="submit" class="btn btn-primary">Salva</button>
-</form:form>
+
+    <div class="col-lg-4 col-md-4 form-group">
+        <label>Data fine</label>
+        <input type="date" class="form-control"   name="dataF"/>
+    </div>
+
+    <!-- fare controllo inserimento -->
+
+    <div class="col-lg-4 col-md-4 form-group">
+        <label>Costo</label>
+        <input type="text" class="form-control"  name="costo"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+</form>

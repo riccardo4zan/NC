@@ -201,7 +201,6 @@ public class CQualitaController {
     public ModelAndView visualizzaNC(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         model.addObject("NCChiesta", ncs.findByCodice(id));
-        //codice da fare
         model.setViewName("indexCQualita");
         return model;
     }

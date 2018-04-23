@@ -22,7 +22,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="/cq/">Home</a></li>
-                            <li><a href="/creaCategoria">Aggiungi categoria di prodotto</a>
+                            <li><a href="/creaCategoria">Aggiungi categoria di prodotto</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">

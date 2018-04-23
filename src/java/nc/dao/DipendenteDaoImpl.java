@@ -42,5 +42,21 @@ public class DipendenteDaoImpl implements DipendenteDao{
         query.addEntity(Dipendente.class);
         return new ArrayList<>(query.list());
     }
+    
+
+    public List<Dipendente> findAllOperai() {
+        String sql = "SELECT * FROM Dipendenti WHERE ruolo=:operaio GROUP BY Reparto";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(Dipendente.class);
+        return new ArrayList<>(query.list());
+    }
 
 }
+
+
+SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US 
+WHERE D.Username=U.username AND U.username= US.username AND US.role="ROLE_OPERAIO" GROUP BY D.Reparto
+
+
+create view operai (Matricola,Nome,Cognome,Reparto) as SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US 
+WHERE D.Username=U.username AND U.username= US.username AND US.role="ROLE_OPERAIO"

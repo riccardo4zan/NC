@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<!-- vedere se ci sono nc aperte   -->
-<c:if test="${NCAperte}"></c:if>
+<!-- vedere se ci sono nc in elaborazione   -->
+<c:if test="${not empty Vuoto}">${Vuoto}</c:if>
     
 <!-- Tabella NC -->
 <table class="table">
@@ -14,11 +14,10 @@
             <th>Azioni correttive</th>
             <th>Tipo </th>
             <th>Modifica</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-        <c:forEach items="${NCAperte}" var="nc">
+        <c:forEach items="${NCElaborazione}" var="nc">
             <tr>
                 <td> ${nc.codice} </td>
                 <td> ${nc.descrizione}</td>

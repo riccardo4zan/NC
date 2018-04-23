@@ -11,4 +11,5 @@ public interface PezzoDao {
     Pezzo findByCodice(int codice);
     void savePezzo (Pezzo toSave);
     List<Pezzo> findAll();
+    int findMaxID();
 }

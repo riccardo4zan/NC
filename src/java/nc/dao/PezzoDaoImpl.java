@@ -5,6 +5,7 @@ import java.util.List;
 import nc.model.Pezzo;
 import nc.model.Reparto;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +42,14 @@ public class PezzoDaoImpl implements PezzoDao {
         SQLQuery query = getSession().createSQLQuery(sql);
         query.addEntity(Pezzo.class);
         return new ArrayList<>(query.list());
+    }
+    
+     @Override
+    public int findMaxID(){
+        Query query = getSession().createSQLQuery("SELECT max(Codice) FROM Pezzi");
+        Object res = query.uniqueResult();
+        if(res == null) return -1;
+        else return (Integer) res;
     }
 
 }

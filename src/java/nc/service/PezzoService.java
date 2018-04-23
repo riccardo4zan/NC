@@ -12,4 +12,5 @@ public interface PezzoService {
     void savePezzo (Pezzo toSave);
     void updatePezzo(Pezzo toUpdate);
     List<Pezzo> findAll();
+    int findMaxID();
 }

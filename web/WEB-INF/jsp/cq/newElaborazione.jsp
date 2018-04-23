@@ -2,23 +2,23 @@
 <br></br>
 <form action="/cq/addElaborazione" method="POST">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+    <input type="hidden" class="form-control" name="codNC" value="${ncPassata}">
     
     <div class="form-group">
         <label>Descrizione</label>
         <textarea class="form-control" name="desc" rows="3"></textarea>
     </div>
-    
-      <div class="col-lg-4 col-md-4 form-group">
+
+    <div class="col-lg-4 col-md-4 form-group">
         <label>Data Inizio</label>
         <input type="date" class="form-control"  name="dataInizio"/>
     </div>
-    
-       <div class="col-lg-4 col-md-4 form-group">
-        <label>Codice non conformita</label>
-        <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">${ncPassata}
-    </div>
-    
-     <div class="col-lg-4 col-md-4 form-group">
+
+    <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">
+
+
+    <div class="col-lg-4 col-md-4 form-group">
         <label>Dipendente</label>
         <select class="form-control" name="dipendente">
             <option value=""></option>
@@ -29,4 +29,3 @@
     </div>
     <button type="submit" class="btn btn-primary">Assegna</button>
 </form>
-    

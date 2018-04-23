@@ -46,7 +46,7 @@ public class DipendenteDaoImpl implements DipendenteDao {
 
     public List<Dipendente> findAllOperaiReparto(int reparto) {
         Query query = getSession().createSQLQuery(
-                "SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US WHERE D.Username=U.username AND U.username= US.username AND US.role=:ROLE_OPERAIO AND D.Reparto=:nome_reparto") 
+                "SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US WHERE D.Username=U.username AND U.username= US.username AND US.role='ROLE_OPERAIO' AND D.Reparto=:nome_reparto") 
         .addEntity(Dipendente.class)
         .setParameter("nome_reparto", reparto);
 

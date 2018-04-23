@@ -76,6 +76,13 @@
                         <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
                     </c:if>
 
+                     <c:if test="${not empty editNC}">
+                        <c:set var="editNC" value="${editNC}" scope="request"/>
+                        <c:set var="desc" value="${desc}" scope="request"/>
+                        <c:set var="azioniContenitive" value="${azioniContenitive}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/editNC.jsp"/>
+                    </c:if>
+                    
                     <c:if test="${not empty apriElaborazione}">
                         <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
                         <c:set var="ncPassata" value="${ncPassata}" scope="request"/>

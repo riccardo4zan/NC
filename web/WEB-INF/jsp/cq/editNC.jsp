@@ -3,7 +3,7 @@
 <form action="/cq/modNC" method="POST">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     
-    <input type="hidden" class="form-control"  name="codNC" value="${editNC}">
+    <input type="hidden" class="form-control"  name="codNC" value="${editNC}"/>
     
     <div class="form-group">
         <label>Descrizione</label>

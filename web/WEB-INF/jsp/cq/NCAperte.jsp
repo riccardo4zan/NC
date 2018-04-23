@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- vedere se ci sono nc aperte   -->
-<c:if test="${NCAperte}"></c:if>
+<c:if test="${not empty Vuoto}">${Vuoto}</c:if>
     
     <!-- Tabella NC -->
 <table class="table">
@@ -13,7 +13,6 @@
             <th>Data inizio</th>
             <th>Tipo </th>
             <th>Modifica</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>

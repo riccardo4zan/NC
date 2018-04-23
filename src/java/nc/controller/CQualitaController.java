@@ -1,5 +1,6 @@
 package nc.controller;
 
+import java.util.List;
 import nc.model.Cliente;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
@@ -49,7 +50,9 @@ public class CQualitaController {
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
     public String index() {
         ModelAndView model = new ModelAndView();
-        model.addObject("NCAperte", ncs.findAllAperte());
+        List<NonConformita> nc=ncs.findAllAperte();
+        if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità aperte");
+        model.addObject("NCAperte",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
@@ -57,7 +60,9 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCElaborazione"}, method = RequestMethod.GET)
     public String NCElaborazione() {
         ModelAndView model = new ModelAndView();
-        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        List<NonConformita> nc=ncs.findAllInElaborazione();
+        if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità in elaborazione");
+        model.addObject("NCElaborazione",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }
@@ -65,7 +70,9 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCChiuse"}, method = RequestMethod.GET)
     public String NCChiuse() {
         ModelAndView model = new ModelAndView();
-        model.addObject("NCChiuse", ncs.findAllChiuse());
+        List<NonConformita> nc=ncs.findAllChiuse();
+        if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità chiuse");
+        model.addObject("NCChiuse",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }

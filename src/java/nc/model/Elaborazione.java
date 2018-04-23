@@ -24,9 +24,9 @@ public class Elaborazione implements Serializable {
     @Column(name="Descrizione")
     private String descrizione;
     @Column(name="DataInizio")
-    private Date dataInizio;
+    private String dataInizio;
     @Column(name="DataFine")
-    private Date dataFine;
+    private String dataFine;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MatricolaDipendente")
     private Dipendente dipendente;
@@ -37,6 +37,13 @@ public class Elaborazione implements Serializable {
     public Elaborazione() {
     }
 
+    public Elaborazione(String descrizione, String dataInizio, Dipendente dipendente, NonConformita nonConformita) {
+        this.descrizione = descrizione;
+        this.dataInizio = dataInizio;
+        this.dipendente = dipendente;
+        this.nonConformita = nonConformita;
+    }
+
     public int getCodice() {
         return codice;
     }
@@ -45,11 +52,11 @@ public class Elaborazione implements Serializable {
         return descrizione;
     }
 
-    public Date getDataInizio() {
+    public String getDataInizio() {
         return dataInizio;
     }
 
-    public Date getDataFine() {
+    public String getDataFine() {
         return dataFine;
     }
 
@@ -69,11 +76,11 @@ public class Elaborazione implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public void setDataInizio(Date dataInizio) {
+    public void setDataInizio(String dataInizio) {
         this.dataInizio = dataInizio;
     }
 
-    public void setDataFine(Date dataFine) {
+    public void setDataFine(String dataFine) {
         this.dataFine = dataFine;
     }
 

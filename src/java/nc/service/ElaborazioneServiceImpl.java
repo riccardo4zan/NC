@@ -32,9 +32,11 @@ public class ElaborazioneServiceImpl implements ElaborazioneService{
     @Override
     public void updateElaborazione(Elaborazione toUpdate) {
         Elaborazione entity = dao.findByCodice(toUpdate.getCodice());
+        String dataFine = toUpdate.getDataFine();
+        if(dataFine.equals("")) dataFine=null;
         if(entity!=null){
             entity.setDataInizio(toUpdate.getDataInizio());
-            entity.setDataFine(toUpdate.getDataFine());
+            entity.setDataFine(dataFine);
             entity.setDescrizione(toUpdate.getDescrizione());
             entity.setDipendente(toUpdate.getDipendente());
             entity.setNonConformita(toUpdate.getNonConformita());

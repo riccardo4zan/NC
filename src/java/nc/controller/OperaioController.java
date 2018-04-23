@@ -159,5 +159,14 @@ public class OperaioController {
         model.setViewName("/operaio/pdfBuilder");
         return model;
     }
+    
+    @RequestMapping(value = {"/modEla"}, method = RequestMethod.POST)
+    public ModelAndView modificaElaborazione(@ModelAttribute("elaborazione") Elaborazione e) {
+        ModelAndView model = new ModelAndView();
+        es.updateElaborazione(e);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
+        return model;
+    }
 
 }

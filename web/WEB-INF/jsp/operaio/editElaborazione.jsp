@@ -3,9 +3,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h2> Elaborazione numero: ${elaborazione.codice} </h2>
-<form:form action="/cq/modNC" method="POST" modelAttribute="elaborazione">
+<form:form action="/op/modEla" method="POST" modelAttribute="elaborazione">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <form:input type="hidden" path="codice" id="id"/>
+    <form:input type="hidden" path="dipendente.matricola" />
+    <form:input type="hidden" path="nonConformita.codice" />
 
     <div class="form-group">
         <label>Descrizione</label>

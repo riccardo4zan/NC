@@ -44,7 +44,6 @@
     <div class="col-lg-4 col-md-4 form-group">
         <label>Tipo</label>
         <select class="form-control" name="tipo">
-            <option value="">Nullo</option>
             <c:forEach items="${Tipi}" var="tipo">
                 <option value="${tipo.nome}">${tipo.nome}</option>
             </c:forEach>
@@ -54,7 +53,7 @@
     <div class="col-lg-4 col-md-4 form-group">
         <label>Reparto</label>
         <select class="form-control" name="reparto" >
-            <option value="">Nullo</option>
+            <option value=""></option>
             <c:forEach items="${Reparti}" var="reparto">
                 <option value="${reparto.id}">${reparto.nome}</option>
             </c:forEach>
@@ -65,7 +64,7 @@
     <div class="col-lg-4 col-md-4 form-group">
         <label>Fornitore</label>
         <select class="form-control" name="fornitore" >
-            <option value="">Nullo</option>
+            <option value=""></option>
             <c:forEach items="${Fornitori}" var="fornitore">
                 <option value="${fornitore.piva}">${fornitore.nome}</option>
             </c:forEach>
@@ -75,7 +74,7 @@
     <div class="col-lg-4 col-md-4 form-group">
         <label>Cliente</label>
         <select class="form-control" name="cliente" >
-            <option value="">Nullo</option>
+            <option value=""></option>
             <c:forEach items="${Clienti}" var="clienti">
                 <option value="${clienti.id}">${clienti.nome}</option>
             </c:forEach>

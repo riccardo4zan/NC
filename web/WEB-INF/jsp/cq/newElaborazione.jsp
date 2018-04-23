@@ -13,6 +13,11 @@
         <input type="date" class="form-control"  name="dataInizio"/>
     </div>
     
+       <div class="col-lg-4 col-md-4 form-group">
+        <label>Codice non conformita</label>
+        <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">${ncPassata}
+    </div>
+    
      <div class="col-lg-4 col-md-4 form-group">
         <label>Dipendente</label>
         <select class="form-control" name="dipendente">

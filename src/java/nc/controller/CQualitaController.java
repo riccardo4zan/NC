@@ -3,6 +3,7 @@ package nc.controller;
 import java.util.List;
 import nc.model.Cliente;
 import nc.model.Dipendente;
+import nc.model.Elaborazione;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
@@ -10,6 +11,7 @@ import nc.model.Tipo;
 import nc.model.User;
 import nc.service.ClienteService;
 import nc.service.DipendenteService;
+import nc.service.ElaborazioneService;
 import nc.service.FornitoreService;
 import nc.service.NonConformitaService;
 import nc.service.RepartoService;
@@ -50,6 +52,9 @@ public class CQualitaController {
 
     @Autowired
     private DipendenteService ds;
+    
+    @Autowired
+    private ElaborazioneService es;
     
     @Autowired
     private UserService us;
@@ -187,11 +192,13 @@ public class CQualitaController {
     
     //finire metodo aggiunta Elaborazioni cazzo mollo
     
-    @RequestMapping(value = {"/addElaborazione"},params={"desc","dataInizio","dipendente"}, method = RequestMethod.GET)
-    public String addElaborazione(@RequestParam("desc") int id) {
+    @RequestMapping(value = {"/addElaborazione"},params={"desc","dataInizio","codNC","dipendente"}, method = RequestMethod.GET)
+    public String addElaborazione(@RequestParam("desc") String desc,@RequestParam("dataInizio") String dataI,@RequestParam("codNC") int id,@RequestParam("dipendente") int matr) {
         ModelAndView model = new ModelAndView();
+        Dipendente dip=ds.findByMatricola(matr);
         NonConformita nc=ncs.findByCodice(id);
-        model.addObject("apriElaborazione",ds.findAllOperaiReparto(nc.getReparto().getId()));
+        es.saveElaborazione(new Elaborazione(desc,dataI,dip,nc));
+        model.addObject("NCElaborazione",ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         return "indexCQualita";
     }

@@ -32,8 +32,8 @@ public class CategoriaServiceImpl implements CategoriaService{
     public void updateCategoria(Categoria toUpdate) {
         Categoria entity = dao.findByCodice(toUpdate.getCodice());
         if(entity!=null){
-            entity.setDescrizione(entity.getDescrizione());
-            entity.setPezzi(entity.getPezzi());
+            entity.setDescrizione(toUpdate.getDescrizione());
+            entity.setPezzi(toUpdate.getPezzi());
         }
     }
 

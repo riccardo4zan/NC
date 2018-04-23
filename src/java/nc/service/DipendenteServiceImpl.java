@@ -32,13 +32,13 @@ public class DipendenteServiceImpl implements DipendenteService{
     public void updateDipendente(Dipendente toUpdate) {
         Dipendente entity = dao.findByMatricola(toUpdate.getMatricola());
         if(entity!=null){
-            entity.setAperte(entity.getAperte());
-            entity.setCognome(entity.getCognome());
-            entity.setElaborazioniEffettuate(entity.getElaborazioniEffettuate());
-            entity.setNome(entity.getNome());
-            entity.setParteTeam(entity.getParteTeam());
-            entity.setReparto(entity.getReparto());
-            entity.setSegnalazioni(entity.getSegnalazioni());
+            entity.setAperte(toUpdate.getAperte());
+            entity.setCognome(toUpdate.getCognome());
+            entity.setElaborazioniEffettuate(toUpdate.getElaborazioniEffettuate());
+            entity.setNome(toUpdate.getNome());
+            entity.setParteTeam(toUpdate.getParteTeam());
+            entity.setReparto(toUpdate.getReparto());
+            entity.setSegnalazioni(toUpdate.getSegnalazioni());
         }
     }
 

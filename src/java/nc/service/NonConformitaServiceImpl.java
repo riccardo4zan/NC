@@ -31,23 +31,23 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public void updateNonConformita(NonConformita toUpdate) {
         NonConformita entity = dao.findByCodice(toUpdate.getCodice());
         if(entity!=null){
-            entity.setAzioniContenimento(entity.getAzioniContenimento());
-            entity.setAzioniCorrettive(entity.getAzioniCorrettive());
-            entity.setAzioniPreventive(entity.getAzioniPreventive());
-            entity.setCause(entity.getCause());
-            entity.setCliente(entity.getCliente());
-            entity.setCosto(entity.getCosto());
-            entity.setDataApertura(entity.getDataApertura());
-            entity.setDataChiusura(entity.getDataChiusura());
-            entity.setDescrizione(entity.getDescrizione());
-            entity.setDipendente(entity.getDipendente());
-            entity.setElaborazioni(entity.getElaborazioni());
-            entity.setFornitore(entity.getFornitore());
-            entity.setGravita(entity.getGravita());
-            entity.setPezziCorrelati(entity.getPezziCorrelati());
-            entity.setReparto(entity.getReparto());
-            entity.setTeam(entity.getTeam());
-            entity.setTipo(entity.getTipo());
+            entity.setAzioniContenimento(toUpdate.getAzioniContenimento());
+            entity.setAzioniCorrettive(toUpdate.getAzioniCorrettive());
+            entity.setAzioniPreventive(toUpdate.getAzioniPreventive());
+            entity.setCause(toUpdate.getCause());
+            entity.setCliente(toUpdate.getCliente());
+            entity.setCosto(toUpdate.getCosto());
+            entity.setDataApertura(toUpdate.getDataApertura());
+            entity.setDataChiusura(toUpdate.getDataChiusura());
+            entity.setDescrizione(toUpdate.getDescrizione());
+            entity.setDipendente(toUpdate.getDipendente());
+            entity.setElaborazioni(toUpdate.getElaborazioni());
+            entity.setFornitore(toUpdate.getFornitore());
+            entity.setGravita(toUpdate.getGravita());
+            entity.setPezziCorrelati(toUpdate.getPezziCorrelati());
+            entity.setReparto(toUpdate.getReparto());
+            entity.setTeam(toUpdate.getTeam());
+            entity.setTipo(toUpdate.getTipo());
         }
     }
 

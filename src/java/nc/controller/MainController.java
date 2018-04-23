@@ -47,27 +47,6 @@ public class MainController {
         model.setViewName("login");
         return model;
     }
-    
-    @RequestMapping(value = "/showChangePsswd", method = RequestMethod.POST)  
-    public ModelAndView showChangePassword() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("changePassword");
-        return model;
-    }
-
-    @RequestMapping(value = "/ChangePsswd", params={"psswd"}, method = RequestMethod.POST)  
-    public ModelAndView showChangePassword(@RequestParam("psswd")String password) {
-        ModelAndView model = new ModelAndView();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	String hashedPassword = passwordEncoder.encode(password);
-        //Cambio della password dell'user associato al dipendente associato
-        User usr = loggedDip.getUser();
-        usr.setPassword(hashedPassword);
-        us.updateUser(usr);
-        model.addObject("ruolo", loggedDip.getUser().getUserRole().iterator().next().getRole());
-        model.setViewName("redirect");
-        return model;
-    }
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {

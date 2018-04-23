@@ -15,7 +15,7 @@
     <body>
         <div class="contenuto">
             <!-- Static navbar -->
-            
+
             <nav class="custom navbar navbar-expand-lg navbar-dark">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
@@ -45,6 +45,15 @@
             </c:if>
             <c:if test="${not empty segnalazione}">
                 <c:import url="/WEB-INF/jsp/manager/creaCategoria.jsp" />
+            </c:if>
+
+            <!-- Visualizzazione dei dati personali e cambio della password --> 
+            <c:if test="${not empty datiPersonali}">
+                <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
+                <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
+            </c:if>
+            <c:if test="${changePassword}">
+                <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
             </c:if>
 
         </div> <!-- /container -->

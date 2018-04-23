@@ -1,11 +1,14 @@
 package nc.controller;
 
 import nc.model.NonConformita;
+import nc.model.User;
 import nc.service.DipendenteService;
 import nc.service.NonConformitaService;
 import nc.service.TipoService;
+import nc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,9 @@ public class RQualitaController {
 
     @Autowired
     private DipendenteService ds;
+
+    @Autowired
+    private UserService us;
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
@@ -87,4 +93,34 @@ public class RQualitaController {
     /**
      * MANCA METODO PER IL TEAM OPERATIVO
      */
+    @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
+    public ModelAndView visualizzaDati() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("datiPersonali", MainController.getLoggedDip());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+
+    @RequestMapping(value = {"/cambiaPassword"}, method = RequestMethod.GET)
+    public ModelAndView cambiaPassword() {
+        ModelAndView model = new ModelAndView();
+        //Passo un valore true per permettere l'inclusione del frammento di codice relativo al cambio della password
+        model.addObject("changePassword", true);
+        model.setViewName("indexCQualita");
+        return model;
+    }
+
+    @RequestMapping(value = {"/saveNewPasswd"}, params = {"psswd1"}, method = RequestMethod.POST)
+    public ModelAndView savePassword(@RequestParam("psswd1") String psswd) {
+        ModelAndView model = new ModelAndView();
+        //Controllo e cambio della password
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hpsswd = passwordEncoder.encode(psswd);
+        User u = MainController.getLoggedDip().getUser();
+        u.setPassword(hpsswd);
+        us.updateUser(u);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
+        return model;
+    }
 }

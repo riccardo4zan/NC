@@ -32,8 +32,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     public void updateUser(UserRole toUpdate) {
         UserRole entity = dao.findById(toUpdate.getUserRoleId());
         if (entity != null) {
-            entity.setRole(entity.getRole());
-            entity.setUser(entity.getUser());
+            entity.setRole(toUpdate.getRole());
+            entity.setUser(toUpdate.getUser());
         }
     }
 

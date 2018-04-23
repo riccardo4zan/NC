@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User toUpdate) {
         User entity = dao.findByUserName(toUpdate.getUsername());
         if (entity != null) {
-            entity.setDip(entity.getDip());
-            entity.setEnabled(entity.isEnabled());
-            entity.setPassword(entity.getPassword());
-            entity.setUserRole(entity.getUserRole());
+            entity.setDip(toUpdate.getDip());
+            entity.setEnabled(toUpdate.isEnabled());
+            entity.setPassword(toUpdate.getPassword());
+            entity.setUserRole(toUpdate.getUserRole());
         }
     }
 

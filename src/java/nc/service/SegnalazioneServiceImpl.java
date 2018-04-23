@@ -36,9 +36,9 @@ public class SegnalazioneServiceImpl implements SegnalazioneService {
     public void updateSegnalazione(Segnalazione toUpdate) {
         Segnalazione entity = dao.findByCodice(toUpdate.getCodice());
         if(entity!=null){
-            entity.setData(entity.getData());
-            entity.setDescrizione(entity.getDescrizione());
-            entity.setDipendente(entity.getDipendente());
+            entity.setData(toUpdate.getData());
+            entity.setDescrizione(toUpdate.getDescrizione());
+            entity.setDipendente(toUpdate.getDipendente());
         }
     }
 

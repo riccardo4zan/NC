@@ -32,8 +32,8 @@ public class TipoServiceImpl implements TipoService{
     public void updateTipo(Tipo toUpdate) {
         Tipo entity = dao.findByNome(toUpdate.getNome());
         if(entity!=null){
-            entity.setDescrizione(entity.getDescrizione());
-            entity.setListaNC(entity.getListaNC());
+            entity.setDescrizione(toUpdate.getDescrizione());
+            entity.setListaNC(toUpdate.getListaNC());
         }
     }
 

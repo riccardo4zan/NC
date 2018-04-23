@@ -7,6 +7,7 @@ import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
+import nc.model.User;
 import nc.service.ClienteService;
 import nc.service.DipendenteService;
 import nc.service.FornitoreService;
@@ -14,6 +15,7 @@ import nc.service.NonConformitaService;
 import nc.service.RepartoService;
 import nc.service.SegnalazioneService;
 import nc.service.TipoService;
+import nc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,6 +50,9 @@ public class CQualitaController {
 
     @Autowired
     private DipendenteService ds;
+    
+    @Autowired
+    private UserService us;
 
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
@@ -239,17 +244,13 @@ public class CQualitaController {
     public ModelAndView savePassword(@RequestParam("psswd1") String psswd) {
         ModelAndView model = new ModelAndView();
         //Controllo e cambio della password
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hpsswd = passwordEncoder.encode(psswd);
-            Dipendente dip = MainController.getLoggedDip();
-            dip.getUser().setPassword(hpsswd);
-            ds.saveDipendente(dip);
-        //Redirezione a HOME
-        List<NonConformita> nc=ncs.findAllAperte();
-        if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità aperte");
-        model.addObject("NCAperte",nc);
-        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
-        model.setViewName("indexCQualita");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hpsswd = passwordEncoder.encode(psswd);       
+        User u = MainController.getLoggedDip().getUser();       
+        u.setPassword(hpsswd);
+        us.updateUser(u);    
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
         return model;
     }
 

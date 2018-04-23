@@ -33,11 +33,11 @@ public class ElaborazioneServiceImpl implements ElaborazioneService{
     public void updateElaborazione(Elaborazione toUpdate) {
         Elaborazione entity = dao.findByCodice(toUpdate.getCodice());
         if(entity!=null){
-            entity.setDataInizio(entity.getDataInizio());
-            entity.setDataFine(entity.getDataFine());
-            entity.setDescrizione(entity.getDescrizione());
-            entity.setDipendente(entity.getDipendente());
-            entity.setNonConformita(entity.getNonConformita());
+            entity.setDataInizio(toUpdate.getDataInizio());
+            entity.setDataFine(toUpdate.getDataFine());
+            entity.setDescrizione(toUpdate.getDescrizione());
+            entity.setDipendente(toUpdate.getDipendente());
+            entity.setNonConformita(toUpdate.getNonConformita());
         }
     }
 

@@ -32,8 +32,8 @@ public class ClienteServiceImpl implements ClienteService {
     public void updateCliente(Cliente toUpdate) {
         Cliente entity = dao.findByPiva(toUpdate.getPiva());
         if(entity!=null){
-            entity.setNome(entity.getNome());
-            entity.setNonConformitaCorrelate(entity.getNonConformitaCorrelate());
+            entity.setNome(toUpdate.getNome());
+            entity.setNonConformitaCorrelate(toUpdate.getNonConformitaCorrelate());
         }
     }
 

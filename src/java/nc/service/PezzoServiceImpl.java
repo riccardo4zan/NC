@@ -32,8 +32,8 @@ public class PezzoServiceImpl implements PezzoService {
     public void updatePezzo(Pezzo toUpdate) {
         Pezzo entity = dao.findByCodice(toUpdate.getCodice());
         if(entity!=null){
-            entity.setCategoria(entity.getCategoria());
-            entity.setPezziNC(entity.getPezziNC());
+            entity.setCategoria(toUpdate.getCategoria());
+            entity.setPezziNC(toUpdate.getPezziNC());
         }        
     }
 

@@ -43,7 +43,7 @@
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
-                    
+
                     <c:if test="${not empty aperte}">
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp"/>
                     </c:if>
@@ -56,9 +56,18 @@
                         <jsp:include page="/WEB-INF/jsp/operaio/segnalazione.jsp" />
                     </c:if>
                     <c:if test="${not empty idElaborazione}">
-                        
+
                     </c:if> 
-                    
+
+                    <!-- Visualizzazione dei dati personali e cambio della password --> 
+                    <c:if test="${not empty datiPersonali}">
+                        <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
+                    </c:if>
+                    <c:if test="${changePassword}">
+                        <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
+                    </c:if>
+
                 </div>
                 <div class="col-lg-3 col-md-3"></div>
             </main>

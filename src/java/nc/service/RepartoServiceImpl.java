@@ -32,9 +32,9 @@ public class RepartoServiceImpl implements RepartoService {
     public void updateReparto(Reparto toUpdate) {
         Reparto entity = dao.findByID(toUpdate.getId());
         if(entity!=null){
-            entity.setDipendentiReparto(entity.getDipendentiReparto());
-            entity.setNome(entity.getNome());
-            entity.setNonConformitaCorrelate(entity.getNonConformitaCorrelate());
+            entity.setDipendentiReparto(toUpdate.getDipendentiReparto());
+            entity.setNome(toUpdate.getNome());
+            entity.setNonConformitaCorrelate(toUpdate.getNonConformitaCorrelate());
         }
     }
 

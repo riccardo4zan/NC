@@ -32,8 +32,8 @@ public class FornitoreServiceImpl implements FornitoreService {
     public void updateFornitore(Fornitore toUpdate) {
         Fornitore entity = dao.findByPiva(toUpdate.getPiva());
         if(entity!=null){
-            entity.setNome(entity.getNome());
-            entity.setNonConformitaCorrelate(entity.getNonConformitaCorrelate());
+            entity.setNome(toUpdate.getNome());
+            entity.setNonConformitaCorrelate(toUpdate.getNonConformitaCorrelate());
         }
     }
 

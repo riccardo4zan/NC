@@ -79,7 +79,7 @@ public class RQualitaController {
                 tipiData.add(new ChartData(tmp.getNome(), costo));
             }
         }
-        model.addObject("repartiData", repartiData);
+        
         model.addObject("tipiData", tipiData);
         model.addObject("fornitoriData", fornitoriData);
 
@@ -97,7 +97,8 @@ public class RQualitaController {
         model.addObject("istogramma", istogramma);
         model.addObject("max", max);
         */
-        model.setViewName("indexManager");
+        
+        model.setViewName("indexRQualita");
         return model;
     }
 
@@ -166,7 +167,7 @@ public class RQualitaController {
         ModelAndView model = new ModelAndView();
         //Passo un valore true per permettere l'inclusione del frammento di codice relativo al cambio della password
         model.addObject("changePassword", true);
-        model.setViewName("indexCQualita");
+        model.setViewName("indexRQualita");
         return model;
     }
 

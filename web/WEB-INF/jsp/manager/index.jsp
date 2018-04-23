@@ -37,7 +37,6 @@
                         <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                     </div>
                     <div class="media-body media-text-right">
-                        ${passato}
                         <h2 class="<c:if test="${differenza<=0}">pos</c:if><c:if test="${differenza>0}">neg</c:if>"><center>${differenza}&percnt;</center></h2>
                             <p class="m-b-0"><center>Differenza percentuale costi NC rispetto allo scorso anno</center></p>
                         </div>

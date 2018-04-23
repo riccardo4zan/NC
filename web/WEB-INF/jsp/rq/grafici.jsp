@@ -11,21 +11,8 @@
                         <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                     </div>
                     <div class="media-body media-text-right">
-                        <h2><center>${totale}&euro;</center></h2>
-                        <p class="m-b-0"><center>Costo non conformità quest'anno</center></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 center">
-            <div class="card p-30 mh">
-                <div class="media">
-                    <div class="media-left meida media-middle">
-                        <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
-                    </div>
-                    <div class="media-body media-text-right">
                         <h2><center>${ncAnno}</center></h2>
-                        <p class="m-b-0"><center>Non Conformità riscontrate quest'anno</center></p>
+                        <p class="m-b-0"><center>Non conformit&aacute; riscontrate quest'anno</center></p>
                     </div>
                 </div>
             </div>
@@ -37,9 +24,21 @@
                         <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
                     </div>
                     <div class="media-body media-text-right">
-                        ${passato}
-                        <h2 class="<c:if test="${differenza<=0}">pos</c:if><c:if test="${differenza>0}">neg</c:if>"><center>${differenza}&percnt;</center></h2>
-                            <p class="m-b-0"><center>Differenza percentuale costi NC rispetto allo scorso anno</center></p>
+                        <h2><center>${ncAperte}</center></h2>
+                        <p class="m-b-0"><center>Non Conformit&aacute; aperte o in elaborazione</center></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 center">
+            <div class="card p-30 mh">
+                <div class="media">
+                    <div class="media-left meida media-middle">
+                        <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    </div>
+                    <div class="media-body media-text-right">
+                        <h2><center>${tipoNC}</center></h2>
+                        <p class="m-b-0"><center>Tipo di Non Conformit&aacute; riscontrata pi&ugrave; spesso</center></p>
                         </div>
                     </div>
                 </div>

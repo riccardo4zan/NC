@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -15,12 +16,11 @@
     <body>
 
         <div>
-
             <nav class="custom navbar navbar-expand-lg navbar-dark">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/rq">Home </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Lista segnalazioni</a>
@@ -42,14 +42,16 @@
                     </div>
                 </div>
             </nav>
+            <c:if test="${not empty ncAnno}">
+                <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
+            </c:if>
             
-            
-
             <!-- Visualizzazione dei dati personali e cambio della password --> 
             <c:if test="${not empty datiPersonali}">
                 <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
                 <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
             </c:if>
+                
             <c:if test="${changePassword}">
                 <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
             </c:if>

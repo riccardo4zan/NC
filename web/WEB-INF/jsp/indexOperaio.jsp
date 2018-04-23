@@ -26,6 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/op/news">Invia una segnalazione</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/op/prod">Aggiungi prodotti</a>
+                        </li>
                     </ul>
                     <div class="navbar-nav destra">
                         <li class="nav-item dropdown">
@@ -40,6 +43,11 @@
                     </div>
                 </div>
             </nav>
+            <c:if test="${not empty cat}">
+                <script>
+                    window.open("http://localhost:8084/op/report?min=${min}&max=${max}&cat=${cat}", '_blank');
+                </script>
+            </c:if>
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
@@ -64,9 +72,14 @@
                         <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
                     </c:if>
+
                     <c:if test="${changePassword}">
                         <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
                     </c:if>
+
+                    <c:if test="${not empty categorie}">
+                        <c:import url="/WEB-INF/jsp/operaio/newProdotti.jsp" />
+                    </c:if> 
 
                 </div>
                 <div class="col-lg-3 col-md-3"></div>

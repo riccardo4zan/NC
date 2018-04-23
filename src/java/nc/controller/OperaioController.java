@@ -1,9 +1,13 @@
 package nc.controller;
 
+import nc.model.Categoria;
 import nc.model.Elaborazione;
+import nc.model.Pezzo;
 import nc.model.Segnalazione;
 import nc.model.User;
+import nc.service.CategoriaService;
 import nc.service.ElaborazioneService;
+import nc.service.PezzoService;
 import nc.service.SegnalazioneService;
 import nc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/op**")
 @ComponentScan("nc.dao")
 public class OperaioController {
+    
+    @Autowired
+    CategoriaService cs;
+    
+    @Autowired
+    PezzoService ps;
     
     @Autowired
     ElaborazioneService es;
@@ -46,6 +56,15 @@ public class OperaioController {
         //inserire qui elaborazioni aperte
         model.addObject("matricola",MainController.getLoggedDip().getMatricola());
         model.addObject("chiuse", es.findClose(MainController.getLoggedDip()));
+        model.setViewName("indexOperaio");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/prod"}, method = RequestMethod.GET)
+    public ModelAndView prod() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
+        model.addObject("categorie", cs.findAllCategorie());
         model.setViewName("indexOperaio");
         return model;
     }
@@ -114,6 +133,39 @@ public class OperaioController {
         us.updateUser(u);    
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
+        return model;
+    }
+    
+       @RequestMapping(value = {"/addProd"}, params={"categoria", "numero"}, method = RequestMethod.GET)
+    public ModelAndView addProdotto(@RequestParam("categoria") String categoria, @RequestParam("numero") int numero) {
+        ModelAndView model = new ModelAndView();
+        
+        
+        int idCat = Integer.parseInt(categoria);
+        Categoria tmp = cs.findByCodice(idCat);
+        int min = ps.findMaxID()+1;
+        for(int i=0; i<numero; i++){
+            Pezzo pz = new Pezzo();
+            pz.setCategoria(tmp);
+            ps.savePezzo(pz);
+        }
+        int max = ps.findMaxID();
+        model.addObject("min", min);
+        model.addObject("max", max);
+        model.addObject("cat", tmp.getDescrizione());
+        model.addObject("matricola",MainController.getLoggedDip().getMatricola());
+        model.addObject("aperte", es.findOpen(MainController.getLoggedDip()));
+        model.setViewName("indexOperaio");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/report"}, params={"min", "max", "cat"}, method = RequestMethod.GET)
+    public ModelAndView report(@RequestParam("min") int min, @RequestParam("max") int max, @RequestParam("cat") String cat) {
+        ModelAndView model = new ModelAndView();
+        model.addObject("min", min);
+        model.addObject("max", max);
+        model.addObject("cat", cat);
+        model.setViewName("/operaio/pdfBuilder");
         return model;
     }
     

@@ -41,5 +41,10 @@ public class PezzoServiceImpl implements PezzoService {
     public List<Pezzo> findAll() {
         return dao.findAll();
     }
+
+    @Override
+    public int findMaxID() {
+        return dao.findMaxID();
+    }
     
 }

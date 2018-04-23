@@ -32,7 +32,12 @@
     
     <!-- Immette la data odierna -->
     <script>
-        document.getElementById('curdate').valueAsDate = new Date();
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
+        document.getElementById('curdate').value = today;
     </script>
     
     <!-- fare controllo inserimento -->

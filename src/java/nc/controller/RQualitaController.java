@@ -49,18 +49,18 @@ public class RQualitaController {
 
         //dati thumbnais
         model.addObject("ncAnno", ncs.findNumeroNCAnno(anno));
-        
+        model.addObject("ncAperte", ncs.findAllAperte().size()+ncs.findAllInElaborazione().size());
+        model.addObject("tipoNC", ncs.findTipoNCProblematico());
         
         // prendo tutti i tipi, i reparti e i fornitori presenti
-        List<Reparto> reparti = rs.findAll();
-        List<Fornitore> fornitori = fs.findAll();
-        List<Tipo> tipi = ts.findAll();
+       
 
         //ricavo i dati riguardanti tipi, reparti e fornitori presenti
         ArrayList<ChartData> repartiData = new ArrayList<>();
         ArrayList<ChartData> fornitoriData = new ArrayList<>();
         ArrayList<ChartData> tipiData = new ArrayList<>();
 
+        /**
         for (Fornitore tmp : fornitori) {
             double costo = ncs.findCostoPerFornitore(anno, tmp);
             if (costo != 0) {
@@ -96,7 +96,7 @@ public class RQualitaController {
         }
         model.addObject("istogramma", istogramma);
         model.addObject("max", max);
-
+        */
         model.setViewName("indexManager");
         return model;
     }

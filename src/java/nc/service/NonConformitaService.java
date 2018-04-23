@@ -20,4 +20,5 @@ public interface NonConformitaService {
     double findCostoAnnoPerMese(int mese, int anno);
     double findCostoNCPerAnno(int anno);
     int findNumeroNCAnno(int anno);
+    String findTipoNCProblematico();
 }

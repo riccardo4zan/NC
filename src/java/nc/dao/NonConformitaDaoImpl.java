@@ -7,12 +7,10 @@ import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
 import nc.model.Tipo;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -161,5 +159,11 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-
+    
+    @Override
+    public String findTipoNCProblematico(){
+        Query query = getSession().createSQLQuery("SELECT Tipo FROM NonConformita GROUP BY Tipo HAVING count(*)=(SELECT max(massimo) from (select count(*) as massimo from NonConformita group by Tipo) as tmp);");
+        return (String) query.list().get(0);
+    }
+ 
 }

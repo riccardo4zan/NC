@@ -100,5 +100,10 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public int findNumeroNCAnno(int anno) {
         return dao.findNumeroNCAnno(anno);
     }
+
+    @Override
+    public String findTipoNCProblematico() {
+        return dao.findTipoNCProblematico();
+    }
     
 }

@@ -173,8 +173,13 @@ public class CQualitaController {
     }
 
     @RequestMapping(value = {"/modNC"}, params = {"codNC", "desc", "azioniContenimento", "azioniCorrettive", "azioniPreventive", "dataF", "costo"}, method = RequestMethod.POST)
-    public ModelAndView modNC(@RequestParam("codNC") int id, @RequestParam("desc") String desc, @RequestParam("azioniContenimeto") String Acon, @RequestParam("azioniCorrettive") String Acor,
-            @RequestParam("azioniPreventive") String Aprev, @RequestParam("dataF") String dataF, @RequestParam("costo") String costo) {
+    public ModelAndView modNC(@RequestParam("codNC") int id, 
+            @RequestParam("desc") String desc, 
+            @RequestParam(value="azioniContenimento",required=false) String Acon, 
+            @RequestParam(value="azioniCorrettive",required=false) String Acor,
+            @RequestParam(value="azioniPreventive",required=false) String Aprev, 
+            @RequestParam(value="dataF",required=false) String dataF, 
+            @RequestParam(value="costo",required=false) Double costo) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
         nc.setDescrizione(desc);
@@ -182,11 +187,12 @@ public class CQualitaController {
         nc.setAzioniCorrettive(Acor);
         nc.setAzioniPreventive(Aprev);
         nc.setDataChiusura(dataF);
-        nc.setCosto(Integer.parseInt(costo));
+        nc.setCosto(costo);
         ncs.updateNonConformita(nc);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
-        model.setViewName("indexCQualita");
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
         return model;
     }
 
@@ -195,7 +201,6 @@ public class CQualitaController {
     public ModelAndView visualizzaNC(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         model.addObject("NCChiesta", ncs.findByCodice(id));
-        //codice da fare
         model.setViewName("indexCQualita");
         return model;
     }
@@ -240,7 +245,6 @@ public class CQualitaController {
         return model;
     }
 
-    //segnalazioni
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
         ModelAndView model = new ModelAndView();

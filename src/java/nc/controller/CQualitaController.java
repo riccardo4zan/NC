@@ -99,7 +99,6 @@ public class CQualitaController {
         return model;
     }
 
-    // aggiunta nc
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView apriNC() {
         ModelAndView model = new ModelAndView();
@@ -183,11 +182,12 @@ public class CQualitaController {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
         nc.setDescrizione(desc);
-        nc.setAzioniContenimento(Acon);
-        nc.setAzioniCorrettive(Acor);
-        nc.setAzioniPreventive(Aprev);
-        nc.setDataChiusura(dataF);
-        nc.setCosto(costo);
+        if(!Acon.isEmpty()) nc.setAzioniContenimento(Acon);
+        if(!Acor.isEmpty()) nc.setAzioniCorrettive(Acor);
+        if(!Aprev.isEmpty()) nc.setAzioniPreventive(Aprev);
+        if(!dataF.isEmpty()) nc.setDataChiusura(dataF);
+        Double c=costo;
+        if(c != null &&(!c.isNaN()))nc.setCosto(costo);
         ncs.updateNonConformita(nc);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
@@ -298,6 +298,24 @@ public class CQualitaController {
         User u = MainController.getLoggedDip().getUser();
         u.setPassword(hpsswd);
         us.updateUser(u);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/aggiungiTipoNC"}, method = RequestMethod.GET)
+    public ModelAndView aggiungiTipoNC() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("aggiungiTipo", true);
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/addTipo"}, params = {"nome", "descrizione"}, method = RequestMethod.POST)
+    public ModelAndView addTipoNC(@RequestParam("nome") String nome,@RequestParam("descrizione") String descrizione) {
+        ModelAndView model = new ModelAndView();
+        Tipo nt = new Tipo(nome,descrizione);
+        ts.saveTipo(nt);
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
         return model;

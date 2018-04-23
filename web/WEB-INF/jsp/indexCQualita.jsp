@@ -36,6 +36,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/NCChiuse">Non conformit&agrave; chiuse</a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cq/aggiungiTipoNC">Aggiungi tipo NC</a>
+                        </li>
                     </ul>
                     <div class="navbar-nav destra">
                         <li class="nav-item dropdown">
@@ -104,6 +108,10 @@
                     <c:if test="${not empty segnalazione}">
                         <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
+                    </c:if>
+                    
+                    <c:if test="${not empty aggiungiTipo}">
+                        <c:import url="/WEB-INF/jsp/cq/newTipoNC.jsp"/>
                     </c:if>
 
                     <!-- Visualizzazione dei dati personali e cambio della password --> 

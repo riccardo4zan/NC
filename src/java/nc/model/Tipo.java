@@ -27,6 +27,11 @@ public class Tipo implements Serializable {
     public Tipo() {
     }
 
+    public Tipo(String nome, String descrizione) {
+        this.nome = nome;
+        this.descrizione = descrizione;
+    }  
+
     public String getNome() {
         return nome;
     }

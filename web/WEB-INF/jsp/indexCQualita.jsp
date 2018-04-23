@@ -59,6 +59,7 @@
                         <c:set var="Reparti" value="${Reparti}" scope="request"/>
                         <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
                         <c:set var="Clienti" value="${Clienti}" scope="request"/>
+                        <c:set var="Descrizione" value="${Descrizione}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
                     </c:if>
 

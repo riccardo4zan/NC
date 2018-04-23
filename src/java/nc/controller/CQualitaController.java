@@ -2,6 +2,7 @@ package nc.controller;
 
 import java.util.List;
 import nc.model.Cliente;
+import nc.model.Dipendente;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
 import nc.model.Reparto;
@@ -15,6 +16,7 @@ import nc.service.SegnalazioneService;
 import nc.service.TipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,33 +50,36 @@ public class CQualitaController {
     private DipendenteService ds;
 
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
-    public String index() {
+    public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         List<NonConformita> nc=ncs.findAllAperte();
         if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità aperte");
         model.addObject("NCAperte",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
-        return "indexCQualita";
+        model.setViewName("indexCQualita");
+        return model;
     }
 
     @RequestMapping(value = {"/NCElaborazione"}, method = RequestMethod.GET)
-    public String NCElaborazione() {
+    public ModelAndView NCElaborazione() {
         ModelAndView model = new ModelAndView();
         List<NonConformita> nc=ncs.findAllInElaborazione();
         if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità in elaborazione");
         model.addObject("NCElaborazione",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
-        return "indexCQualita";
+        model.setViewName("indexCQualita");
+        return model;
     }
 
     @RequestMapping(value = {"/NCChiuse"}, method = RequestMethod.GET)
-    public String NCChiuse() {
+    public ModelAndView NCChiuse() {
         ModelAndView model = new ModelAndView();
         List<NonConformita> nc=ncs.findAllChiuse();
         if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità chiuse");
         model.addObject("NCChiuse",nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
-        return "indexCQualita";
+        model.setViewName("indexCQualita");
+        return model;
     }
     
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
@@ -209,6 +214,41 @@ public class CQualitaController {
         ModelAndView model = new ModelAndView();
         ss.deleteSegnalazione(Integer.parseInt(id));
         model.addObject("segnalazioni", ss.findAll());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
+    public ModelAndView visualizzaDati() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("datiPersonali", MainController.getLoggedDip());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/cambiaPassword"}, method = RequestMethod.GET)
+    public ModelAndView cambiaPassword() {
+        ModelAndView model = new ModelAndView();
+        //Passo un valore true per permettere l'inclusione del frammento di codice relativo al cambio della password
+        model.addObject("changePassword", true);
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/saveNewPasswd"}, params = {"psswd1"}, method = RequestMethod.POST)
+    public ModelAndView savePassword(@RequestParam("psswd1") String psswd) {
+        ModelAndView model = new ModelAndView();
+        //Controllo e cambio della password
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hpsswd = passwordEncoder.encode(psswd);
+            Dipendente dip = MainController.getLoggedDip();
+            dip.getUser().setPassword(hpsswd);
+            ds.saveDipendente(dip);
+        //Redirezione a HOME
+        List<NonConformita> nc=ncs.findAllAperte();
+        if(nc.isEmpty())model.addObject("Vuoto", "Non ci sono non conformità aperte");
+        model.addObject("NCAperte",nc);
+        model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
     }

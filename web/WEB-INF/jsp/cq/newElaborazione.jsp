@@ -18,7 +18,7 @@
         <select class="form-control" name="dipendente">
             <option value=""></option>
             <c:forEach items="${apriElaborazione}" var="dip">
-                <option value="${dip.matricola}">${dip.nome} ${dip.cognome}</option>
+                <option value="${dip.matricola}">${dip.matricola} - ${dip.nome} , ${dip.cognome}</option>
             </c:forEach>
         </select>
     </div>

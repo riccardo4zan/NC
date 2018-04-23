@@ -24,7 +24,7 @@
                 <td> ${nc.descrizione}</td>
                 <td> ${nc.azioniContenimento} </td>
                 <td> ${nc.azioniCorrettive}</td>
-                <td> ${nc.tipo}</td>
+                <td> ${nc.tipo.nome}</td>
                 <td> ${nc.dataApertura}</td>
                 <td> ${nc.dataChiusura}</td>
                 <td> ${nc.costo}</td>

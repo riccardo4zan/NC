@@ -23,15 +23,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/segnalazioni">Lista segnalazioni</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/apriNC">Apri non conformit&agrave;</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/NCElaborazione">Non conformit&agrave; in elaborazione</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/NCChiuse">Non conformit&agrave; chiuse</a>
                         </li>
@@ -42,7 +42,7 @@
                                 Impostazioni
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">I miei dati</a>
+                                <a class="dropdown-item" href="/cq/dati">I miei dati</a>
                                 <a class="dropdown-item" href="/logout">LogOut</a>
                             </div>
                         </li>
@@ -50,50 +50,62 @@
                 </div>
             </nav>
             <div class="row">
-            <div class="col-lg-2 col-md-2"></div>
-            <div class="col-lg-8 col-md-8">
-                 ${NCAperte}
-                 
-                 
-                 
-                <c:if test="${not empty NC}">
-                    <c:set var="Tipi" value="${Tipi}" scope="request"/>
-                    <c:set var="Reparti" value="${Reparti}" scope="request"/>
-                    <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
-                    <c:set var="Clienti" value="${Clienti}" scope="request"/>
-                    <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
-                </c:if>
-                    
-                <c:if test="${not empty NCAperte}">
-                    <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
-                    <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
-                </c:if>
+                <div class="col-lg-2 col-md-2"></div>
+                <div class="col-lg-8 col-md-8">
+                    ${NCAperte}
 
-                <c:if test="${not empty NCChiuse}">
-                    <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
-                </c:if>
 
-                <c:if test="${not empty NCElaborazione}">
-                    <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
-                </c:if>
 
-                 <c:if test="${not empty apriElaborazione}">
-                    <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
-                    <c:set var="ncPassata" value="${ncPassata}" scope="request"/>
-                    <c:import url="/WEB-INF/jsp/cq/newElaborazione.jsp"/>
-                </c:if>
-                 
-                <c:if test="${not empty segnalazioni}">
-                    <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
-                    <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
-                </c:if>
+                    <c:if test="${not empty NC}">
+                        <c:set var="Tipi" value="${Tipi}" scope="request"/>
+                        <c:set var="Reparti" value="${Reparti}" scope="request"/>
+                        <c:set var="Fornitori" value="${Fornitori}" scope="request"/>
+                        <c:set var="Clienti" value="${Clienti}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
+                    </c:if>
 
-                <c:if test="${not empty segnalazione}">
-                    <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
-                    <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
-                </c:if>
-            </div>
-            <div class="col-lg-2 col-md-2"></div>
+                    <c:if test="${not empty NCAperte}">
+                        <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
+                    </c:if>
+
+                    <c:if test="${not empty NCChiuse}">
+                        <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
+                    </c:if>
+
+                    <c:if test="${not empty NCElaborazione}">
+                        <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
+                    </c:if>
+
+                    <c:if test="${not empty apriElaborazione}">
+                        <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
+                        <c:set var="ncPassata" value="${ncPassata}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/newElaborazione.jsp"/>
+                    </c:if>
+
+                    <c:if test="${not empty segnalazioni}">
+                        <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/listSegnalazioni.jsp"/>
+                    </c:if>
+
+                    <c:if test="${not empty segnalazione}">
+                        <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
+                    </c:if>
+
+                    <!-- Visualizzazione dei dati personali e cambio della password --> 
+                    <c:if test="${not empty datiPersonali}">
+                        <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
+                    </c:if>
+                    <c:if test="${changePassword}">
+                        <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
+                    </c:if>
+
+
+
+                </div>
+                <div class="col-lg-2 col-md-2"></div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

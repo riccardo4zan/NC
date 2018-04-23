@@ -24,7 +24,7 @@
                 <td> ${nc.azioniContenimento} </td>
                 <td> ${nc.azioniCorrettive}</td>
                 <td> ${nc.dataApertura}</td>
-                <td> ${nc.tipo}</td>
+                <td> ${nc.tipo.nome}</td>
                 <td><a href="/cq/editNC?id=${nc.codice}">Modifica</a></td>
                 <td><a href="/cq/newElaborazione?id=${nc.codice}">Assegna elaborazione</a></td>
             </tr>

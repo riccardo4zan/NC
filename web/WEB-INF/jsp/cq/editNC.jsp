@@ -27,8 +27,13 @@
     
       <div class="col-lg-4 col-md-4 form-group">
         <label>Data fine</label>
-        <input type="date" class="form-control"   name="dataF"/>
+        <input id="curdate" type="date" class="form-control" name="dataF"/>
     </div>
+    
+    <!-- Immette la data odierna -->
+    <script>
+        document.getElementById('curdate').valueAsDate = new Date();
+    </script>
     
     <!-- fare controllo inserimento -->
     

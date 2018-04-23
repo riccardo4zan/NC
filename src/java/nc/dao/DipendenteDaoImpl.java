@@ -53,10 +53,11 @@ public class DipendenteDaoImpl implements DipendenteDao{
 
 }
 
-
+/*
 SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US 
 WHERE D.Username=U.username AND U.username= US.username AND US.role="ROLE_OPERAIO" GROUP BY D.Reparto
 
 
 create view operai (Matricola,Nome,Cognome,Reparto) as SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto FROM Dipendenti D,users U,user_roles US 
 WHERE D.Username=U.username AND U.username= US.username AND US.role="ROLE_OPERAIO"
+ */

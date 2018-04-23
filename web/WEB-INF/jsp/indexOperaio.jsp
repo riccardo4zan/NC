@@ -18,13 +18,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/operaio/">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/op/">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/operaio/old">Elaborazioni completate</a>
+                            <a class="nav-link" href="/op/old">Elaborazioni completate</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/operaio/news">Invia una segnalazione</a>
+                            <a class="nav-link" href="/op/news">Invia una segnalazione</a>
                         </li>
                     </ul>
                     <div class="navbar-nav destra">

@@ -12,9 +12,8 @@
   </div>
   <div class="form-group">
     <label for="numero">Indica il numero di pezzi prodotti</label>
-    <input type="number" class="form-control" name="numero">
+    <input type="number" min="1" class="form-control" name="numero">
   </div>
   <input class="btn bottone" type="submit" value="Aggiungi" />
 </form>
 </div>
-

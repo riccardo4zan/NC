@@ -138,7 +138,7 @@ public class CQualitaController {
 
         ModelAndView model = new ModelAndView();
         Tipo t = ts.findByNome(tipo);
-        NonConformita newnc = newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
+        NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
         //Apertura di una NC interna
         if (reparto != null) {
             Reparto r = rs.findByID(reparto);

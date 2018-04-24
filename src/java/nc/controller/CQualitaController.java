@@ -1,6 +1,7 @@
 package nc.controller;
 
 import java.util.List;
+import java.util.Set;
 import nc.model.Cliente;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
@@ -138,7 +139,7 @@ public class CQualitaController {
 
         ModelAndView model = new ModelAndView();
         Tipo t = ts.findByNome(tipo);
-        NonConformita newnc = newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
+        NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
         //Apertura di una NC interna
         if (reparto != null) {
             Reparto r = rs.findByID(reparto);
@@ -172,8 +173,8 @@ public class CQualitaController {
     }
 
     @RequestMapping(value = {"/modNC"}, params = {"codNC", "desc", "azioniContenimento", "azioniCorrettive", "azioniPreventive", "dataF", "costo"}, method = RequestMethod.POST)
-    public ModelAndView modNC(@RequestParam("codNC") int id, 
-            @RequestParam("desc") String desc, 
+    public ModelAndView modNC(@RequestParam("codNC") int id,
+            @RequestParam("desc") String desc,
             @RequestParam(value="azioniContenimento",required=false) String Acon, 
             @RequestParam(value="azioniCorrettive",required=false) String Acor,
             @RequestParam(value="azioniPreventive",required=false) String Aprev, 
@@ -302,7 +303,7 @@ public class CQualitaController {
         model.setViewName("/redirect");
         return model;
     }
-    
+
     @RequestMapping(value = {"/aggiungiTipoNC"}, method = RequestMethod.GET)
     public ModelAndView aggiungiTipoNC() {
         ModelAndView model = new ModelAndView();
@@ -310,22 +311,37 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
-    
+
     @RequestMapping(value = {"/addTipo"}, params = {"nome", "descrizione"}, method = RequestMethod.POST)
-    public ModelAndView addTipoNC(@RequestParam("nome") String nome,@RequestParam("descrizione") String descrizione) {
+    public ModelAndView addTipoNC(@RequestParam("nome") String nome, @RequestParam("descrizione") String descrizione) {
         ModelAndView model = new ModelAndView();
-        Tipo nt = new Tipo(nome,descrizione);
+        Tipo nt = new Tipo(nome, descrizione);
         ts.saveTipo(nt);
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
         return model;
     }
 
-    @RequestMapping(value = {"/showTeam"}, method = RequestMethod.GET)
-    public ModelAndView showTeam() {
+    @RequestMapping(value = {"/showTeam"},params = {"codice"}, method = RequestMethod.GET)
+    public ModelAndView showTeam(@RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
         model.addObject("showTeam", true);
-        //model.setViewName("indexCQualita");
+        model.addObject("NCtm", ncs.findByCodice(cod));
+        model.addObject("Dipendenti", ds.findAll());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+
+    @RequestMapping(value = {"/addOperaioTeamNC"}, params = {"matricola","codice"}, method = RequestMethod.GET)
+    public ModelAndView addOperaioTeamNC(@RequestParam("matricola") Integer mat,@RequestParam("codice") Integer cod) {
+        ModelAndView model = new ModelAndView();
+        Dipendente dip = ds.findByMatricola(mat);
+        NonConformita nc = ncs.findByCodice(cod);
+        Set<NonConformita> lnc = dip.getParteTeam();
+        lnc.add(nc);
+        dip.setParteTeam(lnc);
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
         return model;
     }
 }

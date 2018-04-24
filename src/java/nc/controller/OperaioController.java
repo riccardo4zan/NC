@@ -110,7 +110,7 @@ public class OperaioController {
     public ModelAndView cambiaPassword() {
         ModelAndView model = new ModelAndView();
         model.addObject("changePassword", true);
-        model.setViewName("indexCQualita");
+        model.setViewName("indexOperaio");
         return model;
     }
 

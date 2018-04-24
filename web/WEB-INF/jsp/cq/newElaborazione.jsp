@@ -12,7 +12,7 @@
     <div class="row">
     <div class="col-lg-4 col-md-4 form-group">
         <label>Data Inizio</label>
-        <input type="date" class="form-control"  name="dataInizio"/>
+        <input class="form-control" type="date" name="dataInizio"/>
     </div>
 
     

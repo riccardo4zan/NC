@@ -46,8 +46,10 @@
         <label>Costo</label>
         <input type="text" class="form-control"  name="costo"/>
     </div>
-    </div>
-    <button type="submit" class="btn bottone">Salva</button>
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+    
+    <a href="/cq/showTeam?codice=${editNC}">teamop</a>
     
 </form>
 

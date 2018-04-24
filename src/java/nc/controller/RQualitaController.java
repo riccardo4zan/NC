@@ -159,7 +159,7 @@ public class RQualitaController {
     public ModelAndView visualizzaDati() {
         ModelAndView model = new ModelAndView();
         model.addObject("datiPersonali", MainController.getLoggedDip());
-        model.setViewName("indexCQualita");
+        model.setViewName("indexRQualita");
         return model;
     }
 

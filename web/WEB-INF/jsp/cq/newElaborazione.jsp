@@ -12,10 +12,10 @@
 
     <div class="col-lg-4 col-md-4 form-group">
         <label>Data Inizio</label>
-        <input type="date" class="form-control"  name="dataInizio"/>
+        <input class="form-control" type="date" name="dataInizio"/>
     </div>
 
-    <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">
+    <input type="hidden" class="form-control"  readonly name="codNC" value="${ncPassata}">
 
 
     <div class="col-lg-4 col-md-4 form-group">

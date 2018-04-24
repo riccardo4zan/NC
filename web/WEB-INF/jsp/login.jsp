@@ -20,7 +20,7 @@
                     <label>Username</label>
                 </div>
                 <div class="group">
-                    <input name="password" type="Password" required ><span class="highlight"></span><span class="bar"></span>
+                    <input name="password" type="Password" ><span class="highlight"></span><span class="bar"></span>
                     <label>Password</label>
                 </div>
                 <button type="submit" class="button buttonBlue">Log-In

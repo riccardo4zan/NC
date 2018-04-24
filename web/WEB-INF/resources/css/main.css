@@ -126,3 +126,7 @@ div.visualnc {
 .divTableHeading { display: table-header-group;}
 .divTableFoot { display: table-footer-group;}
 .divTableBody { display: table-row-group;}
+
+.btnform{
+    margin-left:60%;
+}

@@ -9,13 +9,18 @@
         <label>Descrizione</label>
         <textarea class="form-control" name="desc" rows="3"></textarea>
     </div>
-
+    <div class="row">
     <div class="col-lg-4 col-md-4 form-group">
         <label>Data Inizio</label>
         <input type="date" class="form-control"  name="dataInizio"/>
     </div>
 
-    <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">
+    
+    <div class="col-lg-4 col-md-4 form-group">
+        <label>Codice Non Conformit&agrave;</label>
+        <input type="text" class="form-control"  readonly name="codNC" value="${ncPassata}">
+    </div>
+    
 
 
     <div class="col-lg-4 col-md-4 form-group">
@@ -26,6 +31,7 @@
                 <option value="${dip.matricola}">${dip.matricola} - ${dip.nome} , ${dip.cognome}</option>
             </c:forEach>
         </select>
+    </div>
     </div>
     <button type="submit" class="btn btn-primary">Assegna</button>
 </form>

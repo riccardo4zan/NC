@@ -48,7 +48,7 @@
 
     <button type="submit" class="btn btn-primary">Salva</button>
     
-    <a href="/cq/showTeam"><button class="btn btn-primary">Modifica Team NC</button></a>
+    <a href="/cq/showTeam?codice=${editNC}">teamop</a>
     
 </form>
 

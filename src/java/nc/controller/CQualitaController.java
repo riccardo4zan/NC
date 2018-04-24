@@ -321,4 +321,11 @@ public class CQualitaController {
         return model;
     }
 
+    @RequestMapping(value = {"/showTeam"}, method = RequestMethod.GET)
+    public ModelAndView showTeam() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("showTeam", true);
+        //model.setViewName("indexCQualita");
+        return model;
+    }
 }

@@ -113,6 +113,10 @@
                     <c:if test="${not empty aggiungiTipo}">
                         <c:import url="/WEB-INF/jsp/cq/newTipoNC.jsp"/>
                     </c:if>
+                    
+                    <c:if test="${showTeam}">
+                        <c:import url="/WEB-INF/jsp/cq/showTeam.jsp"/>
+                    </c:if>
 
                     <!-- Visualizzazione dei dati personali e cambio della password --> 
                     <c:if test="${not empty datiPersonali}">

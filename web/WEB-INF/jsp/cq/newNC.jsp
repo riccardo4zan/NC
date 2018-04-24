@@ -76,15 +76,25 @@
         <select class="form-control" name="cliente" >
             <option value=""></option>
             <c:forEach items="${Clienti}" var="clienti">
-                <option value="${clienti.id}">${clienti.nome}</option>
+                <option value="${clienti.piva}">${clienti.nome}</option>
             </c:forEach>
         </select>
     </div>
 
     <div class="col-lg-4 col-md-4 form-group">
         <label>Data Inizio</label>
-        <input type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
+        <input id="curdate" type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
     </div>
         </div>
     <button type="submit" class="btn btn-primary">Salva</button>
+    
+        <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
+        document.getElementById('curdate').value = today;
+    </script>
+
 </form>

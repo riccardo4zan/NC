@@ -25,7 +25,8 @@
         <textarea class="form-control" name="azioniPreventive" rows="3"></textarea>
     </div>
 
-    <div class="col-lg-4 col-md-4 form-group">
+    <div class="row">
+    <div class="col-lg-6 col-md-6 form-group">
         <label>Data fine</label>
         <input id="curdate" type="date" class="form-control" name="dataF"/>
     </div>
@@ -41,7 +42,7 @@
     </script>
 
     <!-- fare controllo inserimento -->
-    <div class="col-lg-4 col-md-4 form-group">
+    <div class="col-lg-6 col-md-6 form-group">
         <label>Costo</label>
         <input type="text" class="form-control"  name="costo"/>
     </div>

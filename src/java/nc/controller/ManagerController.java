@@ -137,7 +137,7 @@ public class ManagerController {
     public ModelAndView visualizzaDati() {
         ModelAndView model = new ModelAndView();
         model.addObject("datiPersonali", MainController.getLoggedDip());
-        model.setViewName("indexCQualita");
+        model.setViewName("indexManager");
         return model;
     }
 
@@ -146,7 +146,7 @@ public class ManagerController {
         ModelAndView model = new ModelAndView();
         //Passo un valore true per permettere l'inclusione del frammento di codice relativo al cambio della password
         model.addObject("changePassword", true);
-        model.setViewName("indexCQualita");
+        model.setViewName("indexManager");
         return model;
     }
 

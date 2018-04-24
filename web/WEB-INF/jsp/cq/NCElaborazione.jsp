@@ -12,6 +12,7 @@
             <th>Descrizione</th>
             <th>Azioni di contenimento</th>
             <th>Azioni correttive</th>
+            <th>Data apertura</th>
             <th>Tipo </th>
             <th></th>
             <th></th>

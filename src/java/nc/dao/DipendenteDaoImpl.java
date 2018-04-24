@@ -53,5 +53,4 @@ public class DipendenteDaoImpl implements DipendenteDao {
                 
         return (List<Dipendente>) query.list();
     }
-
 }

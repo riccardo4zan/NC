@@ -53,4 +53,12 @@ public class DipendenteDaoImpl implements DipendenteDao {
                 
         return (List<Dipendente>) query.list();
     }
+    
+    public List<Dipendente> findAllSenzaManager() {
+        Query query = getSession().createSQLQuery(
+                "SELECT D.Matricola, D.Nome, D.Cognome, D.Reparto, D.Username FROM Dipendenti D,users U,user_roles US WHERE D.Username=U.username AND U.username= US.username AND US.role!='ROLE_MANAGER' ") 
+                .addEntity(Dipendente.class);
+                
+        return (List<Dipendente>) query.list();
+    }
 }

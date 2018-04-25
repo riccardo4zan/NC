@@ -116,6 +116,7 @@
                     
                     <c:if test="${showTeam}">
                         <c:set var="NCtm" value="${NCtm}" scope="request"/>
+                        <c:set var="tco" value="${tco}" scope="request"/>
                         <c:set var="Dipendenti" value="${Dipendenti}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/showTeam.jsp"/>
                     </c:if>

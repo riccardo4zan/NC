@@ -12,4 +12,5 @@ public interface DipendenteDao {
     void saveDipendente (Dipendente toSave);
     List<Dipendente> findAll();
     List<Dipendente> findAllOperaiReparto(int reparto);
+    List<Dipendente> findAllSenzaManager();
 }

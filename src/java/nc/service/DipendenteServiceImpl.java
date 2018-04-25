@@ -50,5 +50,7 @@ public class DipendenteServiceImpl implements DipendenteService{
     public List<Dipendente> findAllOperaiReparto(int reparto) {
         return dao.findAllOperaiReparto(reparto);
     }
-    
+     public List<Dipendente> findAllSenzaManager(){
+         return dao.findAllSenzaManager();
+     }
 }

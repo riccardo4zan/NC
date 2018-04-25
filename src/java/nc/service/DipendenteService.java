@@ -13,4 +13,5 @@ public interface DipendenteService {
     void updateDipendente(Dipendente toUpdate);
     List<Dipendente> findAll();
     List<Dipendente> findAllOperaiReparto(int reparto);
+     List<Dipendente> findAllSenzaManager();
 }

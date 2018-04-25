@@ -100,6 +100,7 @@ public class CQualitaController {
         return model;
     }
 
+    //aggiunta nc
     @RequestMapping(value = {"/apriNC"}, method = RequestMethod.GET)
     public ModelAndView apriNC() {
         ModelAndView model = new ModelAndView();
@@ -160,7 +161,7 @@ public class CQualitaController {
         return model;
     }
 
-    //  modfica nc 
+    //  modifica nc 
     @RequestMapping(value = {"/editNC"}, params = {"id", "desc", "azioniContenitive"}, method = RequestMethod.GET)
     public ModelAndView editNC(@RequestParam("id") int id, @RequestParam("desc") String desc, @RequestParam("azioniContenitive") String AC) {
         ModelAndView model = new ModelAndView();
@@ -175,20 +176,30 @@ public class CQualitaController {
     @RequestMapping(value = {"/modNC"}, params = {"codNC", "desc", "azioniContenimento", "azioniCorrettive", "azioniPreventive", "dataF", "costo"}, method = RequestMethod.POST)
     public ModelAndView modNC(@RequestParam("codNC") int id,
             @RequestParam("desc") String desc,
-            @RequestParam(value="azioniContenimento",required=false) String Acon, 
-            @RequestParam(value="azioniCorrettive",required=false) String Acor,
-            @RequestParam(value="azioniPreventive",required=false) String Aprev, 
-            @RequestParam(value="dataF",required=false) String dataF, 
-            @RequestParam(value="costo",required=false) Double costo) {
+            @RequestParam(value = "azioniContenimento", required = false) String Acon,
+            @RequestParam(value = "azioniCorrettive", required = false) String Acor,
+            @RequestParam(value = "azioniPreventive", required = false) String Aprev,
+            @RequestParam(value = "dataF", required = false) String dataF,
+            @RequestParam(value = "costo", required = false) Double costo) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
         nc.setDescrizione(desc);
-        if(!Acon.isEmpty()) nc.setAzioniContenimento(Acon);
-        if(!Acor.isEmpty()) nc.setAzioniCorrettive(Acor);
-        if(!Aprev.isEmpty()) nc.setAzioniPreventive(Aprev);
-        if(!dataF.isEmpty()) nc.setDataChiusura(dataF);
-        Double c=costo;
-        if(c != null &&(!c.isNaN()))nc.setCosto(costo);
+        if (!Acon.isEmpty()) {
+            nc.setAzioniContenimento(Acon);
+        }
+        if (!Acor.isEmpty()) {
+            nc.setAzioniCorrettive(Acor);
+        }
+        if (!Aprev.isEmpty()) {
+            nc.setAzioniPreventive(Aprev);
+        }
+        if (!dataF.isEmpty()) {
+            nc.setDataChiusura(dataF);
+        }
+        Double c = costo;
+        if (c != null && (!c.isNaN())) {
+            nc.setCosto(costo);
+        }
         ncs.updateNonConformita(nc);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
@@ -197,27 +208,11 @@ public class CQualitaController {
         return model;
     }
 
-    //metodo per vedere nc passare codice    
+    //metodo per vedere nc 
     @RequestMapping(value = {"/visualizzaNC"}, params = {"id"}, method = RequestMethod.GET)
     public ModelAndView visualizzaNC(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         model.addObject("NCChiesta", ncs.findByCodice(id));
-        model.setViewName("indexCQualita");
-        return model;
-    }
-
-//teamop
-    @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
-    public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
-        ModelAndView model = new ModelAndView();
-        //Prendo la NC dal codice
-        NonConformita tm = ncs.findByCodice(codice);
-        //Passo tutta la lista dei possibili dipendenti associabili al team
-        model.addObject("scrollerDip", ds.findAll());
-        //Passo la lista dei dipendenti già associati al team
-        model.addObject("dipendentiAssociati", tm.getTeam());
-        //Attiva l'inclusione del codice
-        model.addObject("teamOp", true);
         model.setViewName("indexCQualita");
         return model;
     }
@@ -246,6 +241,7 @@ public class CQualitaController {
         return model;
     }
 
+    //segnalazioni
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
     public ModelAndView segnalazioni() {
         ModelAndView model = new ModelAndView();
@@ -304,6 +300,7 @@ public class CQualitaController {
         return model;
     }
 
+    //aggiunta tipo nc
     @RequestMapping(value = {"/aggiungiTipoNC"}, method = RequestMethod.GET)
     public ModelAndView aggiungiTipoNC() {
         ModelAndView model = new ModelAndView();
@@ -322,26 +319,57 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/showTeam"},params = {"codice"}, method = RequestMethod.GET)
-    public ModelAndView showTeam(@RequestParam("codice") Integer cod) {
+//teamop
+    @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
+    public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
         ModelAndView model = new ModelAndView();
-        model.addObject("showTeam", true);
-        model.addObject("NCtm", ncs.findByCodice(cod));
-        model.addObject("Dipendenti", ds.findAll());
+        //Prendo la NC dal codice
+        NonConformita tm = ncs.findByCodice(codice);
+        //Passo tutta la lista dei possibili dipendenti associabili al team
+        model.addObject("scrollerDip", ds.findAll());
+        //Passo la lista dei dipendenti già associati al team
+        model.addObject("dipendentiAssociati", tm.getTeam());
+        //Attiva l'inclusione del codice
+        model.addObject("teamOp", true);
         model.setViewName("indexCQualita");
         return model;
     }
 
-    @RequestMapping(value = {"/addOperaioTeamNC"}, params = {"matricola","codice"}, method = RequestMethod.GET)
-    public ModelAndView addOperaioTeamNC(@RequestParam("matricola") Integer mat,@RequestParam("codice") Integer cod) {
+    @RequestMapping(value = {"/showTeam"}, params = {"codice"}, method = RequestMethod.GET)
+    public ModelAndView showTeam(@RequestParam("codice") Integer cod) {
+        ModelAndView model = new ModelAndView();
+        NonConformita nc = ncs.findByCodice(cod);
+        model.addObject("tco", nc.getTeam());
+        model.addObject("showTeam", true);
+        model.addObject("NCtm", cod);
+        model.addObject("Dipendenti", ds.findAllSenzaManager());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+
+    @RequestMapping(value = {"/addOperaioTeamNC"}, params = {"dipendente", "codice"}, method = RequestMethod.POST)
+    public ModelAndView addOperaioTeamNC(@RequestParam("dipendente") Integer mat, @RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
         Dipendente dip = ds.findByMatricola(mat);
         NonConformita nc = ncs.findByCodice(cod);
         Set<NonConformita> lnc = dip.getParteTeam();
         lnc.add(nc);
         dip.setParteTeam(lnc);
-        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
-        model.setViewName("/redirect");
+        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+
+    @RequestMapping(value = {"/eliminaDipTeamOp"}, params = {"dip", "codice"}, method = RequestMethod.GET)
+    public ModelAndView showTeam(@RequestParam("dip") Integer mat, @RequestParam("codice") Integer cod) {
+        ModelAndView model = new ModelAndView();
+        Dipendente dip = ds.findByMatricola(mat);
+        NonConformita nc = ncs.findByCodice(cod);
+        Set<NonConformita> lnc = dip.getParteTeam();
+        lnc.remove(nc);
+        dip.setParteTeam(lnc);
+        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.setViewName("indexCQualita");
         return model;
     }
 }

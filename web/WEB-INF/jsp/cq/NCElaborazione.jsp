@@ -30,7 +30,7 @@
                 <td> ${nc.tipo.nome}</td>
                 <td><a href="/cq/editNC?id=${nc.codice}&desc=${nc.descrizione}&azioniContenitive=${nc.azioniContenimento}">Modifica</a></td>
                 <td><a href="/cq/newElaborazione?id=${nc.codice}">Assegna elaborazione</a></td>
-                <td><a href="/cq/TeamNC?id=${nc.codice}">Assegna team operativo </a></td>
+                <td><a href="/cq/showTeam?codice=${nc.codice}">Assegna team operativo </a></td>
             </tr>
         </c:forEach>
     </tbody>

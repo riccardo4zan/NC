@@ -44,6 +44,7 @@
     <div class="col-lg-4 col-md-4 form-group">
         <label>Tipo</label>
         <select class="form-control" name="tipo">
+              <option value=""></option>
             <c:forEach items="${Tipi}" var="tipo">
                 <option value="${tipo.nome}">${tipo.nome}</option>
             </c:forEach>
@@ -87,14 +88,6 @@
     </div>
         </div>
     <button type="submit" class="btn btn-primary">Salva</button>
-    
-        <script>
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        today = yyyy + '/' + mm + '/' + dd;
-        document.getElementById('curdate').value = today;
-    </script>
+
 
 </form>

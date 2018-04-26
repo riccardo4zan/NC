@@ -1,5 +1,6 @@
 package nc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import nc.model.Cliente;
@@ -19,6 +20,7 @@ import nc.service.RepartoService;
 import nc.service.SegnalazioneService;
 import nc.service.TipoService;
 import nc.service.UserService;
+import static org.hibernate.internal.util.collections.CollectionHelper.arrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -339,10 +341,34 @@ public class CQualitaController {
     public ModelAndView showTeam(@RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(cod);
-        model.addObject("tco", nc.getTeam());
+        //si puo` fare meglio
+        boolean f = true;
+        Set<Dipendente> dipU = nc.getTeam();
+        List<Dipendente> dipA = ds.findAllSenzaManager();
+        List<Dipendente> dipA2 = new ArrayList<Dipendente>();
+        if (!dipU.isEmpty()) {
+            for (Dipendente d1 : dipA) {
+                f=true;
+                for (Dipendente d2 : dipU) {
+                    if (d1.getMatricola() == d2.getMatricola()) {
+                        f = false;
+                    }
+                }
+                if (f) {
+                    dipA2.add(d1);
+                }
+            }
+        model.addObject("tco", dipU);
         model.addObject("showTeam", true);
         model.addObject("NCtm", cod);
-        model.addObject("Dipendenti", ds.findAllSenzaManager());
+        model.addObject("Dipendenti", dipA2);
+        model.setViewName("indexCQualita");
+        return model;
+        }
+        model.addObject("tco", dipU);
+        model.addObject("showTeam", true);
+        model.addObject("NCtm", cod);
+        model.addObject("Dipendenti", dipA);
         model.setViewName("indexCQualita");
         return model;
     }
@@ -355,11 +381,12 @@ public class CQualitaController {
         Set<NonConformita> lnc = dip.getParteTeam();
         lnc.add(nc);
         dip.setParteTeam(lnc);
+        ds.updateDipendente(dip);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.setViewName("indexCQualita");
         return model;
     }
-
+//problema come se non cancellasse
     @RequestMapping(value = {"/eliminaDipTeamOp"}, params = {"dip", "codice"}, method = RequestMethod.GET)
     public ModelAndView showTeam(@RequestParam("dip") Integer mat, @RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
@@ -368,6 +395,7 @@ public class CQualitaController {
         Set<NonConformita> lnc = dip.getParteTeam();
         lnc.remove(nc);
         dip.setParteTeam(lnc);
+        ds.updateDipendente(dip);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.setViewName("indexCQualita");
         return model;

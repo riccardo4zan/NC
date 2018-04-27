@@ -44,7 +44,7 @@
     <!-- fare controllo inserimento -->
     <div class="col-lg-6 col-md-6 form-group">
         <label>Costo</label>
-        <input type="text" class="form-control"  name="costo"/>
+        <input type="number" min="0.01" step="0.01" max="1000000000" class="form-control"  name="costo"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Salva</button>

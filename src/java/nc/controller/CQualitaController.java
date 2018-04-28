@@ -1,6 +1,7 @@
 package nc.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import nc.model.Cliente;
@@ -8,6 +9,7 @@ import nc.model.Dipendente;
 import nc.model.Elaborazione;
 import nc.model.Fornitore;
 import nc.model.NonConformita;
+import nc.model.Pezzo;
 import nc.model.Reparto;
 import nc.model.Tipo;
 import nc.model.User;
@@ -16,6 +18,7 @@ import nc.service.DipendenteService;
 import nc.service.ElaborazioneService;
 import nc.service.FornitoreService;
 import nc.service.NonConformitaService;
+import nc.service.PezzoService;
 import nc.service.RepartoService;
 import nc.service.SegnalazioneService;
 import nc.service.TipoService;
@@ -34,6 +37,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/cq**")
 @ComponentScan("nc.dao")
 public class CQualitaController {
+
+    @Autowired
+    private PezzoService ps;
 
     @Autowired
     private SegnalazioneService ss;
@@ -128,8 +134,9 @@ public class CQualitaController {
         return model;
     }
 
-    @RequestMapping(value = {"/addNC"}, params = {"desc", "azioniContenimento", "cause", "gravita", "tipo", "reparto", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/addNC"}, params = {"pezzi", "desc", "azioniContenimento", "cause", "gravita", "tipo", "reparto", "fornitore", "cliente", "dataInizio"}, method = RequestMethod.POST)
     public ModelAndView addNC(
+            @RequestParam("pezzi") String pezzi,
             @RequestParam("desc") String desc,
             @RequestParam("azioniContenimento") String AC,
             @RequestParam("cause") String cause,
@@ -140,9 +147,38 @@ public class CQualitaController {
             @RequestParam(value = "cliente", required = false) String cliente,
             @RequestParam("dataInizio") String dataI) {
 
+        //elaborazione pezzi da associare alla NC
+        Set<Pezzo> pezziCorrelati = new HashSet<>();
+        pezzi = pezzi.trim();
+        String[] parti = pezzi.split(",");
+        for (int i = 0; i < parti.length; i++) {
+            String[] parti2 = parti[i].split(":");
+            switch (parti2.length) {
+                case 2:
+                    for (int j = Integer.parseInt(parti2[0]); j <= Integer.parseInt(parti2[1]); j++) {
+                        pezziCorrelati.add(ps.findByCodice(j));
+                    }
+                    break;
+                case 1:
+                    pezziCorrelati.add(ps.findByCodice(Integer.parseInt(parti2[0])));
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+        }
+        //fine elaborazione
+        
         ModelAndView model = new ModelAndView();
         Tipo t = ts.findByNome(tipo);
         NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
+        newnc.setPezziCorrelati(pezziCorrelati);
+        for (Pezzo tmp : pezziCorrelati){
+            Set<NonConformita> nc = tmp.getPezziNC();
+            nc.add(newnc);
+            tmp.setPezziNC(nc);
+            ps.updatePezzo(tmp);
+        }
+        
         //Apertura di una NC interna
         if (reparto != null) {
             Reparto r = rs.findByID(reparto);
@@ -348,7 +384,7 @@ public class CQualitaController {
         List<Dipendente> dipA2 = new ArrayList<Dipendente>();
         if (!dipU.isEmpty()) {
             for (Dipendente d1 : dipA) {
-                f=true;
+                f = true;
                 for (Dipendente d2 : dipU) {
                     if (d1.getMatricola() == d2.getMatricola()) {
                         f = false;
@@ -358,12 +394,12 @@ public class CQualitaController {
                     dipA2.add(d1);
                 }
             }
-        model.addObject("tco", dipU);
-        model.addObject("showTeam", true);
-        model.addObject("NCtm", cod);
-        model.addObject("Dipendenti", dipA2);
-        model.setViewName("indexCQualita");
-        return model;
+            model.addObject("tco", dipU);
+            model.addObject("showTeam", true);
+            model.addObject("NCtm", cod);
+            model.addObject("Dipendenti", dipA2);
+            model.setViewName("indexCQualita");
+            return model;
         }
         model.addObject("tco", dipU);
         model.addObject("showTeam", true);
@@ -387,6 +423,7 @@ public class CQualitaController {
         return model;
     }
 //problema come se non cancellasse
+
     @RequestMapping(value = {"/eliminaDipTeamOp"}, params = {"dip", "codice"}, method = RequestMethod.GET)
     public ModelAndView showTeam(@RequestParam("dip") Integer mat, @RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();

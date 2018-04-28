@@ -97,6 +97,12 @@
             <label>Data Inizio</label>
             <input id="curdate" type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
         </div>
+        
+        <div class="col-lg-4 col-md-4 form-group">
+            <label>Pezzi su cui è stata riscontrata la NC (":" per intervallo "," per separare pezzi diversi)</label>
+            <input id="pezzi" type="text" class="form-control"  name="pezzi"/>
+        </div>
+        
     </div>
     <button type="submit" class="btn btn-primary">Salva</button>
 

@@ -62,6 +62,33 @@ public class Pezzo implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.codice;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pezzo other = (Pezzo) obj;
+        if (this.codice != other.codice) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    @Override
     public String toString() {
         return "Pezzo{" + "codice=" + codice + ", categoria=" + categoria + ", pezziNC=" + pezziNC + '}';
     }

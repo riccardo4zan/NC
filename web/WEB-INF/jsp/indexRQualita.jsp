@@ -42,7 +42,9 @@
                     </div>
                 </div>
             </nav>
-            
+            <div class="mt row">
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
             <c:if test="${not empty ncAnno}">
                 <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
             </c:if>
@@ -56,7 +58,9 @@
             <c:if test="${changePassword}">
                 <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
             </c:if>
-
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

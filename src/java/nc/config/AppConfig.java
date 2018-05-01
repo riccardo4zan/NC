@@ -48,7 +48,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         //Username dell'utente
         ds.setUsername("root");
         //Password dell'utente
-        ds.setPassword("Rossotre2797");
+        ds.setPassword("root");
         return ds;
     }
 

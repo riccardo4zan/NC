@@ -55,15 +55,17 @@
     <!-- grafici torta -->
     <br><br><br><br>
     <div class="row contenuto">
-        <div><h3>Grafici a torta</h3></div>
         <div class="row">
             <div class="childs col-lg-4 col-md-4 col-sm-4" style="height: 400px; width: 400px;">
+                <center><h5>Costo NC reparti</h5></center>
                 <div id="reparti" ></div>
             </div>
             <div class="childs col-lg-4 col-md-4 col-sm-4" style="height: 400px; width: 400px;">
-                <div id="prodotti" ></div>
+                <center><h5>Costo NC per tipi</h5></center>
+                <div id="tipi" ></div>
             </div>
             <div class="childs col-lg-4 col-md-4 col-sm-4" style="height: 400px; width: 400px;">
+                <center><h5>Costo NC per fornitori</h5></center>
                 <div id="fornitori"></div>
             </div>
 
@@ -84,7 +86,7 @@
         var data = google.visualization.arrayToDataTable([
                 ["Fornitore", "Costo"]
 <c:forEach items="${fornitoriData}" var="i">
-        , ["${i.etichetta}", "${i.valD}"]
+        , ["${i.etichetta}", ${i.valD}]
 </c:forEach>
         ]);
         var options = {
@@ -110,7 +112,7 @@
         var data = google.visualization.arrayToDataTable([
             ["Prodotto", "Costo"],
     <c:forEach items="${tipiData}" var="i">
-            ["${i.etichetta}", "${i.valD}"],
+            ["${i.etichetta}", ${i.valD}],
     </c:forEach>
         ]);
         var options = {
@@ -125,7 +127,7 @@
                 fontSize: 16
             }
         };
-        var chart = new google.visualization.PieChart(document.getElementById('prodotti'));
+        var chart = new google.visualization.PieChart(document.getElementById('tipi'));
         chart.draw(data, options);
     }
 </script>
@@ -136,7 +138,7 @@
         var data = google.visualization.arrayToDataTable([
             ["Reparto", "Costo"]
     <c:forEach items="${repartiData}" var="i">
-            , ["${i.etichetta}", "${i.valD}"]
+            , ["${i.etichetta}", ${i.valD}]
     </c:forEach>
         ]);
         var options = {
@@ -167,7 +169,7 @@
         var data = google.visualization.arrayToDataTable([
             ['', 'Sales']
     <c:forEach items="${istogramma}" var="i">
-            , ["${i.etichetta}", "${i.valD}"]
+            , ["${i.etichetta}", ${i.valD}]
     </c:forEach>
         ]);
         var options = {

@@ -53,4 +53,7 @@ public class DipendenteServiceImpl implements DipendenteService{
      public List<Dipendente> findAllSenzaManager(){
          return dao.findAllSenzaManager();
      }
+     public List<Dipendente> findAllLiberi(int codice){
+         return dao.findAllLiberi(codice);
+     }
 }

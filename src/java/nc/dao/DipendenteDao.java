@@ -13,4 +13,5 @@ public interface DipendenteDao {
     List<Dipendente> findAll();
     List<Dipendente> findAllOperaiReparto(int reparto);
     List<Dipendente> findAllSenzaManager();
+    List<Dipendente> findAllLiberi(int codice);
 }

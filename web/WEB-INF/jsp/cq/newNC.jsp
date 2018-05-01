@@ -95,7 +95,7 @@
 
         <div class="col-lg-4 col-md-4 form-group">
             <label>Data Inizio</label>
-            <input id="curdate" type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
+            <input  type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
         </div>
         
         <div class="col-lg-4 col-md-4 form-group">

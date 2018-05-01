@@ -14,7 +14,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <body >
         <div>
-            <nav class="custom navbar navbar-expand-lg navbar-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#">IFS</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">

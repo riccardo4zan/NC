@@ -171,13 +171,7 @@ public class CQualitaController {
         ModelAndView model = new ModelAndView();
         Tipo t = ts.findByNome(tipo);
         NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
-        newnc.setPezziCorrelati(pezziCorrelati);
-        for (Pezzo tmp : pezziCorrelati){
-            Set<NonConformita> nc = tmp.getPezziNC();
-            nc.add(newnc);
-            tmp.setPezziNC(nc);
-            ps.updatePezzo(tmp);
-        }
+        
         
         //Apertura di una NC interna
         if (reparto != null) {
@@ -193,6 +187,12 @@ public class CQualitaController {
         }
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
+        for (Pezzo tmp : pezziCorrelati){
+            Set<NonConformita> nc = tmp.getPezziNC();
+            nc.add(newnc);
+            tmp.setPezziNC(nc);
+            ps.updatePezzo(tmp);
+        }
         model.addObject("newnc", newnc);
         model.addObject("NCAperte", ncs.findAllAperte());
         model.setViewName("indexCQualita");

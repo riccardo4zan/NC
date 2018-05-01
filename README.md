@@ -1,70 +1,23 @@
--- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: May 01, 2018 at 10:19 PM
--- Server version: 5.7.22-0ubuntu0.16.04.1
--- PHP Version: 7.0.28-0ubuntu0.16.04.1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `WebApp`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Categorie`
---
 
 CREATE TABLE `Categorie` (
   `Codice` int(3) NOT NULL,
   `Descrizione` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Categorie`
---
-
 INSERT INTO `Categorie` (`Codice`, `Descrizione`) VALUES
 (1, 'Prodotto1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Clienti`
---
 
 CREATE TABLE `Clienti` (
   `Piva` varchar(11) NOT NULL,
   `Nome` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `CTeam`
---
-
 CREATE TABLE `CTeam` (
   `MatricolaDipendente` int(3) NOT NULL,
   `CodiceNC` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Dipendenti`
---
 
 CREATE TABLE `Dipendenti` (
   `Matricola` int(3) NOT NULL,
@@ -74,21 +27,11 @@ CREATE TABLE `Dipendenti` (
   `Username` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Dipendenti`
---
-
 INSERT INTO `Dipendenti` (`Matricola`, `Nome`, `Cognome`, `Reparto`, `Username`) VALUES
 (1, 'Operaio', 'Operaio', 1, 'Operaio'),
 (2, 'Manager', 'Manager', 2, 'Manager'),
 (3, 'Responsabile Qualita', 'Responsabile Qualita', 3, 'ResponsabileQualita'),
 (4, 'ControlloreQualita', 'ControlloreQualita', 1, 'ControlloreQualita');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Elaborazioni`
---
 
 CREATE TABLE `Elaborazioni` (
   `Codice` int(4) NOT NULL,
@@ -99,22 +42,10 @@ CREATE TABLE `Elaborazioni` (
   `CodiceNC` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Fornitori`
---
-
 CREATE TABLE `Fornitori` (
   `Piva` varchar(11) NOT NULL,
   `Nome` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `NonConformita`
---
 
 CREATE TABLE `NonConformita` (
   `Codice` int(5) NOT NULL,
@@ -125,7 +56,7 @@ CREATE TABLE `NonConformita` (
   `DataApertura` date NOT NULL,
   `DataChiusura` date DEFAULT NULL,
   `Cause` varchar(255) NOT NULL,
-  `Gravita` int(2) NOT NULL,
+  `Gravita` int(1) NOT NULL,
   `Costo` decimal(12,2) DEFAULT NULL,
   `Tipo` varchar(30) NOT NULL,
   `PivaFornitore` varchar(11) DEFAULT NULL,
@@ -134,27 +65,13 @@ CREATE TABLE `NonConformita` (
   `MatricolaDipendente` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `NonConformita`
---
-
 INSERT INTO `NonConformita` (`Codice`, `Descrizione`, `AzioniContenimento`, `AzioniCorrettive`, `AzioniPreventive`, `DataApertura`, `DataChiusura`, `Cause`, `Gravita`, `Costo`, `Tipo`, `PivaFornitore`, `PivaCliente`, `IDReparto`, `MatricolaDipendente`) VALUES
 (1, 'aa', 'aa', NULL, NULL, '2018-05-10', NULL, '', 1, '0.00', 'Tipo NC 1', NULL, NULL, 1, 4);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Pezzi`
---
 
 CREATE TABLE `Pezzi` (
   `Codice` int(7) NOT NULL,
   `Categoria` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Pezzi`
---
 
 INSERT INTO `Pezzi` (`Codice`, `Categoria`) VALUES
 (1, 1),
@@ -276,51 +193,368 @@ INSERT INTO `Pezzi` (`Codice`, `Categoria`) VALUES
 (117, 1),
 (118, 1),
 (119, 1),
-(120, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `PezzoNC`
---
+(120, 1),
+(121, 1),
+(122, 1),
+(123, 1),
+(124, 1),
+(125, 1),
+(126, 1),
+(127, 1),
+(128, 1),
+(129, 1),
+(130, 1),
+(131, 1),
+(132, 1),
+(133, 1),
+(134, 1),
+(135, 1),
+(136, 1),
+(137, 1),
+(138, 1),
+(139, 1),
+(140, 1),
+(141, 1),
+(142, 1),
+(143, 1),
+(144, 1),
+(145, 1),
+(146, 1),
+(147, 1),
+(148, 1),
+(149, 1),
+(150, 1),
+(151, 1),
+(152, 1),
+(153, 1),
+(154, 1),
+(155, 1),
+(156, 1),
+(157, 1),
+(158, 1),
+(159, 1),
+(160, 1),
+(161, 1),
+(162, 1),
+(163, 1),
+(164, 1),
+(165, 1),
+(166, 1),
+(167, 1),
+(168, 1),
+(169, 1),
+(170, 1),
+(171, 1),
+(172, 1),
+(173, 1),
+(174, 1),
+(175, 1),
+(176, 1),
+(177, 1),
+(178, 1),
+(179, 1),
+(180, 1),
+(181, 1),
+(182, 1),
+(183, 1),
+(184, 1),
+(185, 1),
+(186, 1),
+(187, 1),
+(188, 1),
+(189, 1),
+(190, 1),
+(191, 1),
+(192, 1),
+(193, 1),
+(194, 1),
+(195, 1),
+(196, 1),
+(197, 1),
+(198, 1),
+(199, 1),
+(200, 1),
+(201, 1),
+(202, 1),
+(203, 1),
+(204, 1),
+(205, 1),
+(206, 1),
+(207, 1),
+(208, 1),
+(209, 1),
+(210, 1),
+(211, 1),
+(212, 1),
+(213, 1),
+(214, 1),
+(215, 1),
+(216, 1),
+(217, 1),
+(218, 1),
+(219, 1),
+(220, 1),
+(221, 1),
+(222, 1),
+(223, 1),
+(224, 1),
+(225, 1),
+(226, 1),
+(227, 1),
+(228, 1),
+(229, 1),
+(230, 1),
+(231, 1),
+(232, 1),
+(233, 1),
+(234, 1),
+(235, 1),
+(236, 1),
+(237, 1),
+(238, 1),
+(239, 1),
+(240, 1),
+(241, 1),
+(242, 1),
+(243, 1),
+(244, 1),
+(245, 1),
+(246, 1),
+(247, 1),
+(248, 1),
+(249, 1),
+(250, 1),
+(251, 1),
+(252, 1),
+(253, 1),
+(254, 1),
+(255, 1),
+(256, 1),
+(257, 1),
+(258, 1),
+(259, 1),
+(260, 1),
+(261, 1),
+(262, 1),
+(263, 1),
+(264, 1),
+(265, 1),
+(266, 1),
+(267, 1),
+(268, 1),
+(269, 1),
+(270, 1),
+(271, 1),
+(272, 1),
+(273, 1),
+(274, 1),
+(275, 1),
+(276, 1),
+(277, 1),
+(278, 1),
+(279, 1),
+(280, 1),
+(281, 1),
+(282, 1),
+(283, 1),
+(284, 1),
+(285, 1),
+(286, 1),
+(287, 1),
+(288, 1),
+(289, 1),
+(290, 1),
+(291, 1),
+(292, 1),
+(293, 1),
+(294, 1),
+(295, 1),
+(296, 1),
+(297, 1),
+(298, 1),
+(299, 1),
+(300, 1),
+(301, 1),
+(302, 1),
+(303, 1),
+(304, 1),
+(305, 1),
+(306, 1),
+(307, 1),
+(308, 1),
+(309, 1),
+(310, 1),
+(311, 1),
+(312, 1),
+(313, 1),
+(314, 1),
+(315, 1),
+(316, 1),
+(317, 1),
+(318, 1),
+(319, 1),
+(320, 1),
+(321, 1),
+(322, 1),
+(323, 1),
+(324, 1),
+(325, 1),
+(326, 1),
+(327, 1),
+(328, 1),
+(329, 1),
+(330, 1),
+(331, 1),
+(332, 1),
+(333, 1),
+(334, 1),
+(335, 1),
+(336, 1),
+(337, 1),
+(338, 1),
+(339, 1),
+(340, 1),
+(341, 1),
+(342, 1),
+(343, 1),
+(344, 1),
+(345, 1),
+(346, 1),
+(347, 1),
+(348, 1),
+(349, 1),
+(350, 1),
+(351, 1),
+(352, 1),
+(353, 1),
+(354, 1),
+(355, 1),
+(356, 1),
+(357, 1),
+(358, 1),
+(359, 1),
+(360, 1),
+(361, 1),
+(362, 1),
+(363, 1),
+(364, 1),
+(365, 1),
+(366, 1),
+(367, 1),
+(368, 1),
+(369, 1),
+(370, 1),
+(371, 1),
+(372, 1),
+(373, 1),
+(374, 1),
+(375, 1),
+(376, 1),
+(377, 1),
+(378, 1),
+(379, 1),
+(380, 1),
+(381, 1),
+(382, 1),
+(383, 1),
+(384, 1),
+(385, 1),
+(386, 1),
+(387, 1),
+(388, 1),
+(389, 1),
+(390, 1),
+(391, 1),
+(392, 1),
+(393, 1),
+(394, 1),
+(395, 1),
+(396, 1),
+(397, 1),
+(398, 1),
+(399, 1),
+(400, 1),
+(401, 1),
+(402, 1),
+(403, 1),
+(404, 1),
+(405, 1),
+(406, 1),
+(407, 1),
+(408, 1),
+(409, 1),
+(410, 1),
+(411, 1),
+(412, 1),
+(413, 1),
+(414, 1),
+(415, 1),
+(416, 1),
+(417, 1),
+(418, 1),
+(419, 1),
+(420, 1),
+(421, 1),
+(422, 1),
+(423, 1),
+(424, 1),
+(425, 1),
+(426, 1),
+(427, 1),
+(428, 1),
+(429, 1),
+(430, 1),
+(431, 1),
+(432, 1),
+(433, 1),
+(434, 1),
+(435, 1),
+(436, 1),
+(437, 1),
+(438, 1),
+(439, 1),
+(440, 1),
+(441, 1),
+(442, 1),
+(443, 1),
+(444, 1),
+(445, 1),
+(446, 1),
+(447, 1),
+(448, 1),
+(449, 1),
+(450, 1),
+(451, 1),
+(452, 1),
+(453, 1),
+(454, 1),
+(455, 1),
+(456, 1),
+(457, 1),
+(458, 1),
+(459, 1),
+(460, 1),
+(461, 1),
+(462, 1),
+(463, 1);
 
 CREATE TABLE `PezzoNC` (
   `CodicePezzo` int(7) NOT NULL,
   `CodiceNC` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `PezzoNC`
---
-
 INSERT INTO `PezzoNC` (`CodicePezzo`, `CodiceNC`) VALUES
 (12, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Reparti`
---
 
 CREATE TABLE `Reparti` (
   `ID` int(3) NOT NULL,
   `Nome` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Reparti`
---
-
 INSERT INTO `Reparti` (`ID`, `Nome`) VALUES
 (1, 'Produzione'),
 (2, 'Direzione'),
 (3, 'Qualita');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Segnalazioni`
---
 
 CREATE TABLE `Segnalazioni` (
   `Codice` int(5) NOT NULL,
@@ -330,29 +564,13 @@ CREATE TABLE `Segnalazioni` (
   `MatricolaDipendente` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Tipi`
---
-
 CREATE TABLE `Tipi` (
   `Nome` varchar(30) NOT NULL,
   `Descrizione` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Tipi`
---
-
 INSERT INTO `Tipi` (`Nome`, `Descrizione`) VALUES
 ('Tipo NC 1', 'Tipo NC 1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
@@ -360,21 +578,11 @@ CREATE TABLE `users` (
   `enabled` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `users` (`username`, `password`, `enabled`) VALUES
 ('ControlloreQualita', '$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', 1),
 ('Manager', '$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', 1),
 ('Operaio', '$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', 1),
 ('ResponsabileQualita', '$2a$10$04TVADrR6/SPLBjsK0N30.Jf5fNjBugSACeGv1S69dZALR7lSov0y', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_roles`
---
 
 CREATE TABLE `user_roles` (
   `user_role_id` int(11) NOT NULL,
@@ -382,64 +590,35 @@ CREATE TABLE `user_roles` (
   `role` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user_roles`
---
-
 INSERT INTO `user_roles` (`user_role_id`, `username`, `role`) VALUES
 (5, 'ControlloreQualita', 'ROLE_CONTROLQUA'),
 (2, 'Manager', 'ROLE_MANAGER'),
 (3, 'Operaio', 'ROLE_OPERAIO'),
 (4, 'ResponsabileQualita', 'ROLE_RESPOQUA');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `Categorie`
---
 ALTER TABLE `Categorie`
   ADD PRIMARY KEY (`Codice`);
-
---
--- Indexes for table `Clienti`
---
+  
 ALTER TABLE `Clienti`
   ADD PRIMARY KEY (`Piva`);
 
---
--- Indexes for table `CTeam`
---
 ALTER TABLE `CTeam`
   ADD PRIMARY KEY (`MatricolaDipendente`,`CodiceNC`),
   ADD KEY `CodiceNC` (`CodiceNC`);
 
---
--- Indexes for table `Dipendenti`
---
 ALTER TABLE `Dipendenti`
   ADD PRIMARY KEY (`Matricola`),
   ADD KEY `Reparto` (`Reparto`),
   ADD KEY `Username` (`Username`);
 
---
--- Indexes for table `Elaborazioni`
---
 ALTER TABLE `Elaborazioni`
   ADD PRIMARY KEY (`Codice`),
   ADD KEY `MatricolaDipendente` (`MatricolaDipendente`),
   ADD KEY `CodiceNC` (`CodiceNC`);
 
---
--- Indexes for table `Fornitori`
---
 ALTER TABLE `Fornitori`
   ADD PRIMARY KEY (`Piva`);
 
---
--- Indexes for table `NonConformita`
---
 ALTER TABLE `NonConformita`
   ADD PRIMARY KEY (`Codice`),
   ADD KEY `Tipo` (`Tipo`),
@@ -448,125 +627,68 @@ ALTER TABLE `NonConformita`
   ADD KEY `IDReparto` (`IDReparto`),
   ADD KEY `MatricolaDipendente` (`MatricolaDipendente`);
 
---
--- Indexes for table `Pezzi`
---
 ALTER TABLE `Pezzi`
   ADD PRIMARY KEY (`Codice`),
   ADD KEY `Categoria` (`Categoria`);
 
---
--- Indexes for table `PezzoNC`
---
 ALTER TABLE `PezzoNC`
   ADD PRIMARY KEY (`CodicePezzo`,`CodiceNC`),
   ADD KEY `CodiceNC` (`CodiceNC`);
 
---
--- Indexes for table `Reparti`
---
 ALTER TABLE `Reparti`
   ADD PRIMARY KEY (`ID`);
 
---
--- Indexes for table `Segnalazioni`
---
 ALTER TABLE `Segnalazioni`
   ADD PRIMARY KEY (`Codice`),
   ADD KEY `MatricolaDipendente` (`MatricolaDipendente`);
-
---
--- Indexes for table `Tipi`
---
+  
 ALTER TABLE `Tipi`
   ADD PRIMARY KEY (`Nome`);
 
---
--- Indexes for table `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`);
 
---
--- Indexes for table `user_roles`
---
 ALTER TABLE `user_roles`
   ADD PRIMARY KEY (`user_role_id`),
   ADD UNIQUE KEY `uni_username_role` (`role`,`username`),
   ADD KEY `fk_username_idx` (`username`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `Categorie`
---
 ALTER TABLE `Categorie`
   MODIFY `Codice` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `Dipendenti`
---
+
 ALTER TABLE `Dipendenti`
   MODIFY `Matricola` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `Elaborazioni`
---
+
 ALTER TABLE `Elaborazioni`
   MODIFY `Codice` int(4) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `NonConformita`
---
+
 ALTER TABLE `NonConformita`
   MODIFY `Codice` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `Pezzi`
---
+
 ALTER TABLE `Pezzi`
-  MODIFY `Codice` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
---
--- AUTO_INCREMENT for table `Reparti`
---
+  MODIFY `Codice` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=464;
+
 ALTER TABLE `Reparti`
   MODIFY `ID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `Segnalazioni`
---
+
 ALTER TABLE `Segnalazioni`
   MODIFY `Codice` int(5) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `user_roles`
---
+
 ALTER TABLE `user_roles`
   MODIFY `user_role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `CTeam`
---
 ALTER TABLE `CTeam`
   ADD CONSTRAINT `CTeam_ibfk_1` FOREIGN KEY (`MatricolaDipendente`) REFERENCES `Dipendenti` (`Matricola`),
   ADD CONSTRAINT `CTeam_ibfk_2` FOREIGN KEY (`CodiceNC`) REFERENCES `NonConformita` (`Codice`);
 
---
--- Constraints for table `Dipendenti`
---
 ALTER TABLE `Dipendenti`
   ADD CONSTRAINT `Dipendenti_ibfk_1` FOREIGN KEY (`Reparto`) REFERENCES `Reparti` (`ID`),
   ADD CONSTRAINT `Dipendenti_ibfk_2` FOREIGN KEY (`Username`) REFERENCES `users` (`username`);
 
---
--- Constraints for table `Elaborazioni`
---
 ALTER TABLE `Elaborazioni`
   ADD CONSTRAINT `Elaborazioni_ibfk_1` FOREIGN KEY (`MatricolaDipendente`) REFERENCES `Dipendenti` (`Matricola`),
   ADD CONSTRAINT `Elaborazioni_ibfk_2` FOREIGN KEY (`CodiceNC`) REFERENCES `NonConformita` (`Codice`);
 
---
--- Constraints for table `NonConformita`
---
 ALTER TABLE `NonConformita`
   ADD CONSTRAINT `NonConformita_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `Tipi` (`Nome`),
   ADD CONSTRAINT `NonConformita_ibfk_2` FOREIGN KEY (`PivaFornitore`) REFERENCES `Fornitori` (`Piva`),
@@ -574,28 +696,16 @@ ALTER TABLE `NonConformita`
   ADD CONSTRAINT `NonConformita_ibfk_4` FOREIGN KEY (`IDReparto`) REFERENCES `Reparti` (`ID`),
   ADD CONSTRAINT `NonConformita_ibfk_5` FOREIGN KEY (`MatricolaDipendente`) REFERENCES `Dipendenti` (`Matricola`);
 
---
--- Constraints for table `Pezzi`
---
 ALTER TABLE `Pezzi`
   ADD CONSTRAINT `Pezzi_ibfk_1` FOREIGN KEY (`Categoria`) REFERENCES `Categorie` (`Codice`);
-
---
--- Constraints for table `PezzoNC`
---
+  
 ALTER TABLE `PezzoNC`
   ADD CONSTRAINT `PezzoNC_ibfk_1` FOREIGN KEY (`CodicePezzo`) REFERENCES `Pezzi` (`Codice`),
   ADD CONSTRAINT `PezzoNC_ibfk_2` FOREIGN KEY (`CodiceNC`) REFERENCES `NonConformita` (`Codice`);
 
---
--- Constraints for table `Segnalazioni`
---
 ALTER TABLE `Segnalazioni`
   ADD CONSTRAINT `Segnalazioni_ibfk_1` FOREIGN KEY (`MatricolaDipendente`) REFERENCES `Dipendenti` (`Matricola`);
 
---
--- Constraints for table `user_roles`
---
 ALTER TABLE `user_roles`
   ADD CONSTRAINT `fk_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`);
 

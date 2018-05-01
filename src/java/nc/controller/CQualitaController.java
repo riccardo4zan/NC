@@ -192,6 +192,12 @@ public class CQualitaController {
         }
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
+        for (Pezzo tmp : pezziCorrelati){
+            Set<NonConformita> nc = tmp.getPezziNC();
+            nc.add(newnc);
+            tmp.setPezziNC(nc);
+            ps.updatePezzo(tmp);
+        }
         model.addObject("newnc", newnc);
         model.addObject("NCAperte", ncs.findAllAperte());
         model.setViewName("indexCQualita");

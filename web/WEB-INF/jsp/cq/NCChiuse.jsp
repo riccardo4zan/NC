@@ -16,6 +16,7 @@
                 <th>Data fine</th>
                 <th>Costo </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                     <td> ${nc.dataApertura}</td>
                     <td> ${nc.dataChiusura}</td>
                     <td> ${nc.costo}</td>
+                     <td> <a href="/cq/pezziNC?ncc=${nc.codice}">Pezzi correlati</a></td>
                     <td><a href="/cq/visualizzaNC?id=${nc.codice}">Visualizza</a></td>
                 </tr>
             </c:forEach>

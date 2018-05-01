@@ -13,6 +13,7 @@
                 <th>Data inizio</th>
                 <th>Tipo </th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +24,10 @@
                     <td> ${nc.azioniContenimento} </td>
                     <td> ${nc.dataApertura}</td>
                     <td> ${nc.tipo.nome}</td>
+                    <td> <a href="/cq/pezziNC?ncc=${nc.codice}">Pezzi correlati</a></td>
                     <td><a href="/cq/editNC?id=${nc.codice}&desc=${nc.descrizione}&azioniContenitive=${nc.azioniContenimento}">Modifica</a></td>
                 </tr>
             </c:forEach>
         </tbody>
-    </table></c:if>
+    </table>
+</c:if>

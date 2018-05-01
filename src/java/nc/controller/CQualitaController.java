@@ -73,9 +73,11 @@ public class CQualitaController {
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         List<NonConformita> nc = ncs.findAllAperte();
-        if (nc.isEmpty()) model.addObject("Vuoto", "Non ci sono non conformità aperte");
-
-        else model.addObject("NCAperte", nc);
+        if (nc.isEmpty()) {
+            model.addObject("Vuoto", "Non ci sono non conformità aperte");
+        } else {
+            model.addObject("NCAperte", nc);
+        }
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -87,8 +89,9 @@ public class CQualitaController {
         List<NonConformita> nc = ncs.findAllInElaborazione();
         if (nc.isEmpty()) {
             model.addObject("Vuoto", "Non ci sono non conformità in elaborazione");
+        } else {
+            model.addObject("NCElaborazione", nc);
         }
-        else model.addObject("NCElaborazione", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -100,8 +103,9 @@ public class CQualitaController {
         List<NonConformita> nc = ncs.findAllChiuse();
         if (nc.isEmpty()) {
             model.addObject("Vuoto", "Non ci sono non conformità chiuse");
+        } else {
+            model.addObject("NCChiuse", nc);
         }
-        else model.addObject("NCChiuse", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -146,6 +150,10 @@ public class CQualitaController {
             @RequestParam(value = "cliente", required = false) String cliente,
             @RequestParam("dataInizio") String dataI) {
 
+        ModelAndView model = new ModelAndView();
+        Tipo t = ts.findByNome(tipo);
+        NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
+
         //elaborazione pezzi da associare alla NC
         Set<Pezzo> pezziCorrelati = new HashSet<>();
         pezzi = pezzi.trim();
@@ -167,16 +175,6 @@ public class CQualitaController {
         }
         //fine elaborazione
 
-        ModelAndView model = new ModelAndView();
-        Tipo t = ts.findByNome(tipo);
-        NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
-        newnc.setPezziCorrelati(pezziCorrelati);
-        for (Pezzo tmp : pezziCorrelati) {
-            Set<NonConformita> nc = tmp.getPezziNC();
-            nc.add(newnc);
-            tmp.setPezziNC(nc);
-            ps.updatePezzo(tmp);
-        }
 
         //Apertura di una NC interna
         if (reparto != null) {
@@ -192,7 +190,7 @@ public class CQualitaController {
         }
         newnc.setDipendente(MainController.getLoggedDip());
         ncs.saveNonConformita(newnc);
-        for (Pezzo tmp : pezziCorrelati){
+        for (Pezzo tmp : pezziCorrelati) {
             Set<NonConformita> nc = tmp.getPezziNC();
             nc.add(newnc);
             tmp.setPezziNC(nc);
@@ -266,9 +264,12 @@ public class CQualitaController {
     public ModelAndView newElaborazione(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
-        List<Dipendente> l=ds.findAllOperaiReparto(nc.getReparto().getId());
-        if(l.isEmpty())model.addObject("vuoto", "non ci sono operai nel reparto");
-        else model.addObject("apriElaborazione", l);
+        List<Dipendente> l = ds.findAllOperaiReparto(nc.getReparto().getId());
+        if (l.isEmpty()) {
+            model.addObject("vuoto", "non ci sono operai nel reparto");
+        } else {
+            model.addObject("apriElaborazione", l);
+        }
         model.addObject("ncPassata", id);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
@@ -401,7 +402,6 @@ public class CQualitaController {
         return model;
     }
 
-
     @RequestMapping(value = {"/eliminaDipTeamOp"}, params = {"dip", "codice"}, method = RequestMethod.GET)
     public ModelAndView showTeam(@RequestParam("dip") Integer mat, @RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
@@ -417,6 +417,16 @@ public class CQualitaController {
         dip.setParteTeam(lnc);
         ds.updateDipendente(dip);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.setViewName("indexCQualita");
+        return model;
+    }
+    
+        @RequestMapping(value = {"/pezziNC"}, params = {"ncc"}, method = RequestMethod.GET)
+    public ModelAndView showTeam(@RequestParam("ncc") int cod) {
+        ModelAndView model = new ModelAndView();
+        NonConformita nc = ncs.findByCodice(cod);
+         model.addObject("codNc", cod);
+        model.addObject("visualPezzi", nc.getPezziCorrelati());
         model.setViewName("indexCQualita");
         return model;
     }

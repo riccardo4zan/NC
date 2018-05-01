@@ -100,7 +100,7 @@
         
         <div class="col-lg-4 col-md-4 form-group">
             <label>Pezzi su cui è stata riscontrata la NC (":" per intervallo "," per separare pezzi diversi)</label>
-            <input id="pezzi" type="text" class="form-control"  name="pezzi"/>
+            <input id="pezzi" type="text" class="form-control" required name="pezzi"/>
         </div>
         
     </div>

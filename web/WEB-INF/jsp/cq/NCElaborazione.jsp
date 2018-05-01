@@ -17,6 +17,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     <td><a href="/cq/editNC?id=${nc.codice}&desc=${nc.descrizione}&azioniContenitive=${nc.azioniContenimento}">Modifica</a></td>
                     <td><a href="/cq/newElaborazione?id=${nc.codice}">Assegna elaborazione</a></td>
                     <td><a href="/cq/showTeam?codice=${nc.codice}">Assegna team operativo </a></td>
+                    <td> <a href="/cq/pezziNC?ncc=${nc.codice}">Pezzi correlati</a></td>
                 </tr>
             </c:forEach>
         </tbody>

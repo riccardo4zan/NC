@@ -118,7 +118,7 @@ public class ManagerController {
     @RequestMapping(value = "/creaCategoria", method = RequestMethod.GET)
     public ModelAndView creaCategoria() {
         ModelAndView model = new ModelAndView();
-        model.addObject("segnalazione", true);
+        model.addObject("categoria", true);
         model.setViewName("indexManager");
         return model;
     }

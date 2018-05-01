@@ -88,8 +88,13 @@
                         <c:set var="editNC" value="${editNC}" scope="request"/>
                         <c:set var="desc" value="${desc}" scope="request"/>
                         <c:set var="azioniContenitive" value="${azioniContenitive}" scope="request"/>
-
                         <c:import url="/WEB-INF/jsp/cq/editNC.jsp"/>
+                    </c:if>
+                    
+                     <c:if test="${not empty visualPezzi}">
+                        <c:set var="visualPezzi" value="${visualPezzi}" scope="request"/>
+                         <c:set var="codNc" value="${codNc}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/cq/pezziNC.jsp"/>
                     </c:if>
 
                     <c:if test="${not empty apriElaborazione || not empty vuoto }">

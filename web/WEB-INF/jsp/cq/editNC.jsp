@@ -3,7 +3,7 @@
 <form action="/cq/modNC" method="POST">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-    <input type="hidden" class="form-control"  name="codNC" value="${editNC}"/>
+    <input type="hidden" class="form-control"  name="codNC" value="${editNC.codice}"/>
 
     <div class="form-group">
         <label>Descrizione</label>
@@ -17,12 +17,12 @@
 
     <div class="form-group">
         <label>Azioni correttive</label>
-        <textarea class="form-control" name="azioniCorrettive" rows="3"></textarea>
+        <textarea class="form-control" name="azioniCorrettive" rows="3">${editNC.azioniCorrettive}</textarea>
     </div>
 
     <div class="form-group">
         <label>Azioni preventive</label>
-        <textarea class="form-control" name="azioniPreventive" rows="3"></textarea>
+        <textarea class="form-control" name="azioniPreventive" rows="3">${editNC.azioniPreventive}</textarea>
     </div>
 
     <div class="row">
@@ -31,15 +31,6 @@
         <input id="curdate" type="date" class="form-control" name="dataF"/>
     </div>
 
-    <!-- Immette la data odierna -->
-    <script>
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        today = yyyy + '/' + mm + '/' + dd;
-        document.getElementById('curdate').value = today;
-    </script>
 
     <!-- fare controllo inserimento -->
     <div class="col-lg-6 col-md-6 form-group">
@@ -49,7 +40,7 @@
 
     <button type="submit" class="btn btn-primary">Salva</button>
     
-    <a href="/cq/showTeam?codice=${editNC}">teamop</a>
+    <a href="/cq/showTeam?codice=${editNC.codice}">teamop</a>
     
 </form>
 

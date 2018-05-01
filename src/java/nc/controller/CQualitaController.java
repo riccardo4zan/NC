@@ -73,10 +73,9 @@ public class CQualitaController {
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
         List<NonConformita> nc = ncs.findAllAperte();
-        if (nc.isEmpty()) {
-            model.addObject("Vuoto", "Non ci sono non conformità aperte");
-        }
-        model.addObject("NCAperte", nc);
+        if (nc.isEmpty()) model.addObject("Vuoto", "Non ci sono non conformità aperte");
+
+        else model.addObject("NCAperte", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -89,7 +88,7 @@ public class CQualitaController {
         if (nc.isEmpty()) {
             model.addObject("Vuoto", "Non ci sono non conformità in elaborazione");
         }
-        model.addObject("NCElaborazione", nc);
+        else model.addObject("NCElaborazione", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -102,7 +101,7 @@ public class CQualitaController {
         if (nc.isEmpty()) {
             model.addObject("Vuoto", "Non ci sono non conformità chiuse");
         }
-        model.addObject("NCChiuse", nc);
+        else model.addObject("NCChiuse", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;
@@ -167,12 +166,18 @@ public class CQualitaController {
             }
         }
         //fine elaborazione
-        
+
         ModelAndView model = new ModelAndView();
         Tipo t = ts.findByNome(tipo);
         NonConformita newnc = new NonConformita(desc, AC, dataI, cause, gravita, t);
-        
-        
+        newnc.setPezziCorrelati(pezziCorrelati);
+        for (Pezzo tmp : pezziCorrelati) {
+            Set<NonConformita> nc = tmp.getPezziNC();
+            nc.add(newnc);
+            tmp.setPezziNC(nc);
+            ps.updatePezzo(tmp);
+        }
+
         //Apertura di una NC interna
         if (reparto != null) {
             Reparto r = rs.findByID(reparto);
@@ -200,10 +205,11 @@ public class CQualitaController {
     }
 
     //  modifica nc 
-    @RequestMapping(value = {"/editNC"}, params = {"id", "desc", "azioniContenitive"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/editNC"}, params = {"id", "desc", "azioniContenitive",}, method = RequestMethod.GET)
     public ModelAndView editNC(@RequestParam("id") int id, @RequestParam("desc") String desc, @RequestParam("azioniContenitive") String AC) {
         ModelAndView model = new ModelAndView();
-        model.addObject("editNC", id);
+        NonConformita nc = ncs.findByCodice(id);
+        model.addObject("editNC", nc);
         model.addObject("desc", desc);
         model.addObject("azioniContenitive", AC);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
@@ -260,7 +266,9 @@ public class CQualitaController {
     public ModelAndView newElaborazione(@RequestParam("id") int id) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
-        model.addObject("apriElaborazione", ds.findAllOperaiReparto(nc.getReparto().getId()));
+        List<Dipendente> l=ds.findAllOperaiReparto(nc.getReparto().getId());
+        if(l.isEmpty())model.addObject("vuoto", "non ci sono operai nel reparto");
+        else model.addObject("apriElaborazione", l);
         model.addObject("ncPassata", id);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
@@ -358,53 +366,23 @@ public class CQualitaController {
     }
 
 //teamop
-    @RequestMapping(value = {"/teamNC"}, method = RequestMethod.GET)
-    public ModelAndView teamNC(@RequestParam(value = "codiceNC") int codice) {
-        ModelAndView model = new ModelAndView();
-        //Prendo la NC dal codice
-        NonConformita tm = ncs.findByCodice(codice);
-        //Passo tutta la lista dei possibili dipendenti associabili al team
-        model.addObject("scrollerDip", ds.findAll());
-        //Passo la lista dei dipendenti già associati al team
-        model.addObject("dipendentiAssociati", tm.getTeam());
-        //Attiva l'inclusione del codice
-        model.addObject("teamOp", true);
-        model.setViewName("indexCQualita");
-        return model;
-    }
-
     @RequestMapping(value = {"/showTeam"}, params = {"codice"}, method = RequestMethod.GET)
     public ModelAndView showTeam(@RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(cod);
-        //si puo` fare meglio
-        boolean f = true;
         Set<Dipendente> dipU = nc.getTeam();
-        List<Dipendente> dipA = ds.findAllSenzaManager();
-        List<Dipendente> dipA2 = new ArrayList<Dipendente>();
         if (!dipU.isEmpty()) {
-            for (Dipendente d1 : dipA) {
-                f = true;
-                for (Dipendente d2 : dipU) {
-                    if (d1.getMatricola() == d2.getMatricola()) {
-                        f = false;
-                    }
-                }
-                if (f) {
-                    dipA2.add(d1);
-                }
-            }
             model.addObject("tco", dipU);
             model.addObject("showTeam", true);
             model.addObject("NCtm", cod);
-            model.addObject("Dipendenti", dipA2);
+            model.addObject("Dipendenti", ds.findAllLiberi(cod));
             model.setViewName("indexCQualita");
             return model;
         }
         model.addObject("tco", dipU);
         model.addObject("showTeam", true);
         model.addObject("NCtm", cod);
-        model.addObject("Dipendenti", dipA);
+        model.addObject("Dipendenti", ds.findAllSenzaManager());
         model.setViewName("indexCQualita");
         return model;
     }
@@ -422,15 +400,20 @@ public class CQualitaController {
         model.setViewName("indexCQualita");
         return model;
     }
-//problema come se non cancellasse
+
 
     @RequestMapping(value = {"/eliminaDipTeamOp"}, params = {"dip", "codice"}, method = RequestMethod.GET)
     public ModelAndView showTeam(@RequestParam("dip") Integer mat, @RequestParam("codice") Integer cod) {
         ModelAndView model = new ModelAndView();
         Dipendente dip = ds.findByMatricola(mat);
         NonConformita nc = ncs.findByCodice(cod);
+
         Set<NonConformita> lnc = dip.getParteTeam();
-        lnc.remove(nc);
+        for (NonConformita n : lnc) {
+            if (n.getCodice() == cod) {
+                lnc.remove(n);
+            }
+        }
         dip.setParteTeam(lnc);
         ds.updateDipendente(dip);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());

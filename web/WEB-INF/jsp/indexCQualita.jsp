@@ -37,7 +37,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/NCChiuse">Non conformit&agrave; chiuse</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="/cq/aggiungiTipoNC">Aggiungi tipo NC</a>
                         </li>
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2"></div>
                 <div class="col-lg-8 col-md-8">
-                    
+
                     <c:if test="${NC}">
                         <c:set var="Tipi" value="${Tipi}" scope="request"/>
                         <c:set var="Reparti" value="${Reparti}" scope="request"/>
@@ -68,16 +68,19 @@
                         <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
                     </c:if>
 
-                    <c:if test="${not empty NCAperte}">
+                    <c:if test="${not empty NCAperte || not empty Vuoto}">
                         <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
+                        <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
                     </c:if>
 
-                    <c:if test="${not empty NCChiuse}">
+                    <c:if test="${not empty NCChiuse || not empty Vuoto}">
+                        <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
                     </c:if>
 
-                    <c:if test="${not empty NCElaborazione}">
+                    <c:if test="${not empty NCElaborazione || not empty Vuoto}">
+                        <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
                     </c:if>
 
@@ -85,15 +88,17 @@
                         <c:set var="editNC" value="${editNC}" scope="request"/>
                         <c:set var="desc" value="${desc}" scope="request"/>
                         <c:set var="azioniContenitive" value="${azioniContenitive}" scope="request"/>
+
                         <c:import url="/WEB-INF/jsp/cq/editNC.jsp"/>
                     </c:if>
-                    
-                    <c:if test="${not empty apriElaborazione}">
+
+                    <c:if test="${not empty apriElaborazione || not empty vuoto }">
                         <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
+                        <c:set var="vuoto" value="${vuoto}" scope="request"/>
                         <c:set var="ncPassata" value="${ncPassata}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/newElaborazione.jsp"/>
                     </c:if>
-                    
+
                     <c:if test="${not empty NCChiesta}">
                         <c:set var="NCChiesta" value="${NCChiesta}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/visualizzaNC.jsp"/>
@@ -110,11 +115,11 @@
                         <c:set var="segnalazione" value="${segnalazione}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/dettaglioSegnalazione.jsp"/>
                     </c:if>
-                    
+
                     <c:if test="${not empty aggiungiTipo}">
                         <c:import url="/WEB-INF/jsp/cq/newTipoNC.jsp"/>
                     </c:if>
-                    
+
                     <c:if test="${showTeam}">
                         <c:set var="NCtm" value="${NCtm}" scope="request"/>
                         <c:set var="tco" value="${tco}" scope="request"/>
@@ -127,7 +132,7 @@
                         <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
                     </c:if>
-                    
+
                     <c:if test="${changePassword}">
                         <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
                     </c:if>

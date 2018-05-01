@@ -61,4 +61,13 @@ public class DipendenteDaoImpl implements DipendenteDao {
                 
         return (List<Dipendente>) query.list();
     }
+    
+         public List<Dipendente> findAllLiberi(int codice) {
+        Query query = getSession().createSQLQuery(
+                "SELECT D.Matricola,D.Nome,D.cognome,D.Reparto,D.Username FROM Dipendenti AS D ,users AS U, user_roles AS US WHERE D.Username=U.username AND U.username= US.username AND US.role!='ROLE_MANAGER' AND D.Matricola NOT IN (SELECT MatricolaDipendente FROM CTeam WHERE CodiceNC=:codice)") 
+                .addEntity(Dipendente.class)
+                .setParameter("codice",codice);
+                
+        return (List<Dipendente>) query.list();
+    }
 }

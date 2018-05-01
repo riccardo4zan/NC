@@ -38,7 +38,7 @@
         <input type="number" min="0.01" step="0.01" max="1000000000" class="form-control"  name="costo"/>
     </div>
 
-    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="submit" class="btn btn-success">Salva</button>
     
     <a href="/cq/showTeam?codice=${editNC.codice}">teamop</a>
     

@@ -16,7 +16,7 @@
     <body>
 
         <div>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
                 <a class="navbar-brand" href="#">IFS</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">

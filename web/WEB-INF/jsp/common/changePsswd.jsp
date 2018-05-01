@@ -16,11 +16,13 @@ function check(){
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     
     <div class="form-group">
-        <input type="text" class="form-control" id="name1" name="psswd1" placeholder="Password"/>
+        <label>Nuova password</label>
+        <input type="password" class="form-control" id="name1" name="psswd1" placeholder="Password"/>
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" id="name2" name="psswd2" placeholder="Ripeti la Password"/>
+        <label>Ripeti password</label>
+        <input type="password" class="form-control" id="name2" name="psswd2" placeholder="Password"/>
     </div>
 
 </form>
-<button class="btn bottone btnform" onclick="check();" >Salva</button>
+<button class="btn btn-success btnform" onclick="check();" >Salva</button>

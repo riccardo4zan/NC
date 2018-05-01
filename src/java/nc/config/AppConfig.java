@@ -44,11 +44,11 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         //Nome del Db a cui deve connettersi
-        ds.setUrl("jdbc:mysql://localhost:3306/WebApp");
+        ds.setUrl("jdbc:mysql://localhost/ifs");
         //Username dell'utente
         ds.setUsername("root");
         //Password dell'utente
-        ds.setPassword("root");
+        ds.setPassword("Rossotre2797");
         return ds;
     }
 

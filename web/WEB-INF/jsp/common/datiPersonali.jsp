@@ -33,5 +33,5 @@
 
     </div>
     <div class="cambia-pass">
-        <a href="./cambiaPassword"><button class="btn btn-lg bottone">Cambia password</button></a>
+        <a href="./cambiaPassword"><button class="btn btn-success">Cambia password</button></a>
     </div>

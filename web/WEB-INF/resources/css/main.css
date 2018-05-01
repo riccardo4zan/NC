@@ -25,7 +25,7 @@ div.imieidati {
     color: #000000;
 }
 .divTable.imieidati .divTableCell:nth-child(even) {
-    background: #3F51B5;
+    background: #28a745;
 }
 .imieidati .tableFootStyle {
     font-size: 13px;

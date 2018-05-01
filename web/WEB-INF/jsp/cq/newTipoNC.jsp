@@ -8,5 +8,5 @@
         <label>Descrizione</label>
         <textarea class="form-control" name="descrizione"></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="submit" class="btn btn-success">Salva</button>
 </form>

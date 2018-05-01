@@ -28,5 +28,5 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Assegna</button>
+        <button type="submit" class="btn btn-success">Assegna</button>
     </form></c:if>

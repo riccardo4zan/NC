@@ -24,5 +24,5 @@
         <form:input class="form-control" path="dataFine" type="date" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="submit" class="btn btn-success">Salva</button>
 </form:form>

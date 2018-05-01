@@ -6,7 +6,7 @@
         <div class="card p-30 mh">
             <div class="media">
                 <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    <span><i class="fa fa-usd f-s-40 color-success"></i></span>
                 </div>
                 <div class="media-body media-text-right">
                     <h2><center>${totale}&euro;</center></h2>
@@ -19,7 +19,7 @@
         <div class="card p-30 mh">
             <div class="media">
                 <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    <span><i class="fa fa-usd f-s-40 color-success"></i></span>
                 </div>
                 <div class="media-body media-text-right">
                     <h2><center>${ncAnno}</center></h2>
@@ -32,7 +32,7 @@
         <div class="card p-30 mh">
             <div class="media">
                 <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    <span><i class="fa fa-usd f-s-40 color-success"></i></span>
                 </div>
                 <div class="media-body media-text-right">
                     <h2 class="<c:if test="${differenza<=0}">pos</c:if><c:if test="${differenza>0}">neg</c:if>"><center>${differenza}&percnt;</center></h2>

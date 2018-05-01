@@ -44,11 +44,6 @@
                     </div>
                 </div>
             </nav>
-            <c:if test="${not empty cat}">
-                <script>
-                    window.open("http://localhost:8084/op/report?min=${min}&max=${max}&cat=${cat}", '_blank');
-                </script>
-            </c:if>
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">

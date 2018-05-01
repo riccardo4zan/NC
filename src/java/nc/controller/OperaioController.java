@@ -141,22 +141,8 @@ public class OperaioController {
             ps.savePezzo(pz);
         }
         int max = ps.findMaxID();
-        model.addObject("min", min);
-        model.addObject("max", max);
-        model.addObject("cat", tmp.getDescrizione());
-        model.addObject("matricola", MainController.getLoggedDip().getMatricola());
-        model.addObject("aperte", es.findOpen(MainController.getLoggedDip()));
-        model.setViewName("indexOperaio");
-        return model;
-    }
-
-    @RequestMapping(value = {"/report"}, params = {"min", "max", "cat"}, method = RequestMethod.GET)
-    public ModelAndView report(@RequestParam("min") int min, @RequestParam("max") int max, @RequestParam("cat") String cat) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("min", min);
-        model.addObject("max", max);
-        model.addObject("cat", cat);
-        model.setViewName("/operaio/pdfBuilder");
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
         return model;
     }
     

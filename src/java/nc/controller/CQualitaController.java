@@ -1,8 +1,13 @@
 package nc.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nc.model.Cliente;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
@@ -164,10 +169,11 @@ public class CQualitaController {
             Reparto r = rs.findByID(reparto);
             newnc.setReparto(r);
         } //Apertura di una NC esterna
-        else if (cliente != null) {
+        if (cliente != null) {
             Cliente c = cs.findByPiva(cliente);
             newnc.setCliente(c);
-        } else if (fornitore != null) {
+        }
+        if (fornitore != null) {
             Fornitore f = fs.findByPiva(fornitore);
             newnc.setFornitore(f);
         }
@@ -209,6 +215,7 @@ public class CQualitaController {
         ModelAndView model = new ModelAndView();
         NonConformita nc = ncs.findByCodice(id);
         nc.setDescrizione(desc);
+
         if (!Acon.isEmpty()) {
             nc.setAzioniContenimento(Acon);
         }
@@ -218,19 +225,54 @@ public class CQualitaController {
         if (!Aprev.isEmpty()) {
             nc.setAzioniPreventive(Aprev);
         }
+
         if (!dataF.isEmpty()) {
-            nc.setDataChiusura(dataF);
+            if (Acon.isEmpty() || Acor.isEmpty() || Aprev.isEmpty() || (costo == null) || costo.isNaN()) {
+                String error = "Campi compilati in modo scorretto";
+                //Output dell'errore
+                model.addObject("err", error);
+                model.addObject("editNC", nc);
+                model.addObject("desc", desc);
+                model.addObject("azioniContenitive", Acon);
+                model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+                model.setViewName("indexCQualita");
+                return model;
+            }
+            //Controllo le date
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date df = sdf.parse(dataF);
+                Date di = sdf.parse(nc.getDataApertura());
+                if (df.after(di)) {
+                    nc.setDataChiusura(dataF);
+                } else {
+                    String error = "Campo data compilato in modo scorretto";
+                    model.addObject("err", error);
+                    model.addObject("editNC", nc);
+                    model.addObject("desc", desc);
+                    model.addObject("azioniContenitive", Acon);
+                    model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+                    model.setViewName("indexCQualita");
+                    return model;
+                }
+            } catch (ParseException ex) {
+                model.addObject("err", ex.toString());
+                model.addObject("editNC", nc);
+                model.addObject("desc", desc);
+                model.addObject("azioniContenitive", Acon);
+                model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
+                model.setViewName("indexCQualita");
+                return model;
+            }
         }
-        Double c = costo;
-        if (c != null && (!c.isNaN())) {
-            nc.setCosto(costo);
-        }
+
         ncs.updateNonConformita(nc);
         model.addObject("NCElaborazione", ncs.findAllInElaborazione());
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
         return model;
+
     }
 
     //metodo per vedere nc 

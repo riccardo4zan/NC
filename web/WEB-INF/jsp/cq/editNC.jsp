@@ -1,5 +1,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <br></br>
+<c:if test="${not empty err}"><h1>${err}</h1></c:if>
 <form action="/cq/modNC" method="POST">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 

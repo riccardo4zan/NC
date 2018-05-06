@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author riccardo
- */
 @Entity
 @Table(name="Fornitori")
 public class Fornitore implements Serializable { 
@@ -28,7 +24,8 @@ public class Fornitore implements Serializable {
     }
 
     public Fornitore(String piva, String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.piva = piva;
+        this.nome = nome;
     }
 
     public String getPiva() {

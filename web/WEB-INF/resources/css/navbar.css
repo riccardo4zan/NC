@@ -8,7 +8,7 @@ body {
     background-color: #333333 !important;
     color: #99ff99 !important;
 }
-
+#3333
 .contenuto{
     text-align:center;
 }
@@ -30,3 +30,7 @@ body {
 .neg{
     color:red;
 }
+.navbar-default .navbar-nav .open .dropdown-menu>li>a, .navbar-default .navbar-nav .open .dropdown-menu {
+    background-color: #333333;
+    color:#ffffff;
+  }

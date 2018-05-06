@@ -25,4 +25,7 @@ function check(){
     </div>
 
 </form>
-<button class="btn btn-success btnform" onclick="check();" >Salva</button>
+
+<button class="btn btn-success "  onclick="check();">Salva</button>
+
+

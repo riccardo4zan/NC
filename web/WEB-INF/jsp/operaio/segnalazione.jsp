@@ -11,6 +11,6 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" type="text" rows= "7" cols="50"></textarea>
     </div>
     <div>
-        <button type="submit" class="btn btn-success" >Segnala</button>
+        <button type="submit" class="btn btn-success " >Segnala</button>
     </div>
 </form>

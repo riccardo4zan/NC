@@ -16,7 +16,7 @@
         <label>Nominativo</label>
         <input class="form-control" required type="text" name="nome"/>
     </div>       
-    <button type="submit" class="btn btn-primary">Salva</button>   
+    <button type="submit" class="btn btn-success">Salva</button>   
 </form>
 
 <script>

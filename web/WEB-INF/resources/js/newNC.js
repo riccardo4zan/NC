@@ -1,3 +1,7 @@
+/*
+ * SERVE PER INSERIRE IN MODO CHE NON SI POSSANO INSERIRE PIÙ FORNITORI CLIENTI 
+ * E REPARTI DURANTE LA CREAZIONE DI UNA NUOVA NC 
+ */
 function display() {
     var selected = document.getElementById("ief").value;
     switch (selected) {

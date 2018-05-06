@@ -16,12 +16,9 @@
     <body >
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <a class="navbar-brand" href="#">IFS</a>
+                <a class="navbar-brand" href="#">IFS - Home</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/op/">Home <span class="sr-only">(current)</span></a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/op/old">Elaborazioni completate</a>
                         </li>
@@ -48,8 +45,13 @@
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
-
+                    
+                    <c:if test="${empty aperte}">
+                        <h1>Nessuna elaborazione da eseguire :)</h1>
+                    </c:if>
+                        
                     <c:if test="${not empty aperte}">
+                        <h1>Elabroazioni da eseguire</h1>
                         <c:import url="/WEB-INF/jsp/operaio/elaborazioniAperte.jsp"/>
                     </c:if>
 

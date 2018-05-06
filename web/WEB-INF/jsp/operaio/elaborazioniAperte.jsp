@@ -11,7 +11,6 @@
         </li>
     </div>
 
-<!-- Tabella elaborazioni da fare -->
 <table class="table">
     <thead>
         <tr>

@@ -41,11 +41,9 @@
             <div class="mt row">
                 <div class="col-lg-2 col-md-2 col-sm-2"></div>
                 <div class="col-lg-8 col-md-8 col-sm-8">
-
                     <c:if test="${not empty ncAnno}">
                         <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
                     </c:if>
-
                     <!-- mostrare la lista delle segnalazioni -->
                     <c:if test="${not empty segnalazioni}">
                         <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
@@ -55,7 +53,6 @@
                     <c:if test="${not empty allnc}">
                         <c:import url="/WEB-INF/jsp/rq/allNC.jsp"/>
                     </c:if>
-
                     <!-- Visualizzazione dei dati personali e cambio della password --> 
                     <c:if test="${not empty datiPersonali}">
                         <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>

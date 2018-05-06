@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- vedere se ci sono nc aperte   -->
-<c:if test="${not empty Vuoto}">${Vuoto}</c:if>
+<c:if test="${NCAperte.size()==0}"><h1>Non sono presenti non conformit&agrave; aperte :)</h1></c:if>
 
 <c:if test="${not empty NCAperte}">
     <table class="table">

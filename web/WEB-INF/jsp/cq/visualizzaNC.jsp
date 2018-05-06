@@ -62,6 +62,7 @@
             <div class="divTableCell">Dipendente</div>
             <div class="divTableCell">${NCChiesta.dipendente.matricola} - ${NCChiesta.dipendente.nome}, ${NCChiesta.dipendente.cognome} - ${NCChiesta.dipendente.user.username}</div>
         </div>
+      
         <c:forEach items="${NCChiesta.elaborazioni}" var="item" >
             <div class="divTableRow">
                 <div class="divTableCell">Elaborazione</div>
@@ -76,11 +77,11 @@
                     Dipendente username: &nbsp; ${item.dipendente.user.username} <br></br>
                 </div>
             </div>
-        </c:forEach>
+        </c:forEach> 
         <c:forEach items="${NCChiesta.pezziCorrelati}" var="item" >
             <div class="divTableRow">
                 <div class="divTableCell">Pezzo</div>
-                <div class="divTableCell">${item.categoria} - ${item.codice}</div>
+                <div class="divTableCell">${item.categoria.codice} , ${item.categoria.descrizione}  - ${item.codice}</div>
             </div>
         </c:forEach>
         <c:forEach items="${NCChiesta.team}" var="item" >
@@ -89,6 +90,6 @@
                 <div class="divTableCell">${item.matricola} - ${item.nome}, ${item.cognome} - ${item.username}</div>
             </div>
         </c:forEach>
-
+            
     </div>
 </div>

@@ -58,9 +58,8 @@ public class NonConformita implements Serializable {
     private Set<Pezzo> pezziCorrelati;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "parteTeam")
     private Set<Dipendente> team;
-
-    public NonConformita() {
-    }
+    
+    public NonConformita(){}
 
     public NonConformita(String descrizione, String azioniContenimento, String dataApertura, String cause, int gravita, Tipo tipo) {
         this.descrizione = descrizione;

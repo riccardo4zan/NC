@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- vedere se ci sono nc in elaborazione   -->
-<c:if test="${not empty Vuoto}">${Vuoto}</c:if>
+<c:if test="${NCElaborazione.size()==0}"><h1>Non sono presenti non conformit&agrave; in elaborazione</h1></c:if>
 
 <c:if test="${not empty NCElaborazione}">
     <table class="table">

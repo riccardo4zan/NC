@@ -69,18 +69,18 @@
                         <c:import url="/WEB-INF/jsp/cq/newNC.jsp"/>
                     </c:if>
 
-                    <c:if test="${not empty NCAperte || not empty Vuoto}">
+                    <c:if test="${not empty NCAperte}">
                         <c:set var="NCAperte" value="${NCAperte}" scope="request"/>
                         <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <c:import url="/WEB-INF/jsp/cq/NCAperte.jsp" />
                     </c:if>
 
-                    <c:if test="${not empty NCChiuse || not empty Vuoto}">
+                    <c:if test="${not empty NCChiuse}">
                         <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <jsp:include page="/WEB-INF/jsp/cq/NCChiuse.jsp" />
                     </c:if>
 
-                    <c:if test="${not empty NCElaborazione || not empty Vuoto}">
+                    <c:if test="${not empty NCElaborazione}">
                         <c:set var="Vuoto" value="${Vuoto}" scope="request"/>
                         <jsp:include page="/WEB-INF/jsp/cq/NCElaborazione.jsp" />
                     </c:if>
@@ -98,7 +98,7 @@
                         <c:import url="/WEB-INF/jsp/cq/pezziNC.jsp"/>
                     </c:if>
 
-                    <c:if test="${not empty apriElaborazione || not empty vuoto }">
+                    <c:if test="${not empty apriElaborazione}">
                         <c:set var="apriElaborazione" value="${apriElaborazione}" scope="request"/>
                         <c:set var="vuoto" value="${vuoto}" scope="request"/>
                         <c:set var="ncPassata" value="${ncPassata}" scope="request"/>

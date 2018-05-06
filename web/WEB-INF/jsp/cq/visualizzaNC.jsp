@@ -87,7 +87,7 @@
         <c:forEach items="${NCChiesta.team}" var="item" >
             <div class="divTableRow">
                 <div class="divTableCell">Dipendente</div>
-                <div class="divTableCell">${item.matricola} - ${item.nome}, ${item.cognome} - ${item.username}</div>
+                <div class="divTableCell">${item.matricola} - ${item.nome}, ${item.cognome} - ${item.user.username}</div>
             </div>
         </c:forEach>
             

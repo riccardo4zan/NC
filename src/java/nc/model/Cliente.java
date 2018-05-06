@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author riccardo
- */
 @Entity
 @Table(name = "Clienti")
 public class Cliente implements Serializable {
@@ -25,6 +21,11 @@ public class Cliente implements Serializable {
     private Set<NonConformita> nonConformitaCorrelate;
 
     public Cliente() {
+    }
+
+    public Cliente(String piva, String nome) {
+        this.piva = piva;
+        this.nome = nome;
     }
 
     public String getPiva() {

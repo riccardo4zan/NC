@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="it">
     <head>
-        <meta http-equiv="refresh" content="5"/>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,10 +44,6 @@
             <main class="row">
                 <div class="col-lg-3 col-md-3"></div>
                 <div class="col-lg-6 col-md-6">
-                    
-                    <c:if test="${empty aperte}">
-                        <h1>Nessuna elaborazione da eseguire :)</h1>
-                    </c:if>
                         
                     <c:if test="${not empty aperte}">
                         <h1>Elabroazioni da eseguire</h1>

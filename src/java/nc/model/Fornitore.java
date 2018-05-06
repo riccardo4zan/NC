@@ -27,6 +27,10 @@ public class Fornitore implements Serializable {
     public Fornitore() {
     }
 
+    public Fornitore(String piva, String nome) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getPiva() {
         return piva;
     }

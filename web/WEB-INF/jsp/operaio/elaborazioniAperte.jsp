@@ -11,21 +11,26 @@
         </li>
     </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Codice elaborazione</th>
-            <th>Data</th>
-            <th>Modifica</th>
-        </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${aperte}" var="item">
-        <tr>
-            <td> ${item.codice} </td>
-            <td> ${item.dataInizio} </td>
-            <td><a href="/op/editElaborazione?codice=${item.codice}">Modifica</a></td>
-        </tr>
-    </c:forEach>
-</tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codice elaborazione</th>
+                <th>Data</th>
+                <th>Modifica</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${aperte}" var="item">
+                <tr>
+                    <td> ${item.codice} </td>
+                    <td> ${item.dataInizio} </td>
+                    <td><a href="/op/editElaborazione?codice=${item.codice}">Modifica</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 30000);
+    </script>

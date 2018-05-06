@@ -23,3 +23,8 @@
     </c:forEach>
 </tbody>
 </table>
+    <script>
+        setTimeout(function () {
+            location.reload();
+        }, 30000);
+    </script>

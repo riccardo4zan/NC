@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import nc.model.Categoria;
+import nc.model.Cliente;
 import nc.model.Fornitore;
 import nc.model.Reparto;
 import nc.model.Tipo;
 import nc.model.User;
 import nc.service.CategoriaService;
+import nc.service.ClienteService;
 import nc.service.FornitoreService;
 import nc.service.NonConformitaService;
 import nc.service.RepartoService;
@@ -31,6 +33,9 @@ public class ManagerController {
 
     @Autowired
     private CategoriaService cs;
+    
+    @Autowired
+    private ClienteService cls;
 
     @Autowired
     private NonConformitaService ncs;
@@ -132,6 +137,59 @@ public class ManagerController {
         model.setViewName("redirect");
         return model;
     }
+    
+    @RequestMapping(value = "/nuovoCliente", method = RequestMethod.GET)
+    public ModelAndView nuovoCliente() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("cliente", true);
+        model.setViewName("indexManager");
+        return model;
+    }
+    
+    @RequestMapping(value = {"/addCliente"}, params = {"piva","nome"}, method = RequestMethod.POST)
+    public ModelAndView addCliente(@RequestParam("piva") String piva,@RequestParam("nome") String nome) {
+        ModelAndView model = new ModelAndView();
+        List<Cliente> c=cls.findAll();
+        for(Cliente c1:c){
+            if(piva.equals(c1.getPiva())){
+                model.addObject("Errore","Errore esiste gia` un cliente con una stessa partita iva");
+                model.addObject("cliente", true);
+                model.setViewName("indexManager");
+                return model;
+            }   
+        }
+        cls.saveCliente(new Cliente(piva,nome));
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("redirect");
+        return model;
+    }    
+    
+    
+        @RequestMapping(value = "/nuovoFornitore", method = RequestMethod.GET)
+    public ModelAndView nuovoFornitore() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("fornitore", true);
+        model.setViewName("indexManager");
+        return model;
+    }
+    
+        @RequestMapping(value = {"/addFornitore"}, params = {"piva","nome"}, method = RequestMethod.POST)
+    public ModelAndView addFornitore(@RequestParam("piva") String piva,@RequestParam("nome") String nome) {
+        ModelAndView model = new ModelAndView();
+                List<Fornitore> f=fs.findAll();
+        for(Fornitore f1:f){
+            if(piva.equals(f1.getPiva())){
+                model.addObject("Errore","Errore esiste gia` un fornitore con una stessa partita iva");
+                model.addObject("fornitore", true);
+                model.setViewName("indexManager");
+                return model;
+            }   
+        }
+        fs.saveFornitore(new Fornitore(piva,nome));
+        model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
+        model.setViewName("/redirect");
+        return model;
+    }     
 
     @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
     public ModelAndView visualizzaDati() {

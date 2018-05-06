@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${NCChiuse.size()==0}"><h1>Non sono presenti non conformit&agrave; chiuse</h1></c:if>
+<c:if test="${NCChiuse.isEmpty()}"><h1>Non sono presenti non conformit&agrave; chiuse</h1></c:if>
 
 <c:if test="${not empty NCChiuse}">
     <table class="table">

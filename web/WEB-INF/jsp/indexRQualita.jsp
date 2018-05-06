@@ -17,17 +17,17 @@
 
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <a class="navbar-brand" href="#">IFS</a>
+                <a class="navbar-brand" href="./">IFS</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/rq">Home </a>
+                            <a class="nav-link" href="/rq">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Lista segnalazioni</a>
+                            <a class="nav-link" href="/rq/segnalazioni">Lista segnalazioni</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Apri segnalazione</a>
+                            <a class="nav-link" href="/rq/AllNC">Visualizza tutte le non conformit&agrave;</a>
                         </li>
                     </ul>
                     <div class="navbar-nav destra">
@@ -44,23 +44,30 @@
                 </div>
             </nav>
             <div class="mt row">
-            <div class="col-lg-2 col-md-2 col-sm-2"></div>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-            <c:if test="${not empty ncAnno}">
-                <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
-            </c:if>
-            
-            <!-- Visualizzazione dei dati personali e cambio della password --> 
-            <c:if test="${not empty datiPersonali}">
-                <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
-                <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
-            </c:if>
-                
-            <c:if test="${changePassword}">
-                <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
-            </c:if>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                <div class="col-lg-2 col-md-2 col-sm-2"></div>
+                <div class="col-lg-8 col-md-8 col-sm-8">
+
+                    <c:if test="${not empty ncAnno}">
+                        <c:import url="/WEB-INF/jsp/rq/grafici.jsp"/>
+                    </c:if>
+
+                    <!-- mostrare la lista delle segnalazioni -->
+                    <c:if test="${not empty segnalazioni}">
+                        <c:set var="segnalazioni" value="${segnalazioni}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/rq/listSegnalazioni.jsp"/>
+                    </c:if>
+
+                    <!-- Visualizzazione dei dati personali e cambio della password --> 
+                    <c:if test="${not empty datiPersonali}">
+                        <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
+                        <c:import url="/WEB-INF/jsp/common/datiPersonali.jsp"/>
+                    </c:if>
+
+                    <c:if test="${changePassword}">
+                        <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
+                    </c:if>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2"></div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

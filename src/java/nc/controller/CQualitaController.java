@@ -1,6 +1,5 @@
 package nc.controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,6 @@ import nc.service.RepartoService;
 import nc.service.SegnalazioneService;
 import nc.service.TipoService;
 import nc.service.UserService;
-import static org.hibernate.internal.util.collections.CollectionHelper.arrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -315,7 +313,6 @@ public class CQualitaController {
         return model;
     }
 
-    //dati personali 
     @RequestMapping(value = {"/dati"}, method = RequestMethod.GET)
     public ModelAndView visualizzaDati() {
         ModelAndView model = new ModelAndView();
@@ -347,7 +344,6 @@ public class CQualitaController {
         return model;
     }
 
-    //aggiunta tipo nc
     @RequestMapping(value = {"/aggiungiTipoNC"}, method = RequestMethod.GET)
     public ModelAndView aggiungiTipoNC() {
         ModelAndView model = new ModelAndView();

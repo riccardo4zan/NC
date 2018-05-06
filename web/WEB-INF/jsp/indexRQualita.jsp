@@ -17,17 +17,14 @@
 
         <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <a class="navbar-brand" href="./">IFS</a>
+                <a class="navbar-brand" href="/rq">IFS Home</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/rq">Home</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/rq/segnalazioni">Lista segnalazioni</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/rq/AllNC">Visualizza tutte le non conformit&agrave;</a>
+                            <a class="nav-link" href="/rq/allNC">Visualizza tutte le non conformit&agrave;</a>
                         </li>
                     </ul>
                     <div class="navbar-nav destra">
@@ -57,6 +54,10 @@
                         <c:import url="/WEB-INF/jsp/rq/listSegnalazioni.jsp"/>
                     </c:if>
 
+                    <c:if test="${not empty allnc}">
+                        <c:import url="/WEB-INF/jsp/rq/allNC.jsp"/>
+                    </c:if>
+
                     <!-- Visualizzazione dei dati personali e cambio della password --> 
                     <c:if test="${not empty datiPersonali}">
                         <c:set var="datiPersonali" value="${datiPersonali}" scope="request"/>
@@ -66,6 +67,7 @@
                     <c:if test="${changePassword}">
                         <c:import url="/WEB-INF/jsp/common/changePsswd.jsp"/>
                     </c:if>
+
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2"></div>
             </div>

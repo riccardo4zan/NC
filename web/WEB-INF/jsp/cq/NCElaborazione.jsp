@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!-- vedere se ci sono nc in elaborazione   -->
 <c:if test="${not empty Vuoto}">${Vuoto}</c:if>
 

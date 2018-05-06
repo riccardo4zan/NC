@@ -106,13 +106,21 @@ public class RQualitaController {
         model.setViewName("indexRQualita");
         return model;
     }
+    
+    //Visualizza tutte le NC
+    @RequestMapping(value = "/allNC", method = RequestMethod.GET)
+    public ModelAndView allnc() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("allnc", ncs.findAll());
+        model.setViewName("indexRQualita");
+        return model;
+    }
 
     //segnalazioni
     @RequestMapping(value = "/segnalazioni", method = RequestMethod.GET)
-    public ModelAndView segnalazioni() {
+    public ModelAndView allSegnalazioni() {
         ModelAndView model = new ModelAndView();
         model.addObject("segnalazioni", ss.findAll());
-        model.setViewName("indexRQualita");
         model.setViewName("indexRQualita");
         return model;
     }

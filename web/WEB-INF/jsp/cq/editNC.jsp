@@ -26,21 +26,24 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-6 col-md-6 form-group">
-        <label>Data fine</label>
-        <input id="curdate" type="date" class="form-control" name="dataF"/>
-    </div>
+        <div class="col-lg-6 col-md-6 form-group">
+            <label>Data fine</label>
+            <input id="curdate" type="date" class="form-control" name="dataF"/>
+        </div>
 
 
-    <!-- fare controllo inserimento -->
-    <div class="col-lg-6 col-md-6 form-group">
-        <label>Costo</label>
-        <input type="number" min="0.01" step="0.01" max="1000000000" class="form-control"  name="costo"/>
-    </div>
+        <!-- fare controllo inserimento -->
+        <div class="col-lg-6 col-md-6 form-group">
+            <label>Costo</label>
+            <input type="number" min="0.01" step="0.01" max="1000000000" class="form-control"  name="costo"/>
+        </div>
 
-    <button type="submit" class="btn btn-success">Salva</button>
-    
-    <a href="/cq/showTeam?codice=${editNC.codice}">teamop</a>
-    
+        <p>
+            <button type="submit" class="btn btn-success">Salva</button>
+        </p>
+        <p>
+            <a href="/cq/showTeam?codice=${editNC.codice}" class="btn btn-primary">Modifica il team</a>
+        </p>
+
 </form>
 

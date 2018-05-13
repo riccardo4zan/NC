@@ -106,7 +106,7 @@ public class CQualitaController {
     public ModelAndView apriNC() {
         ModelAndView model = new ModelAndView();
         model.addObject("Tipi", ts.findAll());
-        model.addObject("Reparti", rs.findAll());
+        model.addObject("Reparto", MainController.getLoggedDip().getReparto());
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
         model.addObject("NC", true);
@@ -118,7 +118,7 @@ public class CQualitaController {
     public ModelAndView apriNCconDescrizione(@RequestParam(value = "desc", required = false) String descrizione) {
         ModelAndView model = new ModelAndView();
         model.addObject("Tipi", ts.findAll());
-        model.addObject("Reparti", rs.findAll());
+        model.addObject("Reparto", MainController.getLoggedDip().getReparto());
         model.addObject("Fornitori", fs.findAll());
         model.addObject("Clienti", cs.findAll());
         model.addObject("Descrizione", descrizione);

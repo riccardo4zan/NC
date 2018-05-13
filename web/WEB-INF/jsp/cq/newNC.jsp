@@ -64,13 +64,8 @@
     
     <div class="row">
         <div class="col-lg-4 col-md-4 form-group" id="Sreparto" style="display:none;">
-            <label>Reparto</label>
-            <select class="form-control" name="reparto" >
-                <option value=""></option>
-                <c:forEach items="${Reparti}" var="reparto">
-                    <option value="${reparto.id}">${reparto.nome}</option>
-                </c:forEach>
-            </select>
+            <label>Numero reparto</label>
+            <input type="text" class="form-control" name="reparto" value="${Reparto.id}" readonly>
         </div>
         
         <div class="col-lg-4 col-md-4 form-group" id="Sfornitore" style="display:none;">

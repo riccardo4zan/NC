@@ -14,6 +14,7 @@
                 <th>Costo</th>
                 <th>Pezzi difettosi</th>
                 <th>Reparto</th>
+                <th>Stato</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,19 @@
                     <td> ${nc.costo}</td>
                     <td> ${nc.pezziCorrelati.size()}</td>
                     <td> ${nc.reparto.nome}</td>
+                    <td>
+                    <c:choose>
+                        <c:when test = "${nc.dataChiusura == null && nc.azioniCorrettive == null}">
+                            Aperta
+                        </c:when>
+                        <c:when test = "${nc.dataChiusura == null && nc.azioniCorrettive != null}">
+                            Elaborazione
+                        </c:when>
+                        <c:when test = "${nc.dataChiusura != null && nc.azioniCorrettive != null}">
+                            Chiusa
+                        </c:when>
+                    </c:choose>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>

@@ -14,6 +14,9 @@ public interface NonConformitaService {
     List<NonConformita> findAllAperte();
     List<NonConformita> findAllInElaborazione();
     List<NonConformita> findAllChiuse();
+    List<NonConformita> findAllApertePerReparto(Reparto rep);
+    List<NonConformita> findAllInElaborazionePerReparto(Reparto rep);
+    List<NonConformita> findAllChiusePerReparto(Reparto rep);
     double findCostoPerTipo(int anno, Tipo tipo);
     double findCostoPerReparto(int anno, Reparto rep);
     double findCostoPerFornitore(int anno, Fornitore forn);

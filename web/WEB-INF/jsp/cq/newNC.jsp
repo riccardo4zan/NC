@@ -94,12 +94,14 @@
         </div>
 
         <div class="col-lg-4 col-md-4 form-group">
-            <label>Data Inizio</label>
+            <label>Data Inizio (YYYY-MM-AA)</label>
             <input  type="date" class="form-control"  id="dataInizio"   name="dataInizio"/>
         </div>
         
         <div class="col-lg-4 col-md-4 form-group">
-            <label>Pezzi su cui è stata riscontrata la NC (":" per intervallo "," per separare pezzi diversi)</label>
+            <label>Pezzi su cui è stata riscontrata la NC 
+                (":" per intervallo oppure 
+                "," per separare pezzi diversi)</label>
             <input id="pezzi" type="text" class="form-control" required name="pezzi"/>
         </div>
         

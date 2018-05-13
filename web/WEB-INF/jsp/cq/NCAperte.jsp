@@ -6,7 +6,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Codice non conformita`</th>
+                <th>Codice non conformit&agrave;</th>
                 <th>Descrizione</th>
                 <th>Azioni di contenimento</th>
                 <th>Data inizio</th>

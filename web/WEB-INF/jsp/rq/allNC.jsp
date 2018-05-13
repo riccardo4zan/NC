@@ -13,6 +13,7 @@
                 <th>Data fine</th>
                 <th>Costo</th>
                 <th>Pezzi difettosi</th>
+                <th>Reparto</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                     <td> ${nc.dataChiusura}</td>
                     <td> ${nc.costo}</td>
                     <td> ${nc.pezziCorrelati.size()}</td>
+                    <td> ${nc.reparto.nome}</td>
                 </tr>
             </c:forEach>
         </tbody>

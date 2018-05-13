@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import nc.model.Cliente;
 import nc.model.Dipendente;
 import nc.model.Elaborazione;
@@ -75,7 +73,8 @@ public class CQualitaController {
     @RequestMapping(value = {"/index", ""}, method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView model = new ModelAndView();
-        List<NonConformita> nc = ncs.findAllAperte();
+        ncs.findAllApertePerReparto(MainController.getLoggedDip().getReparto());
+        List<NonConformita> nc = ncs.findAllApertePerReparto(MainController.getLoggedDip().getReparto());
         model.addObject("NCAperte", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
@@ -85,7 +84,7 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCElaborazione"}, method = RequestMethod.GET)
     public ModelAndView NCElaborazione() {
         ModelAndView model = new ModelAndView();
-        List<NonConformita> nc = ncs.findAllInElaborazione();
+        List<NonConformita> nc = ncs.findAllInElaborazionePerReparto(MainController.getLoggedDip().getReparto());
         model.addObject("NCElaborazione", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
@@ -95,7 +94,7 @@ public class CQualitaController {
     @RequestMapping(value = {"/NCChiuse"}, method = RequestMethod.GET)
     public ModelAndView NCChiuse() {
         ModelAndView model = new ModelAndView();
-        List<NonConformita> nc = ncs.findAllChiuse();
+        List<NonConformita> nc = ncs.findAllChiusePerReparto(MainController.getLoggedDip().getReparto());
         model.addObject("NCChiuse", nc);
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
@@ -186,7 +185,7 @@ public class CQualitaController {
             ps.updatePezzo(tmp);
         }
         model.addObject("newnc", newnc);
-        model.addObject("NCAperte", ncs.findAllAperte());
+        model.addObject("NCAperte", ncs.findAllApertePerReparto(MainController.getLoggedDip().getReparto()));
         model.setViewName("indexCQualita");
         return model;
     }
@@ -267,7 +266,7 @@ public class CQualitaController {
         }
 
         ncs.updateNonConformita(nc);
-        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.addObject("NCElaborazione", ncs.findAllInElaborazionePerReparto(MainController.getLoggedDip().getReparto()));
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.addObject("ruolo", MainController.getLoggedDip().getUser().getUserRole().iterator().next().getRole());
         model.setViewName("/redirect");
@@ -307,7 +306,7 @@ public class CQualitaController {
         Dipendente dip = ds.findByMatricola(matr);
         NonConformita nc = ncs.findByCodice(id);
         es.saveElaborazione(new Elaborazione(desc, dataI, dip, nc));
-        model.addObject("NCElaborazione", ncs.findAllInElaborazione());
+        model.addObject("NCElaborazione", ncs.findAllInElaborazionePerReparto(MainController.getLoggedDip().getReparto()));
         model.addObject("Matricola", MainController.getLoggedDip().getMatricola());
         model.setViewName("indexCQualita");
         return model;

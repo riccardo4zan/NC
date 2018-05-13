@@ -130,5 +130,20 @@ public class NonConformitaServiceImpl implements NonConformitaService{
     public int findNumAnnoPerMese(int mese, int anno) {
         return dao.findNumAnnoPerMese(mese, anno);
     }
+
+    @Override
+    public List<NonConformita> findAllApertePerReparto(Reparto rep) {
+        return dao.findAllApertePerReparto(rep);
+    }
+
+    @Override
+    public List<NonConformita> findAllInElaborazionePerReparto(Reparto rep) {
+        return dao.findAllInElaborazionePerReparto(rep);
+    }
+
+    @Override
+    public List<NonConformita> findAllChiusePerReparto(Reparto rep) {
+        return dao.findAllChiusePerReparto(rep);
+    }
     
 }

@@ -117,7 +117,6 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         return new ArrayList<>(query.list());
     }
 
-
     @Override
     public List<NonConformita> findAllInElaborazione() {
         String sql = "SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND AzioniCorrettive IS NOT NULL ";
@@ -125,7 +124,6 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
         query.addEntity(NonConformita.class);
         return new ArrayList<>(query.list());
     }
-
 
     @Override
     public List<NonConformita> findAllChiuse() {
@@ -159,13 +157,13 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-    
+
     @Override
-    public String findTipoNCProblematico(){
+    public String findTipoNCProblematico() {
         Query query = getSession().createSQLQuery("SELECT Tipo FROM NonConformita GROUP BY Tipo HAVING count(*)=(SELECT max(massimo) from (select count(*) as massimo from NonConformita group by Tipo) as tmp);");
         return (String) query.list().get(0);
     }
-    
+
     @Override
     public int findNumeroNCPerReparto(int anno, int codice) {
         Query query = getSession().createSQLQuery(
@@ -174,7 +172,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("reparto", codice);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-    
+
     @Override
     public int findNumeroNCReparti(int anno) {
         Query query = getSession().createSQLQuery(
@@ -182,7 +180,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-    
+
     @Override
     public int findNumeroNCClienti(int anno) {
         Query query = getSession().createSQLQuery(
@@ -190,7 +188,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-    
+
     @Override
     public int findNumeroNCFornitori(int anno) {
         Query query = getSession().createSQLQuery(
@@ -198,7 +196,7 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
-    
+
     @Override
     public int findNumAnnoPerMese(int mese, int anno) {
         Query query = getSession().createSQLQuery(
@@ -207,5 +205,35 @@ public class NonConformitaDaoImpl implements NonConformitaDao {
                 .setParameter("anno", anno);
         return ((BigInteger) query.uniqueResult()).intValue();
     }
- 
+
+    @Override
+    public List<NonConformita> findAllApertePerReparto(Reparto rep) {
+        String sql = "SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND isnull (AzioniCorrettive) AND IDReparto is null "
+        + "UNION SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND isnull(AzioniCorrettive) AND IDReparto=:reparto ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("reparto", rep.getId());
+        return new ArrayList<>(query.list());
+    }
+
+    @Override
+    public List<NonConformita> findAllInElaborazionePerReparto(Reparto rep) {
+        String sql = "SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND AzioniCorrettive IS NOT NULL and IDReparto is null "
+                + "UNION SELECT * FROM NonConformita WHERE isnull(DataChiusura) AND AzioniCorrettive IS NOT NULL And IDReparto=:reparto ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("reparto", rep.getId());
+        return new ArrayList<>(query.list());
+    }
+
+    @Override
+    public List<NonConformita> findAllChiusePerReparto(Reparto rep) {
+        String sql = "SELECT * FROM NonConformita WHERE DataChiusura IS NOT NULL AND IDReparto is null "
+        + "UNION SELECT * FROM NonConformita WHERE DataChiusura IS NOT NULL AND AzioniCorrettive IS NOT NULL And IDReparto=:reparto ";
+        SQLQuery query = getSession().createSQLQuery(sql);
+        query.addEntity(NonConformita.class);
+        query.setParameter("reparto", rep.getId());
+        return new ArrayList<>(query.list());
+    }
+
 }
